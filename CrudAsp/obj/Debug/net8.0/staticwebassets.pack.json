@@ -1,0 +1,385 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/obj/Debug/net8.0/scopedcss/projectbundle/CrudAsp.bundle.scp.css",
+      "PackagePath": "staticwebassets/CrudAsp.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/071342ed-a9ae-4f8f-b08d-c7e10c05535f.png",
+      "PackagePath": "staticwebassets/app/images/movie/071342ed-a9ae-4f8f-b08d-c7e10c05535f.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/0776ffe0-a933-4937-ae6b-7a0d2f10ee69.png",
+      "PackagePath": "staticwebassets/app/images/movie/0776ffe0-a933-4937-ae6b-7a0d2f10ee69.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/08d6e374-cf7d-4e62-81cc-90d8369aee83.png",
+      "PackagePath": "staticwebassets/app/images/movie/08d6e374-cf7d-4e62-81cc-90d8369aee83.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/157564fa-8ef5-42ba-a7e9-a1745813750c.png",
+      "PackagePath": "staticwebassets/app/images/movie/157564fa-8ef5-42ba-a7e9-a1745813750c.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/1fe34711-82cc-4655-aa21-8520be879d7a.png",
+      "PackagePath": "staticwebassets/app/images/movie/1fe34711-82cc-4655-aa21-8520be879d7a.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/24e466fc-5bca-4fcd-a9a0-e42e196e534f.png",
+      "PackagePath": "staticwebassets/app/images/movie/24e466fc-5bca-4fcd-a9a0-e42e196e534f.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/28720c0e-e743-4967-8678-fd5bddc7c85a.png",
+      "PackagePath": "staticwebassets/app/images/movie/28720c0e-e743-4967-8678-fd5bddc7c85a.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/35a42d18-ea0f-4551-acf8-5abbd38e5a12.png",
+      "PackagePath": "staticwebassets/app/images/movie/35a42d18-ea0f-4551-acf8-5abbd38e5a12.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/3d65bfc0-d6b7-4802-8a46-a56c6d0e75ff.png",
+      "PackagePath": "staticwebassets/app/images/movie/3d65bfc0-d6b7-4802-8a46-a56c6d0e75ff.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/41b96913-a694-4167-be96-0b0c46e1ee99.png",
+      "PackagePath": "staticwebassets/app/images/movie/41b96913-a694-4167-be96-0b0c46e1ee99.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/4263792f-31d4-46e8-a25c-34a0bcfaf327.png",
+      "PackagePath": "staticwebassets/app/images/movie/4263792f-31d4-46e8-a25c-34a0bcfaf327.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/42edc404-3ce2-496a-b557-d0341a081917.png",
+      "PackagePath": "staticwebassets/app/images/movie/42edc404-3ce2-496a-b557-d0341a081917.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/43143aab-e2ac-457f-841d-da62b92d1db8.png",
+      "PackagePath": "staticwebassets/app/images/movie/43143aab-e2ac-457f-841d-da62b92d1db8.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/4745114e-fc0f-4cd0-b774-72859217358a.png",
+      "PackagePath": "staticwebassets/app/images/movie/4745114e-fc0f-4cd0-b774-72859217358a.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/5c7cbe81-18de-45f1-a45f-95966f3457fb.png",
+      "PackagePath": "staticwebassets/app/images/movie/5c7cbe81-18de-45f1-a45f-95966f3457fb.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/5eb944a4-ad71-4d39-99ed-61389a475f2b.png",
+      "PackagePath": "staticwebassets/app/images/movie/5eb944a4-ad71-4d39-99ed-61389a475f2b.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/84be3bd8-01b3-4776-a12c-d993d169f72d.png",
+      "PackagePath": "staticwebassets/app/images/movie/84be3bd8-01b3-4776-a12c-d993d169f72d.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/84e29fc6-b9e2-44e4-adc1-456733b47c7b.png",
+      "PackagePath": "staticwebassets/app/images/movie/84e29fc6-b9e2-44e4-adc1-456733b47c7b.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/8526e64f-7a98-4a5e-9113-20c8b9740fb6.png",
+      "PackagePath": "staticwebassets/app/images/movie/8526e64f-7a98-4a5e-9113-20c8b9740fb6.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/8dc6b538-2a89-45bd-ac66-ac57b5eb75f4.png",
+      "PackagePath": "staticwebassets/app/images/movie/8dc6b538-2a89-45bd-ac66-ac57b5eb75f4.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/9e1176a9-7b39-48b8-bf1b-6ca9d65623ad.png",
+      "PackagePath": "staticwebassets/app/images/movie/9e1176a9-7b39-48b8-bf1b-6ca9d65623ad.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/a2dd399e-5db9-4c6e-adaf-aff9d02e7cc5.png",
+      "PackagePath": "staticwebassets/app/images/movie/a2dd399e-5db9-4c6e-adaf-aff9d02e7cc5.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/b4558ac9-afbb-4e9a-b0a5-544769749a71.png",
+      "PackagePath": "staticwebassets/app/images/movie/b4558ac9-afbb-4e9a-b0a5-544769749a71.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/e4168998-3840-46a4-88ed-6154f8b2bc25.png",
+      "PackagePath": "staticwebassets/app/images/movie/e4168998-3840-46a4-88ed-6154f8b2bc25.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/ff69aae5-52c9-4063-9564-07a3ab39d38a.png",
+      "PackagePath": "staticwebassets/app/images/movie/ff69aae5-52c9-4063-9564-07a3ab39d38a.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/movie/8e7b0303-88b1-4ac4-94a9-b0dc26fd6875.png",
+      "PackagePath": "staticwebassets/app/movie/8e7b0303-88b1-4ac4-94a9-b0dc26fd6875.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/movie-details.js",
+      "PackagePath": "staticwebassets/js/app/movie-details.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/axios.min.js",
+      "PackagePath": "staticwebassets/js/axios.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/jquery.min.js",
+      "PackagePath": "staticwebassets/js/jquery.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/sweetalert2.min.js",
+      "PackagePath": "staticwebassets/js/sweetalert2.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/LICENSE",
+      "PackagePath": "staticwebassets/lib/bootstrap"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CrudAsp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.CrudAsp.props",
+      "PackagePath": "build\\CrudAsp.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.CrudAsp.props",
+      "PackagePath": "buildMultiTargeting\\CrudAsp.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.CrudAsp.props",
+      "PackagePath": "buildTransitive\\CrudAsp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

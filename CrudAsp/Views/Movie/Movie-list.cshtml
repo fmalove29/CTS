@@ -1,0 +1,89 @@
+@model List<CrudAsp.resource.response.MovieResponse>
+
+
+<div class="d-flex justify-content-end mb-3">
+    <a class="btn btn-primary" asp-controller="Movie" asp-action="Create">Add Movie</a>
+</div>
+<div id="movieCarousel" class="carousel slide " data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+        }
+    </div>
+
+    <div class="carousel-inner mb-3">
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var movie = Model[i];
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <div class="card">
+                    @if (movie.MovieImages.Any())
+                    {
+                        <img class="card-img-top"
+                            src="@Url.Content("~/app/images/movie/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path))"
+                            alt="@movie.Title" 
+                            style="height: 300px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img class="card-img-top"
+                            src="@Url.Content("~/images/default-movie.jpg")"
+                            alt="No Image Available"
+                            style="height: 300px; object-fit: cover;" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div class="movie-container row">
+    @foreach (var movie in Model)
+    {
+        <div class="col-3 mb-2">
+            <div class="card">
+                @if (movie.MovieImages != null && movie.MovieImages.Any())
+                {
+                    // Display the first image from the MovieImages collection using relative path
+                    <img class="card-img-top"
+                    src="@Url.Content("~/app/images/movie/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path ))"
+                    alt="@movie.Title"
+                    style="height: 400px; object-fit: cover;" />
+
+                }
+                <div class="card-body">
+                    <h5>@movie.Title</h5>
+                    <p>@movie.Description</p>
+                    
+                    <h6>Genres:</h6>
+                    <ul>
+                        @if (movie.Genres != null && movie.Genres.Any())
+                        {
+                            foreach (var genre in movie.Genres)
+                            {
+                                <li>@genre.GenreName</li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No genres available</li>
+                        }
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" asp-controller="Movie" asp-action="Details" asp-route-Id="@movie.Id">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

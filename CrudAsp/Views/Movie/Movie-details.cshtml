@@ -1,0 +1,79 @@
+@model CrudAsp.resource.response.MovieResponse
+
+@{
+    ViewData["Title"] = Model.Id == Guid.Empty ? "Create Movie" : $"{@Model.Title} Details";
+    var isUpdate = Model.Id != Guid.Empty;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-2 d-flex justify-content-center">
+        <div class="card" style="width: 50rem;">
+            <div class="card-body">
+                <h5 class="card-title">Movie Card Form</h5>
+                    <div class="mb-3">
+                        <label for="movieTitle" class="form-label">Movie Title</label>
+                        <input type="text" class="form-control" id="movieTitle" placeholder="Enter movie title" name="Title" value="@Model.Title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="movieDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="movieDescription" rows="3" placeholder="Enter movie description">@Model.Description</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="releaseDate" class="form-label">Release Date</label>
+                        <input type="date" class="form-control" id="releaseDate" value="@Model.ReleaseDate.ToString("yyyy-MM-dd")" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="releaseDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate" value="@Model.EndDate.ToString("yyyy-MM-dd")" required>
+                    </div>
+                    <div class="mb-3 row container">
+                        <label class="form-label">Genre</label>
+                        
+                        @if(isUpdate)
+                        {
+                            @foreach (var genre in Model.Genres)
+                            {
+                                <div class="form-check col-3">
+                                    <input class="form-check-input genre" type="checkbox"
+                                    id="genre_@genre.Id"
+                                    name="genre[]"
+                                    data-id="@genre.GenreName"
+                                    @(ViewBag.SaveId.ToString().Contains(genre.Id.ToString()) ? "checked" : "")
+                                    value="@genre.Id">
+                                    <label class="form-check-label">@genre.GenreName</label>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var genre in Model.Genres)
+                            {
+                                <div class="form-check col-3">
+                                    <input class="form-check-input genre" type="checkbox"
+                                    id="genre_@genre.Id"
+                                    name="genre[]"
+                                    data-id="@genre.GenreName"
+
+                                    value="@genre.Id">
+                                    <label class="form-check-label">@genre.GenreName</label>
+                                </div>
+                            }
+                        }
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="ImageFile" class="form-label">Upload Image</label>
+                        <input type="file" id="movieImg" name="ImageFile" class="form-control" required />
+                    </div>
+                    <a  class="btn btn-secondary" asp-controller="Movie" asp-action="Index">Back</a>
+                    <button type="submit" id="btnSave" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+
+<script src="@Url.Content("~/js/jquery.min.js")"></script>
+<script src="@Url.Content("~/js/axios.min.js")"></script>
+<script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
+<script src="@Url.Content("~/js/app/movie-details.js")"></script>
+

@@ -1,0 +1,43 @@
+@model CrudAsp.resource.ViewModels.LoginVM;
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h4 class="card-title"><strong>Login</strong></h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Correctly use asp-action -->
+        <form asp-action="PostLogin" method="post">
+            <!-- Anti-forgery token -->
+            @* @Html.AntiForgeryToken() *@
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" id="email" name="UserName" class="form-control" placeholder="Enter your Email">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="Password" class="form-control" placeholder="Enter your Password">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <a asp-controller="Account" asp-action="Register">Sign In</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

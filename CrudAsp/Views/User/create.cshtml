@@ -1,0 +1,49 @@
+@* 
+@model CrudAsp.Models.Users
+@{
+    ViewData["Title"] = Model.Id == Guid.Empty ? "Create User" : "Edit User";
+    var isUpdate = Model.Id != Guid.Empty;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="@(isUpdate ? "UpdateUser" : "Create")" method="post" class="needs-validation" novalidate>
+
+    @if (isUpdate)
+    {
+        <!-- Include a hidden input field for the Id when updating -->
+        <input type="hidden" name="Id" value="@Model.Id" />
+    }
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" value="@Model.firstName" required>
+        <div class="invalid-feedback">
+            Please enter your first name.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="middleName">Middle Name</label>
+        <input type="text" class="form-control" id="middleName" name="MiddleName" placeholder="Enter your middle name" value="@Model.MiddleName" required>
+        <div class="invalid-feedback">
+            Please enter your middle name.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" value="@Model.lastName" required>
+        <div class="invalid-feedback">
+            Please enter your last name.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" name="Age" value="@Model.Age" required>
+        <div class="invalid-feedback">
+            Please enter your age.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">@(isUpdate ? "Update" : "Create")</button>
+    <a class="btn btn-secondary" asp-area="" asp-controller="User" asp-action="Index">Back</a>
+</form>
+
+ *@

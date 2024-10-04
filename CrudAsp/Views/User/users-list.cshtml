@@ -1,0 +1,50 @@
+@using CrudAsp.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Event List";
+}
+<div class="d-flex justify-content-end">
+    <a class="btn btn-secondary" asp-area="" asp-controller="User" asp-action="Create">Create</a>
+</div>
+
+<form asp-controller="Event" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>LastName</th>
+            <th>Middle Name</th>
+            <th>Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Users even in Model)
+        {
+            <tr>
+                <td>@even.Id</td>
+                <td>@even.FirstName</td>
+                <td>@even.LastName</td>
+                <td>@even.MiddleName</td>
+                <td>
+                    <a asp-controller="User" asp-action="GetUserById" asp-route-Id="@even.Id" class="btn btn-outline-primary">Edit</a>
+                    <a  class="btn btn-outline-danger btnDelete" data-id="@even.Id" >Delete</a>
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+    
+</table>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/site.js"></script>
