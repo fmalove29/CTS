@@ -11,5 +11,5 @@ public class MovieImageResponse : BaseResponse
     public string Path {get; set;}
     public string Base64File { get; set; } 
     public Guid? MovieId { get; set; }
-    public MovieResponse? Movie { get; set; }
+    public virtual  MovieResponse? Movie { get; set; }
 }

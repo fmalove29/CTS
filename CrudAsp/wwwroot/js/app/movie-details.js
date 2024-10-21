@@ -1,13 +1,10 @@
-
-
 $(document).ready(function(){
 
     $('#btnSave').on('click', () => {
         let genresArr = [];
         let movieGen = [];
-        $('.genre:checked').each(function(e) {
+        $('.genre:checked').each(function() {
             let genName = $(this).data('id');
-
             genresArr.push({
                 genreName : genName,
                 Id : $(this).val()
@@ -15,30 +12,31 @@ $(document).ready(function(){
 
             movieGen.push({
                 genresId : $(this).val()
-            })
+            });
         });
         
-        var fileInput = $('#movieImg')[0];  // Get the input DOM element
-        var file = fileInput.files[0];      // Get the first file from the FileList
-        let imageArr = [];
+        var fileInput = $('#movieImg')[0];
+        var file = fileInput.files[0];
 
+        if (!file) {
+            alert("Please select a file.");
+            return;
+        }
 
-        // return console.log(file);
         var reader = new FileReader();
-        reader.onloadend = function () {
-            // The Base64 encoded content of the image
+        reader.onloadend = async function () {
             var base64String = reader.result.split(',')[1];
 
-            let imageArr = [];
-            imageArr.push({
+            let imageArr = [{
                 name: file.name,
                 type: file.type,
                 size: file.size,
                 path : '',
-                Base64File: base64String  // Base64 string sent in request
-            });
+                Base64File: base64String
+            }];
 
             let movieRequest = {
+                Id : $('#movieId').val(),
                 title: $('#movieTitle').val(),
                 description: $('#movieDescription').val(),
                 releaseDate: $('#releaseDate').val(),
@@ -48,15 +46,15 @@ $(document).ready(function(){
                 MovieGenre: movieGen
             };
 
-            // Send the request
+            // You can uncomment the following axios code for the POST request
+            /*
             axios.post('/Movie/PostMovie', movieRequest, {
                 headers: {
-                    'Content-Type': 'application/json'  // Ensure that the content type is set to JSON
+                    'Content-Type': 'application/json'
                 }
             })
             .then((res) => {
                 console.log(res);
-
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
@@ -66,10 +64,25 @@ $(document).ready(function(){
             .catch((err) => {
                 console.log(err);
             });
-        };
-        reader.readAsDataURL(file);  // Read the file as DataURL, which includes Base64 encoding
+            */
 
-        
+            if($('#btnSave').text() == ' Update') {
+                let decider = 'PutMovie';
+                let update = await request(decider, movieRequest);
+                console.log(update);
+            }
+        };
+        reader.readAsDataURL(file);
+
     });
 
-})
+    async function request(decider, movie) {
+        try {
+            const data = await axios.put('/Movie/' + decider, movie);
+            console.log(data);
+            return data.response;
+        } catch(error) {
+            console.log(error);
+        }   
+    }
+});

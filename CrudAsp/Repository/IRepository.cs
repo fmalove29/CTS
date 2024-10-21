@@ -15,5 +15,6 @@ namespace CrudAsp.Repository
         public Task<T> DeleteAsync(Guid Id);
         public Task<DbSet<T>> GetDbSet();
 
+
     }
 }

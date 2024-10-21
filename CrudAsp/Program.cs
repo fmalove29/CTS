@@ -5,6 +5,7 @@ using CrudAsp.Models.Data;
 using CrudAsp.Models;
 using CrudAsp.Models.app;
 using CrudAsp.Services.Movies;
+using CrudAsp.Services.Genres;
 using CrudAsp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);

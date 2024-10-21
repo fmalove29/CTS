@@ -54,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/itdev-mac01/CrudAsp/Views/Shared/PartialViews/movie/cardlist-button.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxWaWV3cy9tb3ZpZS9jYXJkbGlzdC1idXR0b24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/itdev-mac01/CrudAsp/Views/Shared/_LoginPartialView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWxWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

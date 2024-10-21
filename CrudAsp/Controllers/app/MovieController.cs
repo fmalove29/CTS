@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudAsp.Models.app;
-using System.Linq; 
+using System.Linq;
 using CrudAsp.Services.Movies;
 using CrudAsp.Services.Genres;
 using CrudAsp.Repository;
@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 using CrudAsp.resource.request;
 using CrudAsp.resource.response;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http; 
-using System.IO;                 
-using System.Threading.Tasks; 
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Threading.Tasks;
 
 
 
@@ -33,17 +33,15 @@ public class MovieController : Controller
     )
     {
         this.repository = repository;
-        movieService =  new MovieService((Repository<Movie>) repository, (Repository<Genre>) genreRepo );
-        
+        movieService = new MovieService((Repository<Movie>)repository, (Repository<Genre>)genreRepo);
+
 
     }
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        // Get the movie set with related entities
-        var movies = await movieService.GetAll();
+        var movies = await movieService.GetAll(); // Movies loaded without related entities
 
-        // Map Movie entities to MovieRequest DTOs
         var movieRequests = movies.Select(movie => new MovieResponse
         {
             Id = movie.Id,
@@ -51,37 +49,26 @@ public class MovieController : Controller
             Description = movie.Description,
             ReleaseDate = movie.ReleaseDate,
             EndDate = movie.EndDate,
-            Genres = movie.Genres != null 
-                ? movie.Genres.Select(g => new GenreResponse
-                {
-                    Id = g.Id,
-                    GenreName = g.GenreName
-                }).ToList() 
-                : new List<GenreResponse>(),   // Handle if no genres
-            MovieImages = movie.MovieImages != null
-                ? movie.MovieImages.Select(img => new MovieImageResponse
-                {
-                    Id = img.Id,
-                    Name = img.Name,
-                    Size = img.Size,
-                    Type = img.Type,
-                    Path = img.Path,
-                    MovieId = img.MovieId
-                }).ToList()
-                : new List<MovieImageResponse>()  // Handle if no images
+            Genres = movie.Genres.Select(g => new GenreResponse
+            {
+                Id = g.Id,
+                GenreName = g.GenreName
+            }).ToList(), // Genres will be lazy-loaded here
+            MovieImages = movie.MovieImages.Select(img => new MovieImageResponse
+            {
+                Path = img.Path,
+                MovieId = img.MovieId
+            }).ToList() // MovieImages will be lazy-loaded here
         }).ToList();
 
-
-        
-        // Return the mapped DTO to the view
         return View("Movie-list", movieRequests);
     }
 
-    
+
     [HttpGet]
     public async Task<IActionResult> Details(Guid Id)
     {
-        
+
         // Fetch all genres
         var gService = await movieService.GetAllGenre();
         // return Json(gService);
@@ -90,7 +77,7 @@ public class MovieController : Controller
 
         // Get the movie with its genres and images
         var movie = await movieService.GetById(Id);
-        
+
 
         // Return 404 if the movie is not found
         if (movie == null)
@@ -153,10 +140,11 @@ public class MovieController : Controller
     {
         var gService = await movieService.GetAllGenre();
 
-    
-        var data = new MovieRequest
+
+        var data = new MovieResponse
         {
-            Genres = gService.Select(b => new GenreRequest{
+            Genres = gService.Select(b => new GenreResponse
+            {
                 GenreName = b.GenreName,
                 Id = b.Id,
                 // Movies = m.Select(mo => new MovieRequest{
@@ -200,18 +188,18 @@ public class MovieController : Controller
                     newMovie.Genres.Add(newGenre);
                 }
 
-                string pathFolder = Path.Combine("wwwroot","app","images" ,"movie");
-                string savePathFolder = Path.Combine("app","images","movie");
+                string pathFolder = Path.Combine("wwwroot", "app", "images", "movie");
+                string savePathFolder = Path.Combine("app", "images", "movie");
 
                 // return Json(savePathFolder);
-                
+
                 if (!Directory.Exists(pathFolder))
                 {
                     Directory.CreateDirectory(pathFolder);
 
                 }
 
-                foreach(var mg in movieRequest.MovieImages)
+                foreach (var mg in movieRequest.MovieImages)
                 {
                     byte[] imageBytes = Convert.FromBase64String(mg.Base64File);
 
@@ -246,5 +234,49 @@ public class MovieController : Controller
 
         return Json(new { success = false, message = "Invalid data", errors = ModelState });
     }
+
+    [HttpPut]
+    public async Task<IActionResult> PutMovie([FromBody] MovieRequest movieRequest)
+    {
+        try
+        {
+            var existingMovie = await movieService.GetById(movieRequest.Id);
+
+            if (existingMovie == null)
+            {
+                return Json(new { success = false, message = "Movie Not Found", result = existingMovie });
+            }
+
+            existingMovie.Title = movieRequest.Title;
+            existingMovie.Description = movieRequest.Description;
+            existingMovie.ReleaseDate = movieRequest.ReleaseDate;
+            existingMovie.EndDate = movieRequest.EndDate;
+            existingMovie.Genres = new List<Genre>();
+
+            foreach (var gen in movieRequest.Genres)
+            {
+                var genId = await genreService.GetAllAsync();
+                foreach(var i in genId)
+                {
+                    if(gen.Id == i.Id)
+                    {
+                        return Json("Yes");
+                    }
+                }
+            }
+            return Json(existingMovie);
+            // Save changes
+            await movieService.Update(existingMovie);
+
+            return Json(new { success = true, message = "Movie updated successfully", result = existingMovie });
+        }
+        catch (Exception ex)
+        {
+            var innerException = ex.InnerException?.Message;
+            return Json(new { success = false, message = ex.Message, innerMessage = innerException });
+        }
+    }
+
+
 
 }

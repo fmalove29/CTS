@@ -12,6 +12,10 @@ namespace CrudAsp.Models.Data
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
         // Remove the Users DbSet if you are using IdentityUser
         // If you want to keep custom DbSet properties for your custom entity classes, define them here.
         public DbSet<Movie> Movies {get; set;}

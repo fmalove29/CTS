@@ -31,13 +31,8 @@ public class MovieService
 
     public async Task<IEnumerable<Movie>> GetAll()
     {
-        var employeeDb = await this.repository.GetDbSet();
-        var employees = await employeeDb
-            .Include(e => e.Genres)
-            .Include(e => e.MovieImages)
-            .ToListAsync();
-
-            return employees;
+        var employeeDb = await this.repository.GetDbSet(); // No Include statements
+        return await employeeDb.ToListAsync(); // Lazy loading enabled at navigation property access
     }
 
     public async Task<IEnumerable<Genre>> GetAllGenre()
@@ -111,6 +106,11 @@ public class MovieService
 
 
         return movie; // Return the found movie or null if not found
+    }
+
+    public async Task Update(Movie movie)
+    {
+        await this.repository.UpdateAsync(movie);
     }
 
 

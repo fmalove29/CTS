@@ -12,6 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title">Movie Card Form</h5>
                     <div class="mb-3">
+                        <input type="text" name="" id="movieId" hidden value="@Model.Id">
                         <label for="movieTitle" class="form-label">Movie Title</label>
                         <input type="text" class="form-control" id="movieTitle" placeholder="Enter movie title" name="Title" value="@Model.Title" required>
                     </div>
@@ -67,7 +68,7 @@
                         <input type="file" id="movieImg" name="ImageFile" class="form-control" required />
                     </div>
                     <a  class="btn btn-secondary" asp-controller="Movie" asp-action="Index">Back</a>
-                    <button type="submit" id="btnSave" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary"> @(isUpdate ? "Update" : "Create")</button>
             </div>
         </div>
     </div>
