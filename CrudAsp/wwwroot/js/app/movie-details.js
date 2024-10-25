@@ -66,11 +66,11 @@ $(document).ready(function(){
             });
             */
 
-            if($('#btnSave').text() == ' Update') {
-                let decider = 'PutMovie';
+    
+
+                let decider = 'PostMovie';
                 let update = await request(decider, movieRequest);
                 console.log(update);
-            }
         };
         reader.readAsDataURL(file);
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
 
     async function request(decider, movie) {
         try {
-            const data = await axios.put('/Movie/' + decider, movie);
+            const data = await axios.post('/Movie/' + decider, movie);
             console.log(data);
             return data.response;
         } catch(error) {

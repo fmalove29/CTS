@@ -23,6 +23,9 @@ gulp.task('copy-dependencies', function() {
     
     gulp.src('node_modules/jquery-easing/dist/jquery.easing.1.3.umd.min.js')
         .pipe(gulp.dest('wwwroot/js'));
+        
+    gulp.src('node_modules/material-icons/**/*')
+        .pipe(gulp.dest('wwwroot/material-icons'));
 });
 
 gulp.task('default', gulp.series('copy-dependencies'));

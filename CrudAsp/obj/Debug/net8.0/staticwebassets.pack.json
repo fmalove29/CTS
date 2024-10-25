@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets/app/images/movie/234a4567-7d37-4b48-a8a1-5045ad13edcb.jpeg"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/244ff5eb-8054-4d95-94f8-7181149428f7.jpeg",
+      "PackagePath": "staticwebassets/app/images/movie/244ff5eb-8054-4d95-94f8-7181149428f7.jpeg"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/24e466fc-5bca-4fcd-a9a0-e42e196e534f.png",
       "PackagePath": "staticwebassets/app/images/movie/24e466fc-5bca-4fcd-a9a0-e42e196e534f.png"
     },
@@ -161,6 +165,10 @@
       "PackagePath": "staticwebassets/css/movie/movie-list.css"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/movie/movielistCarousel.css",
+      "PackagePath": "staticwebassets/css/movie/movielistCarousel.css"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/owl.carousel.css",
       "PackagePath": "staticwebassets/css/owl.carousel.css"
     },
@@ -225,8 +233,16 @@
       "PackagePath": "staticwebassets/js/active.js"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/cinema/index.js",
+      "PackagePath": "staticwebassets/js/app/cinema/index.js"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/movie-details.js",
       "PackagePath": "staticwebassets/js/app/movie-details.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/movielistCarousel.js",
+      "PackagePath": "staticwebassets/js/app/movielistCarousel.js"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/axios.min.js",
@@ -491,6 +507,146 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/LICENSE",
+      "PackagePath": "staticwebassets/material-icons"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/README.md",
+      "PackagePath": "staticwebassets/material-icons/README.md"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/_data/versions.json",
+      "PackagePath": "staticwebassets/material-icons/_data/versions.json"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/css/_codepoints.scss",
+      "PackagePath": "staticwebassets/material-icons/css/_codepoints.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/css/_mixins.scss",
+      "PackagePath": "staticwebassets/material-icons/css/_mixins.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/css/_variables.scss",
+      "PackagePath": "staticwebassets/material-icons/css/_variables.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/css/material-icons.css",
+      "PackagePath": "staticwebassets/material-icons/css/material-icons.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/css/material-icons.min.css",
+      "PackagePath": "staticwebassets/material-icons/css/material-icons.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/css/material-icons.scss",
+      "PackagePath": "staticwebassets/material-icons/css/material-icons.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/_mixins.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/_mixins.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/_variables.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/_variables.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/filled.css",
+      "PackagePath": "staticwebassets/material-icons/iconfont/filled.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/filled.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/filled.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-outlined.woff",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-outlined.woff"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-outlined.woff2",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-outlined.woff2"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-round.woff",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-round.woff"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-round.woff2",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-round.woff2"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-sharp.woff",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-sharp.woff"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-sharp.woff2",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-sharp.woff2"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-two-tone.woff",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-two-tone.woff"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons-two-tone.woff2",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons-two-tone.woff2"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons.css",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons.woff",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons.woff"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/material-icons.woff2",
+      "PackagePath": "staticwebassets/material-icons/iconfont/material-icons.woff2"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/outlined.css",
+      "PackagePath": "staticwebassets/material-icons/iconfont/outlined.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/outlined.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/outlined.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/round.css",
+      "PackagePath": "staticwebassets/material-icons/iconfont/round.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/round.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/round.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/sharp.css",
+      "PackagePath": "staticwebassets/material-icons/iconfont/sharp.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/sharp.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/sharp.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/two-tone.css",
+      "PackagePath": "staticwebassets/material-icons/iconfont/two-tone.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/iconfont/two-tone.scss",
+      "PackagePath": "staticwebassets/material-icons/iconfont/two-tone.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/index.d.ts",
+      "PackagePath": "staticwebassets/material-icons/index.d.ts"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/material-icons/package.json",
+      "PackagePath": "staticwebassets/material-icons/package.json"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CrudAsp.Microsoft.AspNetCore.StaticWebAssets.props",

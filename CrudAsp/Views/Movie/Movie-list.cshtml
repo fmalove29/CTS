@@ -1,12 +1,29 @@
 @model List<CrudAsp.resource.response.MovieResponse>
-
-<link rel="stylesheet" href="~/css/movie/font-awesome.min.css">
-<link rel="stylesheet" href="~/css/movie/font-awesome.css">
 @* <div class="d-flex justify-content-end mb-3">
     <a class="btn btn-primary" asp-controller="Movie" asp-action="Create">Add Movie</a>
 </div> *@
+<style>
+    .hover-card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
 
-@* <div class="card bg-transparent border-0 mb-2">
+    .hover-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Ensure the link looks like part of the card */
+    .text-decoration-none {
+        text-decoration: none !important;
+    }
+
+    .text-dark {
+        color: black !important;
+    }
+</style>
+
+
+<div class="card bg-transparent border-0 mb-2">
     <div class="card-body p-0">
         <div id="movieCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -48,55 +65,35 @@
             </button>
         </div>
     </div>
-</div> *@
-<div class="banner">
-    <div class="content">
-        <h1>Movie 1</h1>
-        <h4>
-            <span>2023</span>
-            <span>12+</span>
-            <span>2h 14min</span>
-        </h4>
-        <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est perferendis illo recusandae minima tempora, odit vitae corrupti hic rem magni et eligendi veniam autem perspiciatis quia dignissimos iusto consequuntur delectus!
-        </p> 
-        <div class="d-flex">
-            <button class="btn btn-primary">Watch </button>
-            <button class="btn btn-primary ">My list</button>
-        </div>
-    </div>
-    <div class="carousel-box"></div>
-    <a class="play" href="#">Watch Trailer</a>
-    <ul>
-        <li><a href=""><i class="fab fa-facebook"></i></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-    </ul>
 </div>
 
-<div class="movie-container row">
-    @foreach (var movie in Model)
-    {
-        <div class="col mb-2">
-            <div class="card shadow w-40">
-                @if (movie.MovieImages != null && movie.MovieImages.Any())
-                {
-                    // Display the first image from the MovieImages collection using relative path
-                    <img class="card-img-top"
-                    src="@Url.Content("~/app/images/movie/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path ))"
-                    alt="@movie.Title"
-                    style="max-width: 600px; object-fit: cover;" />
-                    <div class="row">
-                        <a  class="btn btn-outline-primary col-6" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">Manage</a>
-                        <a  class="btn btn-outline-warning col-6" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">Buy Ticket</a>
+
+<div class="container">
+    <div class="movie-container row">
+        @foreach (var movie in Model)
+        {
+            <div class="col mb-2">
+                <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">
+                    <div class="card shadow" asp-action="Details" asp-route-id="@movie.Id">
+                        @if (movie.MovieImages != null && movie.MovieImages.Any())
+                        {
+                            // Display the first image from the MovieImages collection using relative path
+                            <img class="card-img-top"
+                            src="@Url.Content("~/app/images/movie/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path ))"
+                            alt="@movie.Title"
+                            style="max-width: 100%; object-fit: cover;" />
+                            @* <div class="row">
+                                <a  class="btn btn-outline-primary col-6" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">Manage</a>
+                                <a  class="btn btn-outline-warning col-6" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">Buy Ticket</a>
+                            </div> *@
+                        }
                     </div>
-                }
+                </a>
             </div>
+        }
+        <div class="col text-center align-content-center mt-4">
+            <a class="btn btn-primary" asp-controller="Movie" asp-action="Create"><i class="fa-plus"></i></a>
         </div>
-    }
-    <div class="col text-center align-content-center mt-4">
-        <a class="btn btn-primary" asp-controller="Movie" asp-action="Create"><i class="bi bi-plus-circle-fill"></i></a>
     </div>
 </div>
+

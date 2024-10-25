@@ -163,23 +163,44 @@ namespace CrudAsp.Controllers.Users
         [HttpPost]
         public async Task<IActionResult> PostLogin(LoginVM log)
         {
-            // return Ok(log);
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(log.UserName!, log.Password!, log.RememberMe, false);
+                IdentityUser? user = null;
 
-                if (result.Succeeded)
+                // Check if input is an email (simple email validation)
+                if (log.UserName!.Contains("@"))
                 {
-
-                    // return Ok("Logged");
-                    return RedirectToAction("Index", "Home");
+                    // Try to find user by email
+                    user = await _userManager.FindByEmailAsync(log.UserName);
+                }
+                else
+                {
+                    // Try to find user by username
+                    user = await _userManager.FindByNameAsync(log.UserName);
                 }
 
-                ModelState.AddModelError("", "Invalid login attempt");
+                // If the user is found, proceed with password sign-in
+                if (user != null)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, log.Password!, log.RememberMe, lockoutOnFailure: false);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Movie");
+                    }
+
+                    ModelState.AddModelError("", "Invalid login attempt");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid login attempt");
+                }
             }
 
+            // If we got this far, something failed, redisplay the form
             return View("Login", log);
         }
+
 
         // Handle registration post request
         [HttpPost]
@@ -201,8 +222,10 @@ namespace CrudAsp.Controllers.Users
                 // return Ok(result);
                 if (result.Succeeded)
                 {
+                    string roleName = "User";
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index");
+                    await _userManager.AddToRoleAsync(user, roleName);
+                    return RedirectToAction("Index", "Movie");
                 }
 
                 foreach (var error in result.Errors)

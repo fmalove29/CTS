@@ -18,6 +18,9 @@ namespace CrudAsp.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -136,11 +139,13 @@ namespace CrudAsp.Migrations
 
                     b.Property<string>("CinemaName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("created_at")
                         .HasColumnType("datetime2");
@@ -197,6 +202,8 @@ namespace CrudAsp.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CinemaId");
 
                     b.ToTable("Halls");
                 });
@@ -266,7 +273,6 @@ namespace CrudAsp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Base64File")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("MovieId")
@@ -503,6 +509,15 @@ namespace CrudAsp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CrudAsp.Models.app.Hall", b =>
+                {
+                    b.HasOne("CrudAsp.Models.app.Cinema", null)
+                        .WithMany("Halls")
+                        .HasForeignKey("CinemaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CrudAsp.Models.app.MovieGenre", b =>
                 {
                     b.HasOne("CrudAsp.Models.app.Genre", "Genres")
@@ -604,6 +619,11 @@ namespace CrudAsp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CrudAsp.Models.app.Cinema", b =>
+                {
+                    b.Navigation("Halls");
                 });
 
             modelBuilder.Entity("CrudAsp.Models.app.Hall", b =>

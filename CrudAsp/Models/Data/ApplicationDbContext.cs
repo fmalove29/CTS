@@ -49,27 +49,18 @@ namespace CrudAsp.Models.Data
                 .Property(b => b.TotalAmount)
                 .HasPrecision(18, 2);
 
+            modelBuilder.Entity<Cinema>(entity =>
+            {
+                entity.Property(c => c.CinemaName)
+                    .IsRequired()   // Makes it NOT NULL
+                    .HasMaxLength(255); // Optional: setting max length
 
-            // modelBuilder.Entity<Genre>().HasData(
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Sci-Fi" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Thriller" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Action" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Romance" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Comedy" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Crime" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "War" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Biographical" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Drama" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Mystery" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Animation" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Western" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Horror" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Fantasy" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Documentary" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Superhero" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Family" },
-            //     new Genre { Id = Guid.NewGuid(), GenreName = "Musical" }
-            // );
+                entity.Property(c => c.Location)
+                    .IsRequired()   // Makes it NOT NULL
+                    .HasMaxLength(255); // Optional: setting max length
+            });
+
+
             base.OnModelCreating(modelBuilder);
         }
 

@@ -18,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IRepository<Movie>, Repository<Movie>>();
 builder.Services.AddScoped<IRepository<Genre>, Repository<Genre>>();
+builder.Services.AddScoped<IRepository<Cinema>, Repository<Cinema>>();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -27,6 +28,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Configure Identity
 builder.Services.AddIdentity<Users, IdentityRole>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
@@ -55,5 +57,19 @@ app.UseStaticFiles();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    using(var scope = app.Services.CreateScope())
+    {
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+        var roles = new[] {"Admin","Manager", "User"};
+        
+        foreach(var role in roles)
+        {
+            if(!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+
 
 app.Run();

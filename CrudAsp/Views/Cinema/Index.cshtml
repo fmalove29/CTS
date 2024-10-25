@@ -1,0 +1,73 @@
+@model List<CrudAsp.resource.response.CinemaResponse>
+
+@{
+    ViewBag.list = "Cinema NationWide";
+}
+
+<div class="container mt-2">
+    <h2>@ViewBag.List</h2>
+    <div class="d-flex justify-content-between mb-2">
+        <input type="text" id="searchInput" name="searchQuery" class="form-control w-25" placeholder="Search Cinemas" value="@ViewBag.SearchQuery" />
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Cinema</button>
+    </div>
+    <table class="table" id="cTable">
+        <thead>
+            <th>Cinema Id</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Date Started</th>
+            <th></th>
+        </thead>
+        <tbody class="cTbody">
+            @for(var i = 0; i < Model.Count; i++)
+            {
+                var cinema = Model[i];
+                <tr>
+                    <td>@cinema.Id</td>
+                    <td>@cinema.CinemaName</td>
+                    <td>@cinema.Location</td>
+                    <td>@cinema.created_at</td>
+                    <td>
+                        <a class="btn btn-outline-info" asp-controller="Cinema" asp-action="Details" asp-route-id="@cinema.Id">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="cinemaForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Cinema</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="cinemaName" placeholder="Enter name of cinema">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Location:</label>
+                                <input type="text" class="form-control" id="location" placeholder="Ender Location">
+                            </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" data-bs-dismiss="modal">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/app/cinema/index.js"></script>
+    <script src="@Url.Content("~/js/axios.min.js")"></script>
+    <script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
+}
