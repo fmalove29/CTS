@@ -6,5 +6,5 @@ public class BaseResponse
 {
     public Guid Id {get; set;}
 
-    public DateTime created_at {get; set;}
+    public DateTime created_at {get; set;} = DateTime.Now;
 }

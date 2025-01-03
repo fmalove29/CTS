@@ -177,6 +177,43 @@ namespace CrudAsp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("78c08a35-d863-447b-bb53-867cb5edb4b4"),
+                            GenreName = "Action",
+                            created_at = new DateTime(2024, 12, 20, 11, 14, 15, 994, DateTimeKind.Local).AddTicks(9990),
+                            updated_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(10)
+                        },
+                        new
+                        {
+                            Id = new Guid("f3e0776c-ce30-475d-897d-8fa3d39a3ad4"),
+                            GenreName = "Drama",
+                            created_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(40),
+                            updated_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(40)
+                        },
+                        new
+                        {
+                            Id = new Guid("f82f1a02-0524-44e5-97bd-81029087a0a7"),
+                            GenreName = "Sci-Fi",
+                            created_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(50),
+                            updated_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(50)
+                        },
+                        new
+                        {
+                            Id = new Guid("50ce36e1-8dc4-40ff-a73f-3da7d4977dcf"),
+                            GenreName = "Comedy",
+                            created_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(60),
+                            updated_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(60)
+                        },
+                        new
+                        {
+                            Id = new Guid("b6999bf2-62e7-4295-b520-722aaf6af3a7"),
+                            GenreName = "Horror",
+                            created_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(70),
+                            updated_at = new DateTime(2024, 12, 20, 11, 14, 15, 995, DateTimeKind.Local).AddTicks(70)
+                        });
                 });
 
             modelBuilder.Entity("CrudAsp.Models.app.Hall", b =>
@@ -271,9 +308,6 @@ namespace CrudAsp.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Base64File")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("MovieId")
                         .HasColumnType("uniqueidentifier");

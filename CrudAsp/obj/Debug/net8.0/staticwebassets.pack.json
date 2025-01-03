@@ -85,6 +85,10 @@
       "PackagePath": "staticwebassets/app/images/movie/715698c0-6afd-4776-93c1-2bba9d63e68c.png"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/75d79d68-4beb-4562-88cd-b970a1d43a4f.jpeg",
+      "PackagePath": "staticwebassets/app/images/movie/75d79d68-4beb-4562-88cd-b970a1d43a4f.jpeg"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/app/images/movie/84be3bd8-01b3-4776-a12c-d993d169f72d.png",
       "PackagePath": "staticwebassets/app/images/movie/84be3bd8-01b3-4776-a12c-d993d169f72d.png"
     },
@@ -137,6 +141,10 @@
       "PackagePath": "staticwebassets/css/bootstrap.min.css"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/cinema/cinema-details.css",
+      "PackagePath": "staticwebassets/css/cinema/cinema-details.css"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/core-style.css",
       "PackagePath": "staticwebassets/css/core-style.css"
     },
@@ -147,6 +155,10 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/jquery-ui.min.css",
       "PackagePath": "staticwebassets/css/jquery-ui.min.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/jquery.dataTables.min.css",
+      "PackagePath": "staticwebassets/css/jquery.dataTables.min.css"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/magnific-popup.css",
@@ -175,6 +187,10 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/responsive.css",
       "PackagePath": "staticwebassets/css/responsive.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/select2.min.css",
+      "PackagePath": "staticwebassets/css/select2.min.css"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/site.css",
@@ -229,6 +245,22 @@
       "PackagePath": "staticwebassets/fonts/themify.woff"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/4712426e-b1a1-4043-a044-3754ecfbf726.jpeg",
+      "PackagePath": "staticwebassets/images/movies/4712426e-b1a1-4043-a044-3754ecfbf726.jpeg"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/8e265899-31e8-4bfa-bf2c-3d0e8f213792.jpeg",
+      "PackagePath": "staticwebassets/images/movies/8e265899-31e8-4bfa-bf2c-3d0e8f213792.jpeg"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/9f91a468-6a0b-4aa2-8481-d90a35476605.jpeg",
+      "PackagePath": "staticwebassets/images/movies/9f91a468-6a0b-4aa2-8481-d90a35476605.jpeg"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/ea948dc9-6246-4b54-8237-843b917dc2d1.jpeg",
+      "PackagePath": "staticwebassets/images/movies/ea948dc9-6246-4b54-8237-843b917dc2d1.jpeg"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/active.js",
       "PackagePath": "staticwebassets/js/active.js"
     },
@@ -245,12 +277,28 @@
       "PackagePath": "staticwebassets/js/app/movielistCarousel.js"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/show/hall-details.js",
+      "PackagePath": "staticwebassets/js/app/show/hall-details.js"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/axios.min.js",
       "PackagePath": "staticwebassets/js/axios.min.js"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/bootstrap.min.js",
       "PackagePath": "staticwebassets/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/dataTables.dataTables.min.js",
+      "PackagePath": "staticwebassets/js/dataTables.dataTables.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/dataTables.min.js",
+      "PackagePath": "staticwebassets/js/dataTables.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets/js/jquery.dataTables.min.js"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/jquery.easing.1.3.umd.min.js",
@@ -271,6 +319,14 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/popper.min.js",
       "PackagePath": "staticwebassets/js/popper.min.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/select2.js",
+      "PackagePath": "staticwebassets/js/select2.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/select2.min.js",
+      "PackagePath": "staticwebassets/js/select2.min.js"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/site.js",

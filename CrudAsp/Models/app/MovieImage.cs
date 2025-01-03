@@ -11,7 +11,6 @@ public class MovieImage : BaseEntity
 
     public string? Path { get; set;}
 
-    public string? Base64File {get; set;}
     public Guid? MovieId { get; set; }
 
     [JsonIgnore]

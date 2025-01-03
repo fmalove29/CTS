@@ -26,6 +26,26 @@ gulp.task('copy-dependencies', function() {
         
     gulp.src('node_modules/material-icons/**/*')
         .pipe(gulp.dest('wwwroot/material-icons'));
+
+    gulp.src('node_modules/select2/dist/js/select2.min.js')
+        .pipe(gulp.dest('wwwroot/js'));
+
+    gulp.src('node_modules/select2/dist/js/select2.js')
+        .pipe(gulp.dest('wwwroot/js'));
+    gulp.src('node_modules/select2/dist/css/select2.min.css')
+        .pipe(gulp.dest('wwwroot/css'));
+
+    gulp.src('node_modules/datatables.net/js/dataTables.min.js')
+        .pipe(gulp.dest('wwwroot/js'));
+    
+    gulp.src('node_modules/datatables.net-dt/js/dataTables.dataTables.min.js')
+        .pipe(gulp.dest('wwwroot/js'));
+
+    gulp.src('node_modules/datatables/media/css/jquery.dataTables.min.css')
+        .pipe(gulp.dest('wwwroot/css'));
+        
+    gulp.src('node_modules/datatables/media/js/jquery.dataTables.min.js')
+        .pipe(gulp.dest('wwwroot/js'));
 });
 
 gulp.task('default', gulp.series('copy-dependencies'));

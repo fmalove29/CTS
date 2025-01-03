@@ -40,7 +40,7 @@ public class MovieController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var movies = await movieService.GetAll(); // Movies loaded without related entities
+        var movies = await movieService.GetDbSet(); // Movies loaded without related entities
 
         var movieRequests = movies.Select(movie => new MovieResponse
         {
@@ -61,6 +61,7 @@ public class MovieController : Controller
             }).ToList() // MovieImages will be lazy-loaded here
         }).ToList();
 
+        // return Json(movies);
         return View("Movie-list", movieRequests);
     }
 
@@ -147,9 +148,6 @@ public class MovieController : Controller
             {
                 GenreName = b.GenreName,
                 Id = b.Id,
-                // Movies = m.Select(mo => new MovieRequest{
-                //     Title = mo.Title
-                // }).ToList()
             }).ToList()
         };
 
@@ -160,7 +158,7 @@ public class MovieController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> PostMovie([FromBody] MovieRequest movieRequest)
+    public async Task<IActionResult> PostMovie([FromForm] MovieRequest movieRequest)
     {
         // return Json(movieRequest);
         if (ModelState.IsValid)
@@ -188,39 +186,41 @@ public class MovieController : Controller
                     newMovie.Genres.Add(newGenre);
                 }
 
-                string pathFolder = Path.Combine("wwwroot", "app", "images", "movie");
-                string savePathFolder = Path.Combine("app", "images", "movie");
+                
 
-                // return Json(savePathFolder);
+                string folderPath = Path.Combine("wwwroot", "images", "movies");
 
-                if (!Directory.Exists(pathFolder))
+                // Ensure the directory exists
+                if (!Directory.Exists(folderPath))
                 {
-                    Directory.CreateDirectory(pathFolder);
-
+                    Directory.CreateDirectory(folderPath);
                 }
 
-                foreach (var mg in movieRequest.MovieImages)
+                foreach (var file in movieRequest.MovieImages)
                 {
-                    byte[] imageBytes = Convert.FromBase64String(mg.Base64File);
-
-                    // Generate file name and path
-                    string fileName = newMovie.Id + Path.GetExtension(mg.Name);
-                    string filePath = Path.Combine(pathFolder, fileName);
-                    // Save image to the folder
-                    await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
-
-                    var newImage = new MovieImage
+                    if (file != null && file.Length > 0)
                     {
-                        Name = mg.Name,
-                        Size = mg.Size,
-                        Type = mg.Type,
-                        Base64File = mg.Base64File,
-                        MovieId = newMovie.Id,
-                        Path = filePath
-                    };
-                    newMovie.MovieImages.Add(newImage);
+                        string fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                        string filePath = Path.Combine(folderPath, fileName);
+                        string dbPath = Path.Combine("images", "movies", fileName);
+
+                        // Save the file to the folder
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        // Add to the MovieImages list
+                        newMovie.MovieImages.Add(new MovieImage
+                        {
+                            Name = file.FileName,
+                            Size = (int)file.Length,
+                            Type = file.ContentType,
+                            Path = dbPath, // Save the relative path to the database
+                            MovieId = newMovie.Id
+                        });
+                    }
                 }
-                // return Json(newMovie);
                 await movieService.AddAsync(newMovie);
 
                 return Json(new { success = true, message = "Movie created successfully", result = newMovie });
@@ -228,11 +228,12 @@ public class MovieController : Controller
             catch (Exception ex)
             {
                 var innerException = ex.InnerException?.Message;
-                return Json(new { success = false, message = ex.Message, innerMessage = innerException });
+                return Json(new { success = false, message = ex.Message, innerMessage = innerException});
             }
         }
 
-        return Json(new { success = false, message = "Invalid data", errors = ModelState });
+        return Json(new { success = false, message = "Invalid data", errors = ModelState, data = movieRequest });
+        
     }
 
     [HttpPut]

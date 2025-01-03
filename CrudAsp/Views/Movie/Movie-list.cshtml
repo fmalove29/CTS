@@ -22,64 +22,66 @@
     }
 </style>
 
+<div class="container">
+    <div class="card bg-transparent border-0 mb-2">
+        <div class="card-body p-0">
+            <div id="movieCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"
+                                aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+                    }
+                </div>
 
-<div class="card bg-transparent border-0 mb-2">
-    <div class="card-body p-0">
-        <div id="movieCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                @for (var i = 0; i < Model.Count; i++)
-                {
-                    <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"
-                            aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
-                }
-            </div>
 
-
-            <div class="carousel-inner h-100">
-                @for (var i = 0; i < Model.Count; i++)
-                {
-                    var movie = Model[i];
-                    <div class="carousel-item position-relative h-100  @(i == 0 ? "active" : "")">
-                        <img class="w-100 h-100 d-block carousel-image"
-                            src="@Url.Content("~/app/images/movie/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path))"
-                            alt="@movie.Title"
-                            style="" />
-                        
-                        <!-- Overlay Text for Title and Description -->
-                        <div class="carousel-caption text-start" style="color: white; font-size: 20px; text-shadow: 3px 3px black;">
-                            <h5>@movie.Title</h5>
-                            <p>@movie.Description</p>
+                <div class="carousel-inner h-100">
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        var movie = Model[i];
+                        <div class="carousel-item position-relative h-100  @(i == 0 ? "active" : "")">
+                            <img class="w-100  d-block carousel-image"
+                                src="@Url.Content("~/images/movies/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path))"
+                                alt="@movie.Title"
+                                style="" />
+                            
+                            <!-- Overlay Text for Title and Description -->
+                            <div class="carousel-caption text-start" style="color: white; font-size: 20px; text-shadow: 3px 3px black;">
+                                <h5>@movie.Title</h5>
+                                <p>@movie.Description</p>
+                            </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
 
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 <div class="container">
     <div class="movie-container row">
         @foreach (var movie in Model)
         {
-            <div class="col mb-2">
-                <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">
+            <div class="col-4 mb-2">
+                <a asp-controller="Booking" asp-action="Show" asp-route-id="@movie.Id">
                     <div class="card shadow" asp-action="Details" asp-route-id="@movie.Id">
                         @if (movie.MovieImages != null && movie.MovieImages.Any())
                         {
                             // Display the first image from the MovieImages collection using relative path
                             <img class="card-img-top"
-                            src="@Url.Content("~/app/images/movie/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path ))"
+                            src="@Url.Content("~/images/movies/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path ))"
                             alt="@movie.Title"
                             style="max-width: 100%; object-fit: cover;" />
                             @* <div class="row">
@@ -91,9 +93,6 @@
                 </a>
             </div>
         }
-        <div class="col text-center align-content-center mt-4">
-            <a class="btn btn-primary" asp-controller="Movie" asp-action="Create"><i class="fa-plus"></i></a>
-        </div>
     </div>
 </div>
 

@@ -24,8 +24,16 @@ public class CinemaService
         return await this.repository.GetAllAsync();
     }
     public async Task<Cinema> GetByIdAsync(Guid Id)
-    {   
-        return await this.repository.GetByIdAsync(Id);
+    {
+        var existCinema = await this.repository.GetDbSet();
+
+        var cinema = await existCinema
+                    .Include(e => e.Halls)
+                        .ThenInclude(h => h.Shows) 
+                    .Where(e => e.Id == Id)
+                    .FirstOrDefaultAsync();
+
+        return cinema;
     }
     public async Task<DbSet<Cinema>> GetDbSet()
         => await this.repository.GetDbSet();
@@ -37,8 +45,20 @@ public class CinemaService
             var newCinema = new Cinema
             {
                 CinemaName = cinema.CinemaName,
-                Location = cinema.Location
+                Location = cinema.Location,
+                Halls = new List<Hall>()
             };
+            foreach(var hall in cinema.Halls)
+            {
+                var h = new Hall
+                {
+                    CinemaId = cinema.Id,
+                    HallName = hall.HallName,
+                    SeatCapacity = hall.SeatCapacity
+                };
+                newCinema.Halls.Add(h);
+            }
+
 
             await this.repository.AddAsync(newCinema);
 
