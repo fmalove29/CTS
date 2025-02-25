@@ -1,5 +1,11 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<Users> signInManager
+@using System.Security.Claims
+
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
 
 <ul class="navbar-nav">
     @if (signInManager.IsSignedIn(User))
@@ -14,7 +20,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                    <a class="dropdown-item" asp-action="" asp-controller="">
+                    <a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile" asp-route-Id="@userId">
                         Profile
                     </a>
                 </li>

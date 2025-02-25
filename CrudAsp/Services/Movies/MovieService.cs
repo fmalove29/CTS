@@ -48,54 +48,71 @@ public class MovieService
         {
             var newMovie = new Movie
             {
+                Id          = Guid.NewGuid(), // Assign new Guid to avoid `Guid.Empty` issue
                 Title       = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
                 EndDate     = movie.EndDate,
                 Description = movie.Description,
-                Genres      = new List<Genre>(),
+                MovieGenres = new List<MovieGenre>(),
                 MovieImages = new List<MovieImage>()
             };
 
-            foreach (var genre in movie.Genres)
+            // Ensure movie.MovieGenres is not null before iterating
+            if (movie.MovieGenres != null)
             {
-                var existingGenre = await this.genreRepo.GetByIdAsync(genre.Id); 
-
-                if (existingGenre != null)
+                foreach (var movieGenre in movie.MovieGenres)
                 {
-                    newMovie.Genres.Add(existingGenre);
+                    var existingGenre = await this.genreRepo.GetByIdAsync(movieGenre.GenresId);
+                    if (existingGenre != null)
+                    {
+                        newMovie.MovieGenres.Add(new MovieGenre
+                        {
+                            MoviesId = newMovie.Id, // Ensure it has the correct MovieId
+                            GenresId = existingGenre.Id
+                        });
+                    }
                 }
             }
 
-            foreach(var mi in movie.MovieImages)
+            // Ensure movie.MovieImages is not null before iterating
+            if (movie.MovieImages != null)
             {
-                newMovie.MovieImages.Add(mi);
+                foreach (var mi in movie.MovieImages)
+                {
+                    newMovie.MovieImages.Add(new MovieImage
+                    {
+                        MovieId = newMovie.Id,
+                        Name    = mi.Name,
+                        Size    = mi.Size,
+                        Type    = mi.Type,
+                        Path    = mi.Path
+                    });
+                }
             }
 
             await this.repository.AddAsync(newMovie);
-
-            return movie;
+            return newMovie;
         }
         catch (Exception ex)
         {
-            
-            throw new Exception(ex.Message);
+            throw new Exception($"Error adding movie: {ex.Message}", ex);
         }
     }
 
+
     public async Task<Movie> GetById(Guid Id)
     {
-
         var movieDb = await this.repository.GetDbSet();
 
         var movie = await movieDb
-            .Include(e => e.Genres)   
+            .Include(e => e.MovieGenres) 
+                .ThenInclude(mg => mg.Genres)  
             .Include(e => e.MovieImages)
-            .Where(e => e.Id == Id)
-            .FirstOrDefaultAsync();
-
+            .FirstOrDefaultAsync(e => e.Id == Id);
 
         return movie;
     }
+
 
     public async Task Update(Movie movie)
     {

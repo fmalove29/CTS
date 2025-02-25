@@ -1,0 +1,92 @@
+<head>
+    <!-- Add Local Select2 CSS -->
+    <link href="@Url.Content("~/css/select2.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/cinema/cinema-details.css")" rel="stylesheet" />
+    @* <link href="@Url.Content("~/css/style.css")" rel="stylesheet" /> *@
+    <link href="@Url.Content("~/css/dataTables.bootstrap4.min.css")" rel="stylesheet" />
+    @* <link href="@Url.Content("~/css/jquery.dataTables.min.css")" rel="stylesheet" /> *@
+
+
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Users</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered zero-configuration" id="uTable">
+                            <thead>
+                                <tr>
+                                    @* <th>Id</th> *@
+                                    <th>First Name</th>
+                                    <th>Middle Name</th>
+                                    <th>Last</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="userClaimsModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="uscHeaderText"></h3>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-6 mb-2">
+                                <label for="">Claim Type</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-6 mb-2">
+                                <label for="">Value</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-sm btn-secondary mr-2" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-sm btn-primary mr-2">Save changes</button>
+                        </div>
+                        <div class="row">
+                            <table class="table table-striped table-bordered zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>User Id</th>
+                                        <th>Claim Type</th>
+                                        <th>Claim Value</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/plugins/common/common.min.js")"></script>
+    <script src="@Url.Content("~/js/custom.min.js")"></script>
+    <script src="@Url.Content("~/js/settings.js")"></script>
+    <script src="@Url.Content("~/js/gleek.js")"></script>
+    <script src="@Url.Content("~/js/styleSwitcher.js")"></script>
+    <script src="@Url.Content("~/js/axios.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.js")"></script>
+    <script src="@Url.Content("~/js/app/security/user_role-list.js")"></script>
+
+    <script src="@Url.Content("~/plugins/tables/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/plugins/tables/js/datatable/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/plugins/tables/js/datatable-init/datatable-basic.min.js")"></script>
+}

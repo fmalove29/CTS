@@ -1,0 +1,7 @@
+td.details-control {
+    cursor: pointer;
+}
+.child-row {
+    display: none;
+    padding: 10px;
+}

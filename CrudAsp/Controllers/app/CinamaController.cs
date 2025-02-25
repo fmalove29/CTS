@@ -78,8 +78,7 @@ public class CinemaController : Controller
         return Json(cineResponse); // Return JSON response
     }
 
-
-
+    
 
 
     public async Task<IActionResult> Details(Guid Id)
@@ -88,7 +87,7 @@ public class CinemaController : Controller
 
         
 
-        return Json(cinema.ToCinemaResponse());
+        return View(cinema.ToCinemaResponse());
         // return Json(cinema.ToCinemaResponse());
     }
     // public async Task<IActionResult> CinemaDetails(Guid Id)
