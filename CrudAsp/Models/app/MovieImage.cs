@@ -13,6 +13,5 @@ public class MovieImage : BaseEntity
 
     public Guid? MovieId { get; set; }
 
-    [JsonIgnore]
     public virtual Movie? Movie { get; set; }
 }

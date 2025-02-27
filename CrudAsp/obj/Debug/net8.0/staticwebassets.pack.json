@@ -2021,6 +2021,14 @@
       "PackagePath": "staticwebassets/images/member/profile.png"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/06a6793c-caf2-4468-8816-05c43312062f.png",
+      "PackagePath": "staticwebassets/images/movies/06a6793c-caf2-4468-8816-05c43312062f.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/22c45cfd-1d20-47b5-b160-27d76c7cb69e.png",
+      "PackagePath": "staticwebassets/images/movies/22c45cfd-1d20-47b5-b160-27d76c7cb69e.png"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/43e36afa-35f6-4bd0-9d7e-c32cc5d7820a.png",
       "PackagePath": "staticwebassets/images/movies/43e36afa-35f6-4bd0-9d7e-c32cc5d7820a.png"
     },
@@ -2031,6 +2039,14 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/66946be2-403f-4a36-8ae7-f419ed5dc269.png",
       "PackagePath": "staticwebassets/images/movies/66946be2-403f-4a36-8ae7-f419ed5dc269.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/67e2f4aa-ea30-43c3-8f19-11189cfcf48d.png",
+      "PackagePath": "staticwebassets/images/movies/67e2f4aa-ea30-43c3-8f19-11189cfcf48d.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/6a5fe193-c4fd-428a-b04f-d66573a83d9b.png",
+      "PackagePath": "staticwebassets/images/movies/6a5fe193-c4fd-428a-b04f-d66573a83d9b.png"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/7d486f2d-e21b-482f-849c-bc7f56bb4453.png",
@@ -2049,6 +2065,10 @@
       "PackagePath": "staticwebassets/images/movies/9721f2e6-7be3-4e02-9013-a8aeeae7f934.png"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/97e35890-e668-4491-8c50-6123da88cc8f.png",
+      "PackagePath": "staticwebassets/images/movies/97e35890-e668-4491-8c50-6123da88cc8f.png"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/9a327b94-e183-4cc4-9b7c-09d53b2ae34b.png",
       "PackagePath": "staticwebassets/images/movies/9a327b94-e183-4cc4-9b7c-09d53b2ae34b.png"
     },
@@ -2065,12 +2085,20 @@
       "PackagePath": "staticwebassets/images/movies/a56c9ba0-bde6-4525-85e5-8dceb0217f3f.png"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/ab82558d-f378-4397-8d97-0c3c8351460f.png",
+      "PackagePath": "staticwebassets/images/movies/ab82558d-f378-4397-8d97-0c3c8351460f.png"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/b0a203a5-eda1-4e8b-9993-930fc162a2e1.png",
       "PackagePath": "staticwebassets/images/movies/b0a203a5-eda1-4e8b-9993-930fc162a2e1.png"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/cbd7711b-0211-4ae2-b9db-45fc24f3b14c.png",
       "PackagePath": "staticwebassets/images/movies/cbd7711b-0211-4ae2-b9db-45fc24f3b14c.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/d29e7a6f-75f6-4beb-82d5-f1e047b95a19.png",
+      "PackagePath": "staticwebassets/images/movies/d29e7a6f-75f6-4beb-82d5-f1e047b95a19.png"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/d511732f-cb25-40a7-bd4f-a2717273bc18.png",
@@ -2083,6 +2111,10 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/e0487ca4-0d49-47e4-8c0f-43b1b22c8e14.png",
       "PackagePath": "staticwebassets/images/movies/e0487ca4-0d49-47e4-8c0f-43b1b22c8e14.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/e340a85b-6b2d-4cc5-9e0a-d904de6d9ec3.png",
+      "PackagePath": "staticwebassets/images/movies/e340a85b-6b2d-4cc5-9e0a-d904de6d9ec3.png"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/ea948dc9-6246-4b54-8237-843b917dc2d1.jpeg",

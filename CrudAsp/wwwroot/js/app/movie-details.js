@@ -33,11 +33,17 @@ $(document).ready(function () {
             });
 
             console.log(response.data);
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Movie created successfully!'
-            });
+            if(response.data.success == true)
+            {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: response.data.message
+                })
+                .then(()=>{
+                    window.location = '/Movie';
+                })
+            }
         } catch (error) {
             console.error(error);
             Swal.fire({

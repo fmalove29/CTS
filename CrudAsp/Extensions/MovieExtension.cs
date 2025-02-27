@@ -45,7 +45,18 @@ public static class MovieExntension
             Title       = movie.Title,
             Description = movie.Description,
             ReleaseDate = movie.ReleaseDate,
-            EndDate     = movie.EndDate
+            EndDate     = movie.EndDate,
+            Genres = movie.MovieGenres.Select(e => new GenreResponse{
+                Id = e.Genres.Id,
+                GenreName = e.Genres.GenreName
+            }).ToList(),
+            MovieImages = movie.MovieImages.Select(img => new MovieImageResponse{
+                Name = img.Name,
+                Size = img.Size,
+                Type = img.Type,
+                Path = img.Path,
+                MovieId = img.MovieId
+            }).ToList()
         };
     }
 
