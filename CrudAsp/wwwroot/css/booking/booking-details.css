@@ -1,0 +1,86 @@
+.step {
+    display: none;
+}
+.step.active {
+    display: block;
+}
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* Adjusted for full-width banner */
+    overflow: hidden;
+    color: white;
+    max-height: 800px;
+}
+
+/* Use background-image instead of <img> to maintain aspect ratio */
+.banner-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Dark Gradient Overlay for Better Contrast */
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)); 
+}
+
+/* Content Box */
+.banner-content {
+    position: absolute;
+    bottom: 15%;
+    left: 5%;
+    max-width: 50%;
+    z-index: 2;
+}
+
+/* Movie Title */
+.movie-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Movie Genres */
+.movie-genres {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.movie-genres li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Release Date */
+.release-date {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Description */
+.movie-description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 80%;
+}
+
+.select2-results__option {
+    color: #000;
+}
+.select2-results__option:hover {
+    background-color:#B3B3B3 !important;
+    color: #E50914 !important;
+}

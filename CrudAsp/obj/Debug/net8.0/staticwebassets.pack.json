@@ -137,6 +137,10 @@
       "PackagePath": "staticwebassets/css/animate.css"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/booking/booking-details.css",
+      "PackagePath": "staticwebassets/css/booking/booking-details.css"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/bootstrap.min.css",
       "PackagePath": "staticwebassets/css/bootstrap.min.css"
     },
@@ -147,6 +151,10 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/core-style.css",
       "PackagePath": "staticwebassets/css/core-style.css"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/custom.css",
+      "PackagePath": "staticwebassets/css/custom.css"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/css/dataTables.bootstrap4.min.css",
@@ -2021,8 +2029,16 @@
       "PackagePath": "staticwebassets/images/member/profile.png"
     },
     {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/00c88011-683f-4fcf-92f2-c7fb0c526adf.jpg",
+      "PackagePath": "staticwebassets/images/movies/00c88011-683f-4fcf-92f2-c7fb0c526adf.jpg"
+    },
+    {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/06a6793c-caf2-4468-8816-05c43312062f.png",
       "PackagePath": "staticwebassets/images/movies/06a6793c-caf2-4468-8816-05c43312062f.png"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/181d1daf-cb0a-4c55-b13e-00995e7886e4.pdf",
+      "PackagePath": "staticwebassets/images/movies/181d1daf-cb0a-4c55-b13e-00995e7886e4.pdf"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/images/movies/22c45cfd-1d20-47b5-b160-27d76c7cb69e.png",
@@ -2271,6 +2287,14 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/active.js",
       "PackagePath": "staticwebassets/js/active.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/booking/booking-details.js",
+      "PackagePath": "staticwebassets/js/app/booking/booking-details.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/cinema/cinema-details.js",
+      "PackagePath": "staticwebassets/js/app/cinema/cinema-details.js"
     },
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/js/app/cinema/index.js",
@@ -21443,6 +21467,14 @@
     {
       "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/plugins/xml/plugin.js",
       "PackagePath": "staticwebassets/plugins/xml/plugin.js"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/scss/custom-component.scss",
+      "PackagePath": "staticwebassets/scss/custom-component.scss"
+    },
+    {
+      "Id": "/Users/itdev-mac01/CrudAsp/wwwroot/scss/custom.scss",
+      "PackagePath": "staticwebassets/scss/custom.scss"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CrudAsp.Microsoft.AspNetCore.StaticWebAssets.props",

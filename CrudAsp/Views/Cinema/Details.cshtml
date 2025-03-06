@@ -3,25 +3,31 @@
 <head>
     <!-- Add Local Select2 CSS -->
     <link href="@Url.Content("~/css/select2.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/css/cinema/cinema-details.css")" rel="stylesheet" />
     <link href="@Url.Content("~/css/jquery.dataTables.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/cinema/cinema-details.css")" rel="stylesheet" />
     
 
 </head>
 
 <div class="container mt-2">
-    <h2>@Model.CinemaName</h2>
-    <h2>@Model.Location</h2>
-
-    <table class="table" id="hTable">
-        <thead>
-            <tr>
-                <th>Hall Name</th>
-                <th>Seat Capacity</th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <input type="text" name="" id="cinemaId" class="d-none" value="@Model.Id">
+            <div class="card-title"><h1 class="text-danger"><strong>@Model.CinemaName</strong></h1></div>
+            <div class="d-flex justify-content-end mb-2">
+                    <button type="button" class="btn btn-netflix-primary" id="btnAddHall" data-bs-toggle="modal" data-bs-target="#btnHallShow">Add Cinema</button>
+                </div>
+            <table class="table table-striped zero-configuration w-100" id="hTable">
+                <thead>
+                    <tr>
+                        <th>Hall Name</th>
+                        <th>Seat Capacity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 
     <a class="btn btn-secondary" asp-controller="Cinema" asp-action="Index">Back</a>
 
@@ -31,43 +37,32 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">@Model.CinemaName</h1>
-                        <small>@Model.Location</small>
+                        <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel"><strong>@Model.CinemaName</strong></h1>
+                        <small class="text-danger">@Model.Location</small>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-12 mb-2">
-                            <select name="selMovie" id="selMovie" class="form-control w-100">
-                            </select>
+                        <div class="col-4">
+                            <label for="#hallName" class="text-dark">Hall Name : </label>
                         </div>
-                        <div class="col-6">
-                            <label for="">Time</label>
-                            <input type="time" class="form-control">
+            
+                        <div class="col-8">
+                            <input type="text" class="form-control" name="" id="hallName">
                         </div>
-                        <div class="col-6">
-                            <label for="">Duration</label>
-                            <input type="number" class="form-control">
-                        </div>
+                        
                     </div>
-                    <br>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-sm btn-primary" id="btnAddShow" data-bs-dismiss="modal">Add</button>
-                    </div>
-                    <hr>
                     <br>
                     <div class="row">
-                        <table class="table table-hover" id="sTable">
-                            <thead>
-                                <th>Title</th>
-                                <th>Time</th>
-                                <th>Duration</th>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                        <div class="col-4">
+                            <label for="#hallName" class="text-dark">Seat Capacity : </label>
+                        </div>
+            
+                        <div class="col-8">
+                            <input type="text" class="form-control" name="" id="seatCapacity">
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -81,5 +76,5 @@
     <script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
     <script src="@Url.Content("~/js/select2.min.js")"></script>
     <script src="@Url.Content("~/js/select2.js")"></script>
-    <script src="@Url.Content("~/js/app/show/hall-details.js")"></script>
+    <script src="@Url.Content("~/js/app/cinema/cinema-details.js")"></script>
 }

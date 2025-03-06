@@ -40,19 +40,17 @@ public class ProfileController : Controller
         
             foreach (var roleName in roles)
             {
-                // Find role details by role name
                 var role = await _roleManager.FindByNameAsync(roleName);
-                // return Json(role);
                 if (role != null)
                 {
                     userResponse.Roles.Add(new RoleResponseDTO
                     {
                         Id = role.Id,
                         Name = role.Name,
-                        NormalizeName = role.NormalizedName // Example of including additional details
+                        NormalizeName = role.NormalizedName 
                     });
                 }
             }
-            return Json(userResponse);
+            return View(userResponse);
     }
 }

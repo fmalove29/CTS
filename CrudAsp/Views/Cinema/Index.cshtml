@@ -1,83 +1,88 @@
-@model List<CrudAsp.resource.response.CinemaResponse>
-
-@{
-    ViewBag.list = "Cinema NationWide";
-}
+<head>
+    <link href="@Url.Content("~/css/dataTables.bootstrap4.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/plugins/sweetalert/css/sweetalert.css")" rel="stylesheet">
+</head>
 
 <div class="container mt-2">
-    <h2>@ViewBag.List</h2>
-    <div class="d-flex justify-content-between mb-2">
-        <input type="text" id="searchInput" name="searchQuery" class="form-control w-25" placeholder="Search Cinemas" value="@ViewBag.SearchQuery" />
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Cinema</button>
-    </div>
-    <table class="table" id="cTable">
-        <thead>
-            <th>Cinema Id</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Date Started</th>
-            <th></th>
-        </thead>
-        <tbody class="cTbody">
-            @for(var i = 0; i < Model.Count; i++)
-            {
-                var cinema = Model[i];
-                <tr>
-                    <td>@cinema.Id</td>
-                    <td>@cinema.CinemaName</td>
-                    <td>@cinema.Location</td>
-                    <td>@cinema.created_at</td>
-                    <td>
-                        <a class="btn btn-outline-primary" asp-controller="Cinema" asp-action="Details" asp-route-id="@cinema.Id">View</a>
-                        <a class="btn btn-outline-danger" asp-controller="Cinema" asp-action="Details" asp-route-id="@cinema.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card w-100">
+        <div class="card-body">
+            <div class="card-title">
+                <div class="card-title"><h1 class="text-danger"><strong>Cinemas</strong></h1></div>
+                <div class="d-flex justify-content-end mb-2">
+                    @* <input type="text" id="searchInput" name="searchQuery" class="form-control w-25" placeholder="Search Cinemas" value="@ViewBag.SearchQuery" /> *@
+                    <button type="button" class="btn btn-netflix-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Cinema</button>
+                </div>
+            </div>
+            <table class="table table-striped  zero-configuration w-100" id="cTable">
+            <thead>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Date Started</th>
+                <th></th>
+            </thead>
+            <tbody class="cTbody">
+                @* @for(var i = 0; i < Model.Count; i++)
+                {
+                    var cinema = Model[i];
+                    <tr>
+                        <td>
+                            <p> <span class="badge bg-danger">@cinema.CinemaName</span></p>
+                            <p><span class="badge bg-secondary">@cinema.Id</span></p>
+                        </td>
+                        <td>@cinema.Location</td>
+                        <td>@cinema.created_at</td>
+                        <td>
+                            <a class="btn btn-netflix-secondary" asp-controller="Cinema" asp-action="Details" asp-route-id="@cinema.Id">View</a>
+                        </td>
+                    </tr>
+                } *@
+            </tbody>
+        </table>
+        </div>
     
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
 
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Cinema</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="cinemaName" placeholder="Enter name of cinema">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">Create New Cinema</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Location:</label>
-                        <input type="text" class="form-control" id="location" placeholder="Ender Location">
-                    </div>
-
-                </div>
-                <div class="d-flex justify-content-end mb-3 align-items-center">
-                    <label for="cInput" class="col-form-label me-3">Number of Halls</label>
-                    <div id="cnum" class="input-group" style="width: auto;">
-                        <button class="btn btn-outline-secondary" id="dClub">-</button>
-                        <input type="number" class="form-control text-center w-25" min="0" value="0" id="cInput" style="max-width: 70px;">
-                        <button class="btn btn-outline-secondary" id="iClub">+</button>
-                    </div>
-                </div>
-
-
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Cinema Halls</h5>
-
-                        <div class="accordion" id="num_halls">
-                        </div><!-- End Default Accordion Example -->
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="cinemaName" placeholder="Enter name of cinema">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Location:</label>
+                            <input type="text" class="form-control" id="location" placeholder="Ender Location">
+                        </div>
 
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="btnSave" data-bs-dismiss="modal">Create</button>
+                    @* <div class="d-flex justify-content-end mb-3 align-items-center">
+                        <label for="cInput" class="col-form-label me-3">Number of Halls</label>
+                        <div id="cnum" class="input-group" style="width: auto;">
+                            <button class="btn btn-outline-secondary" id="dClub">-</button>
+                            <input type="number" class="form-control text-center w-25" min="0" value="0" id="cInput" style="max-width: 70px;">
+                            <button class="btn btn-outline-secondary" id="iClub">+</button>
+                        </div>
+                    </div> *@
+
+
+                    @* <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cinema Halls</h5>
+
+                            <div class="accordion" id="num_halls">
+                            </div><!-- End Default Accordion Example -->
+
+                        </div>
+                    </div> *@
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-netflix-primary" id="btnSave" data-bs-dismiss="modal">Create</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,7 +90,22 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/app/cinema/index.js"></script>
+    <script src="@Url.Content("~/plugins/common/common.min.js")"></script>
+    <script src="@Url.Content("~/js/custom.min.js")"></script>
+    <script src="@Url.Content("~/js/settings.js")"></script>
+    <script src="@Url.Content("~/js/gleek.js")"></script>
+    <script src="@Url.Content("~/js/styleSwitcher.js")"></script>
     <script src="@Url.Content("~/js/axios.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.dataTables.min.js")"></script>
     <script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.js")"></script>
+
+
+    <script src="@Url.Content("~/plugins/tables/js/datatable/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/plugins/tables/js/datatable-init/datatable-basic.min.js")"></script>
+    <script src="@Url.Content("~/plugins/toastr/js/toastr.min.js")"></script>
+    <script src="@Url.Content("~/plugins/toastr/js/toastr.init.js")"></script>
+    <script src="~/js/app/cinema/index.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }

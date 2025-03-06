@@ -149,7 +149,7 @@ namespace CrudAsp.Controllers
         [HttpPost("delete/user-role")]
         public async Task<IActionResult> deleteUserRole([FromBody] RoleDTO roleDTO)
         {
-            return Json(roleDTO.UserId);
+            // return Json(roleDTO.UserId);
             var user = await _userManager.FindByIdAsync(roleDTO.UserId);
             if (user == null)
             {

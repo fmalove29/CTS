@@ -1,4 +1,6 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const path = require('path');
 
 gulp.task('copy-dependencies', function() {
     // Copy Bootstrap CSS to wwwroot/css
@@ -48,5 +50,20 @@ gulp.task('copy-dependencies', function() {
         .pipe(gulp.dest('wwwroot/js'));
 });
 
-gulp.task('default', gulp.series('copy-dependencies'));
+const scssPath = path.join(__dirname, 'wwwroot/scss/custom.scss'); // Source SCSS file
+const cssDest = path.join(__dirname, 'wwwroot/css'); // Output folder
 
+// SCSS to CSS task
+function styles() {
+    return gulp.src(scssPath, { allowEmpty: true }) // Allow empty files to prevent errors
+        .pipe(sass().on('error', sass.logError)) // Compile SCSS to CSS
+        .pipe(gulp.dest(cssDest)); // Output to CSS folder
+}
+
+// Watch for changes
+function watchFiles() {
+    gulp.watch('wwwroot/scss/**/*.scss', styles);
+}
+
+// Default task
+exports.default = gulp.series(styles, watchFiles);

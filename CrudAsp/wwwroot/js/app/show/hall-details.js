@@ -23,10 +23,10 @@ $(document).ready(function(){
 
     })
 
-    function getHall()
-    {
-        $('#hTable').DataTable();
-    }
+    // function getHall()
+    // {
+    //     $('#hTable').DataTable();
+    // }
 
     getHall();
     $('#selMovie').select2({

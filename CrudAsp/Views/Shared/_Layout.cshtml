@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="~/material-icons/css/material-icons.min.css"/>
     <link rel="stylesheet" href="~/material-icons/iconfont/material-icons.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CrudAsp.styles.css" asp-append-version="true" />
+    @RenderSection("Style", required: false)
 </head>
-<body>
+<body class="bg-dark">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark  box-shadow ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Cinema Management System</a>
+                <a class="navbar-brand text-danger" asp-area="" asp-controller="Home" asp-action="Index"><strong>.NETCinema</strong></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +45,7 @@
             </div>
         </nav>
     </header>
-        <main role="main" class="pb-3 bg-dark3">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
 

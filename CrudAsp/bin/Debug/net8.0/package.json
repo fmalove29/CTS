@@ -25,6 +25,11 @@
     "sweetalert2": "^11.14.1"
   },
   "devDependencies": {
-    "gulp": "^5.0.0"
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^6.0.0",
+    "path": "^0.12.7",
+    "sass": "^1.85.1"
   }
 }

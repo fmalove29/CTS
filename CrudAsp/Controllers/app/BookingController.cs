@@ -13,6 +13,7 @@ using CrudAsp.Repository;
 using CrudAsp.Services.Genres;
 using CrudAsp.resource.response;
 using CrudAsp.Extensions;
+using CrudAsp.Services.Cinemas;
 
 namespace CrudAsp.Controllers.app;
 
@@ -20,18 +21,21 @@ public class BookingController : Controller
 {
     private readonly IRepository<Booking> repository;
     private readonly MovieService movieService;
+    private readonly CinemaService cinemaService;
 
 
 
     public BookingController
     (
         IRepository<Booking> repository,
+        IRepository<Cinema> cinemaRepository,
         MovieService movieService
         // GenreService genreService
     )
     {
         this.repository = repository;
         this.movieService = movieService;
+        cinemaService = new CinemaService(cinemaRepository);
         // this.genreService = genreService;
     }
 
@@ -92,9 +96,23 @@ public class BookingController : Controller
         }
 
         var response = movie.ToMovieResponse(); 
-        return Json(response);
+        return View("booking-details",response);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Cinema(string searchTerm)
+    {
+        var cinema = await this.cinemaService.GetAllAsync();
 
+        if(!string.IsNullOrEmpty(searchTerm))
+        {
+            cinema = cinema
+                    .Where(c => c.CinemaName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                    || c.Location.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+        }
 
+        var cinemaResponseList = cinema.Select(c => c.ToSelectCinemaResponse()).ToList();
+        return Ok(cinemaResponseList);
+    }
 }

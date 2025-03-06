@@ -27,4 +27,51 @@ namespace CrudAsp.Models.app.Enum
         Cancelled = 2
     }
 
+    public enum PaymentMethod
+    {
+        Cash = 1,
+        Bank = 2,
+        EWallet = 3
+    }
+
+    public enum BookingStatus
+    {
+        Pending = 0,
+        Confirmed = 1,
+        Cancelled = 2,
+        Completed = 3
+    }
+
+    public enum ScreenType
+    {
+        // Standard Screens
+        TwoD,
+        ThreeD,
+
+        // Premium & Large Format Screens
+        IMAX,
+        IMAX3D,
+        DolbyCinema,
+        RPX,
+        CinemarkXD,
+        ScreenX,
+        BarcoEscape,
+        UltraPanavision70,
+        FourDX,
+
+        // Luxury & VIP Screens
+        DirectorsClub,
+        GoldClass,
+        PremierScreen,
+        DineInTheater,
+
+        // Special Projection Screens
+        Cinerama,
+        DBox,
+        DriveIn,
+        FloatingCinema
+    }
+
+
+
 }

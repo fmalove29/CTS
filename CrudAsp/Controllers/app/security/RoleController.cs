@@ -62,10 +62,11 @@ public class RoleController : Controller
     [HttpPost("create-role")]
     public async Task<IActionResult> AddNewRole([FromBody] CrudAsp.resource.response.CreateRoleDTO createRoleDTO)
     {
-        if (string.IsNullOrWhiteSpace(createRoleDTO.Name))
+        if (string.IsNullOrWhiteSpace(createRoleDTO.Name) || createRoleDTO.Name != createRoleDTO.Name.ToUpper())
         {
-            return BadRequest("Role name cannot be empty.");
+            return BadRequest("Role name cannot be empty or should be in uppercase");
         }
+
 
         // Check if the role already exists
         var roleExists = await _roleManager.RoleExistsAsync(createRoleDTO.Name);

@@ -72,4 +72,13 @@ public static class MovieExntension
             Age = users.Age
         };
     }
+
+    public static CinemaSelectResponse ToSelectCinemaResponse(this Cinema cinema)
+    => new CinemaSelectResponse
+    {
+        Id = cinema.Id,
+        CinemaName = cinema.CinemaName,
+        Location = cinema.Location
+    };
+
 }

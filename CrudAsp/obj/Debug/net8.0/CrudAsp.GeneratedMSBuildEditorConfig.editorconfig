@@ -74,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWUvTW92aWUtbGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/itdev-mac01/CrudAsp/Views/Profile/UserProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9Vc2VyUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/itdev-mac01/CrudAsp/Views/Role/create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZS9jcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

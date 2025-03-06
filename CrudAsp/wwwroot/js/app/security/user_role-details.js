@@ -111,7 +111,7 @@ $(document).ready( function(){
                 { 
                     targets : 2,
                     render : function(data, type, row)
-                    { return `<button class="btn btn-outline-primary btnAddRole" data-id="${row.Id}">Add</button>`}
+                    { return `<button class="btn btn-netflix-secondary btnAddRole" data-id="${row.Id}">Add</button>`}
                     
                 }
             ]

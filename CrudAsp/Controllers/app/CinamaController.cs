@@ -1,5 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Threading.Tasks;
 using CrudAsp.Services.Cinemas;
 using CrudAsp.Services.Movies;
 using CrudAsp.Models.app;
@@ -31,17 +37,14 @@ public class CinemaController : Controller
 
     }
 
-    public async Task<IActionResult> Index(string searchQuery)
+    public async Task<IActionResult> Index()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> IndexData()
     {
         var cinemas = await cinemaService.GetAllAsync();
-
-        if (!string.IsNullOrEmpty(searchQuery))
-        {
-            cinemas = cinemas
-                .Where(c => c.CinemaName.Contains(searchQuery, StringComparison.OrdinalIgnoreCase) 
-                        || c.Location.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-        }
 
         var cineResponse = cinemas.Select(c => new CinemaResponse {
             Id          = c.Id,
@@ -50,10 +53,10 @@ public class CinemaController : Controller
             created_at  = c.created_at
         }).ToList();
         
-        ViewBag.SearchQuery = searchQuery;
 
-        return View(cineResponse);
+        return Ok(cineResponse);
     }
+
     [HttpGet]
     public async Task<IActionResult> CinemaSearch(string searchQuery)
     {
@@ -83,13 +86,14 @@ public class CinemaController : Controller
 
     public async Task<IActionResult> Details(Guid Id)
     {
-        var cinema = await cinemaService.GetByIdAsync(Id);
+        var db = await(await cinemaService.GetDbSet())
+                .Include(e => e.Halls)
+                .FirstOrDefaultAsync(e => e.Id == Id);
 
-        
-
-        return View(cinema.ToCinemaResponse());
-        // return Json(cinema.ToCinemaResponse());
+        // return Json(db);
+        return View(db.ToCinemaResponse());
     }
+
     // public async Task<IActionResult> CinemaDetails(Guid Id)
     // {
     //     var cinema = await cinemaService.
@@ -98,33 +102,18 @@ public class CinemaController : Controller
     [HttpPost]
     public async Task<IActionResult> PostCinema([FromBody] CinemaRequest cinemaRequest)
     {
-        // return Json(cinemaRequest);
         if (ModelState.IsValid)
         {
             try
             {
                 var cinema = new Cinema
                 {   
-                    Id              = Guid.NewGuid(),
                     CinemaName      = cinemaRequest.CinemaName,
-                    Location        = cinemaRequest.Location,
-                    Halls           = new List<Hall>()
+                    Location        = cinemaRequest.Location
                 };
     
-                foreach(var hall in cinemaRequest.Halls)
-                {
-
-                    // return Json(hall);
-                    var h = new Hall
-                    {
-                        CinemaId = cinema.Id,
-                        HallName = hall.HallName,
-                        SeatCapacity = hall.SeatCapacity
-                    };
-                    cinema.Halls.Add(h);
-                }
                 
-                if (string.IsNullOrEmpty(cinemaRequest.CinemaName) || string.IsNullOrEmpty(cinemaRequest.Location) || cinemaRequest.Halls == null)
+                if (string.IsNullOrEmpty(cinemaRequest.CinemaName) || string.IsNullOrEmpty(cinemaRequest.Location))
                 {
                     return BadRequest(new
                     {
@@ -133,12 +122,9 @@ public class CinemaController : Controller
                         result = cinema
                     });
                 }
-                else
-                {
                     // return Json(cinema);
                     await cinemaService.AddAsync(cinema);
-                    return Json(new { success = true, message = "Cinema created successfully", result = cinema });
-                }
+                    return Json(new { success = true, message = "Cinema created successfully", result = cinema , Id = cinema.Id });
             }
             catch (Exception ex)
             {
@@ -146,14 +132,7 @@ public class CinemaController : Controller
                 return Json(new { success = false, message = ex.Message, innerMessage = innerException });
             }
         }
-
-        // If ModelState is invalid, return a bad request response
-        return BadRequest(new 
-        {
-            success = false,
-            message = "Invalid data",
-            errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
-        });
+        return Json(cinemaRequest);
     }
 
 }

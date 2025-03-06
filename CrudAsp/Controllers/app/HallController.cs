@@ -22,7 +22,8 @@ public class HallController : Controller
         hallService = new HallService((Repository<Hall>) repository);
     }
 
-    public async Task<IActionResult> getHallByCinemaId(Guid Id)
+    [HttpGet("hall/{Id}")]
+    public async Task<IActionResult> Hall(Guid Id)
     {
         var hallDbSet = await hallService.GetDbSet();
 

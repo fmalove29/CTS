@@ -39,34 +39,6 @@ public class CinemaService
         => await this.repository.GetDbSet();
 
     public async Task<Cinema> AddAsync(Cinema cinema)
-    {
-        try
-        {
-            var newCinema = new Cinema
-            {
-                CinemaName = cinema.CinemaName,
-                Location = cinema.Location,
-                Halls = new List<Hall>()
-            };
-            foreach(var hall in cinema.Halls)
-            {
-                var h = new Hall
-                {
-                    CinemaId = cinema.Id,
-                    HallName = hall.HallName,
-                    SeatCapacity = hall.SeatCapacity
-                };
-                newCinema.Halls.Add(h);
-            }
-
-
-            await this.repository.AddAsync(newCinema);
-
-            return cinema;
-        }
-        catch(Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-    }
+    =>    await this.repository.AddAsync(cinema);
+    
 }

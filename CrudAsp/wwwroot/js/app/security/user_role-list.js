@@ -39,8 +39,8 @@ $(document).ready(function(){
                     render : function(data, type, row)
                     {
                         return `<div class="d-flex">
-                                    <a class="btn btn-sm btn-info mr-2"  href="/User/Details/${row.id}">View</a>
-                                    <button class="btn btn-sm btn-warning btnUC" data-toggle="modal" data-target="#userClaimsModal" data-id="${row.id}">Claims</button>
+                                    <a class="btn .btn-netflix-info mr-2"  href="/User/Details/${row.id}">View</a>
+                                    <button class="btn btn-sm btn-netflix-secondary  btnUC" data-toggle="modal" data-target="#userClaimsModal" data-id="${row.id}">Claims</button>
                                 </div>`; 
                     }
                 }

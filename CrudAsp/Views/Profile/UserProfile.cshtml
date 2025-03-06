@@ -1,0 +1,82 @@
+@model CrudAsp.resource.response.UserResponseDTO
+@{
+    var fullName = (@Model.FirstName + " " + @Model.MiddleName +" "+@Model.LastName).ToUpper();
+}
+
+<head>
+
+</head>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-4 mr-5">
+            <div class="row">
+                <div class="card shadow-lg p-0">
+                    @* <div class="card-header">EVANDER VALES</div> *@
+                    <div class="card-body text-center">
+                        <div class="col-12">
+                            <img src="@Url.Content("~/images/profile/profile.png")" alt="">
+                            <p><h2>@fullName</h2></p>
+                            <p>APPLICATION DEVELOPER</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="card shadow-sm p-0">
+                    <div class="card-header">
+                        <div class="lg-title text-primary font-14px-bold py-1">Personal</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                First Name:
+                            </div>
+                            <div class="col-8">
+                                @Model.FirstName
+                            </div>
+                        </div>
+                        <hr class="w-100">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                Middle Name :
+                            </div>
+                            <div class="col-8">
+                                @Model.MiddleName
+                            </div>
+                        </div>
+                        <hr class="w-100">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                Last Name :
+                            </div>
+                            <div class="col-8">
+                                @Model.LastName
+                            </div>
+                        </div>
+                        <hr class="w-100">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                First Name:
+                            </div>
+                            <div class="col-8">
+                                First Name:
+                            </div>
+                        </div>
+                        <hr class="w-100">
+                        <div class="row">
+                            <div class="col-4">
+                                First Name:
+                            </div>
+                            <div class="col-8">
+                                First Name:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

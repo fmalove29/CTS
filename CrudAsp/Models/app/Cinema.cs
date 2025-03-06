@@ -12,6 +12,6 @@ namespace CrudAsp.Models.app
         [Required(ErrorMessage = "Locatione is required.")]
         public string Location { get; set; }
 
-        public virtual ICollection<Hall> Halls { get; set; }
+        public virtual ICollection<Hall>? Halls { get; set; }
     }
 }

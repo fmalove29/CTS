@@ -31,20 +31,43 @@ $(document).ready(function(){
         $('#r_table').DataTable({
             data : arr,
             columns : [
-                { data : 'Id' , title : 'Role Id' },
                 { data : 'Name' , title : 'Name' },
                 { data : 'Description' , title : 'Description' },
                 { data : 'Action', title: ''}
             ],
             columnDefs :[
                 {
-                    targets : 3,
+                    targets : 2,
                     render : function(data,type, row)
                     {
-                        return `<button class="btn btn-sm btn-success btnRoleClaims" data-id="${row.Id}">Add Role Claims</button>`;
+                        return `<button class="btn btn-netflix-secondary btnRoleClaims" data-id="${row.Id}">Claims</button>`;
+                    }
+                },
+                {
+                    targets: 0,
+                    render : function(data, type, row)
+                    {
+                        return `<p><span class="badge bg-danger">${row.Name}</span></p><p><span class="badge bg-secondary">${row.Id}</span></p> `
                     }
                 }
-            ]
+            ],
+            // pagingType: "full_numbers", // Enables full pagination controls
+            // pageLength: 10, // Adjust number of rows per page
+            // language: {
+            //     paginate: {
+            //         first: '«', // Custom icons
+            //         last: '»',
+            //         next: '›',
+            //         previous: '‹'
+            //     },
+            //     drawCallback: function () {
+            //         // Remove old class to prevent duplication
+            //         // $('.dataTables_paginate .paginate_button').removeClass('netflix-page-number');
+        
+            //         // Add class only to numeric page indicators
+            //         $('.dataTables_paginate .paginate_button:not(.previous):not(.next):not(.first):not(.last)').addClass('bg-danger');
+            //     }
+            // }
         })
     }
     $(document).on('click', '.btnRoleClaims', function(){

@@ -22,6 +22,7 @@ builder.Services.AddScoped<IRepository<Genre>, Repository<Genre>>();
 builder.Services.AddScoped<IRepository<Cinema>, Repository<Cinema>>();
 builder.Services.AddScoped<IRepository<Show>, Repository<Show>>();
 builder.Services.AddScoped<IRepository<Booking>, Repository<Booking>>();
+builder.Services.AddScoped<IRepository<Hall>, Repository<Hall>>();
 builder.Services.AddScoped<MovieService>();
 
 

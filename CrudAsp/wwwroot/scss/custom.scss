@@ -1,0 +1,142 @@
+// 1️⃣ Define Netflix Theme Colors First
+$netflix-red: #E50914;
+$netflix-black: #141414;
+$netflix-dark-gray: #221F1F;
+$netflix-light-gray: #B3B3B3;
+$netflix-white: #FFFFFF;
+$netflix-deep-red: #B81D24;
+$netflix-light-blue: #66b2ff;  // Light blue for Netflix-style info
+$netflix-blue: #007bff;       // Standard blue for borders
+$netflix-dark-blue: #0056b3;  // Darker blue for hover effect
+$netflix-white: #ffffff;      // White text color
+$netflix-light-gray: #d3d3d3; // Li // A deeper blue for hover effects
+
+
+// 2️⃣ Import Bootstrap After Variables
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+body{
+    color: #fff;
+}
+
+// select option{
+//     color: #0000;
+// }
+// 3️⃣ Custom Background
+.nf-bg-dark {
+    background-color: $netflix-black;
+}
+
+// 4️⃣ Netflix Primary Button
+.btn-netflix-primary {
+    background-color: $netflix-red;
+    border-color: $netflix-red;
+    color: $netflix-white;
+
+    &:hover {
+        background-color: $netflix-deep-red;
+        border-color: $netflix-deep-red;
+    }
+}
+
+.btn-netflix-secondary {
+    background-color: $netflix-white;
+    border: 2px solid $netflix-light-gray;
+    color: $netflix-red;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        background-color: $netflix-deep-red;
+        border-color: $netflix-deep-red;
+        color: $netflix-white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0px 0px 6px 2px rgba($netflix-deep-red, 0.5);
+    }
+
+    &:disabled {
+        background-color: $netflix-light-gray;
+        border-color: $netflix-light-gray;
+        color: $netflix-white;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+.btn-netflix-info {
+    background-color: $netflix-light-blue; 
+    border: 2px solid $netflix-blue;
+    color: $netflix-white;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, 
+                border-color 0.3s ease-in-out, 
+                box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        background-color: $netflix-dark-blue;
+        border-color: $netflix-dark-blue;
+        color: $netflix-white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0px 0px 6px 2px rgba($netflix-dark-blue, 0.5);
+    }
+
+    &:disabled {
+        background-color: $netflix-light-gray;
+        border-color: $netflix-light-gray;
+        color: $netflix-white;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+
+// 5️⃣ Navbar Customization
+.navbar-netflix .nav-link {
+    color: $netflix-white;
+
+    &:hover {
+        color: $netflix-red !important;
+    }
+}
+
+// 6️⃣ Dropdown Customization
+.dropdown-netflix .dropdown-menu {
+    background-color: $netflix-black;
+
+    .dropdown-item {
+        color: $netflix-white;
+
+        &:hover {
+            color: $netflix-red;
+            background-color: $netflix-dark-gray;
+        }
+    }
+}
+
+// 7️⃣ Card Styling (if needed)
+.netflix-card {
+    background-color: $netflix-dark-gray;
+    color: $netflix-white;
+    border: 1px solid $netflix-light-gray;
+    border-radius: 8px;
+    padding: 16px;
+
+    .card-title {
+        color: $netflix-red;
+    }
+}
+
+.bg-netflix-danger{
+    background-color: $netflix-red;
+}

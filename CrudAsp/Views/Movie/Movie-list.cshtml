@@ -1,7 +1,4 @@
 @model List<CrudAsp.resource.response.MovieResponse>
-@* <div class="d-flex justify-content-end mb-3">
-    <a class="btn btn-primary" asp-controller="Movie" asp-action="Create">Add Movie</a>
-</div> *@
 <style>
     .hover-card {
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -22,7 +19,7 @@
     }
 </style>
 
-<div class="container">
+<div class="container mt-5">
     <div class="card bg-transparent border-0 mb-2">
         <div class="card-body p-0">
             <div id="movieCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
@@ -35,7 +32,7 @@
                 </div>
 
 
-                <div class="carousel-inner h-100">
+                <div class="carousel-inner">
                     @for (var i = 0; i < Model.Count; i++)
                     {
                         var movie = Model[i];
@@ -43,7 +40,7 @@
                             <img class="w-100  d-block carousel-image"
                                 src="@Url.Content("~/images/movies/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path))"
                                 alt="@movie.Title"
-                                style="" />
+                                style="height: 900px; " />
                             
                             <!-- Overlay Text for Title and Description -->
                             <div class="carousel-caption text-start" style="color: white; font-size: 20px; text-shadow: 3px 3px black;">
@@ -83,7 +80,7 @@
                             <img class="card-img-top"
                             src="@Url.Content("~/images/movies/" + System.IO.Path.GetFileName(movie.MovieImages.FirstOrDefault()?.Path ))"
                             alt="@movie.Title"
-                            style="max-width: 100%; object-fit: cover;" />
+                            style="height: 600px; object-fit: cover;" />
                             @* <div class="row">
                                 <a  class="btn btn-outline-primary col-6" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">Manage</a>
                                 <a  class="btn btn-outline-warning col-6" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">Buy Ticket</a>
