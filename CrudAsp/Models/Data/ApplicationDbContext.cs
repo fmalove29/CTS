@@ -62,6 +62,14 @@ namespace CrudAsp.Models.Data
 
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Genre>().HasData(
+                new Genre { Id = Guid.NewGuid(), GenreName = "Action" },
+                new Genre { Id = Guid.NewGuid(), GenreName = "Drama" },
+                new Genre { Id = Guid.NewGuid(), GenreName = "Sci-Fi" },
+                new Genre { Id = Guid.NewGuid(), GenreName = "Comedy" },
+                new Genre { Id = Guid.NewGuid(), GenreName = "Horror" }
+            );
         }
 
     }

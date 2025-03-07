@@ -1,0 +1,91 @@
+@model CrudAsp.resource.response.MovieResponse
+
+@section Style{
+    <link rel="stylesheet" href="@Url.Content("~/css/select2.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/booking/booking-details.css")">
+}
+
+
+
+<div class="banner-container">
+    <div class="banner-overlay"></div> <!-- Dark Gradient Overlay -->
+    <div class="banner-image" style="background-image: url('@Url.Content("~/images/movies/" + System.IO.Path.GetFileName(Model.MovieImages.FirstOrDefault()?.Path))');">
+    </div>
+    <div class="banner-content">
+        <h1 class="movie-title">@Model.Title</h1>
+        <ul class="movie-genres">
+            @foreach (var gen in Model.Genres)
+            {
+                <li>@gen.GenreName</li>
+            }
+        </ul>
+        <p class="release-date"><strong>Release Date:</strong> @Model.ReleaseDate.ToString("MMMM dd, yyyy")</p>
+        <p class="movie-description">@Model.Description</p>
+    </div>
+</div>
+
+
+
+<div class="container mt-5">
+    <h2 class="text-center">Book Now</h2>
+
+    <!-- Stepper Indicators -->
+    <div class="progress mb-4">
+        <div id="progress-bar" class="progress-bar bg-netflix-danger" style="width: 33%;">Step 1 of 3</div>
+    </div>
+
+    <form id="multiStepForm" class="card p-4 shadow bg-dark text-light">
+        <!-- Step 1 -->
+        <div class="step active">
+            <h4>Step 1</h4>
+            <div class="mb-3">
+                <label for="name" class="form-label">Cinema</label>
+                <select class="form-control"  name="" id="cinemaSelect">
+                </select>
+            </div>
+            <button type="button" class="btn btn-netflix-primary" id="stepperNext1">Next</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+            <h4>Step 2</h4>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <button type="button" class="btn btn-secondary" id="prev1">Previous</button>
+            <button type="button" class="btn btn-netflix-primary" id="stepperNext2">Next</button>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+            <h4>Step 3</h4>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="button" class="btn btn-secondary" id="prev2">Previous</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content("~/plugins/common/common.min.js")"></script>
+    <script src="@Url.Content("~/js/custom.min.js")"></script>
+    <script src="@Url.Content("~/js/settings.js")"></script>
+    <script src="@Url.Content("~/js/gleek.js")"></script>
+    <script src="@Url.Content("~/js/styleSwitcher.js")"></script>
+    <script src="@Url.Content("~/js/axios.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.js")"></script>
+
+    <script src="@Url.Content("~/js/app/booking/booking-details.js")"></script>
+    @* <script src="@Url.Content("~/plugins/jquery-steps/build/jquery.steps.min.js")"></script>
+    <script src="@Url.Content("~/plugins/jquery-validation/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/js/plugins-init/jquery-steps-init.js")"></script> *@
+
+}
+    

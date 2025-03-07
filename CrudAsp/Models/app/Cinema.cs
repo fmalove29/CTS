@@ -6,12 +6,12 @@ namespace CrudAsp.Models.app
 {
     public class Cinema : BaseEntity
     {
-        [Required]
+        [Required(ErrorMessage = "Cinema Name is Required")]
         public string CinemaName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Locatione is required.")]
         public string Location { get; set; }
 
-        public virtual ICollection<Hall> Halls { get; set; }
+        public virtual ICollection<Hall>? Halls { get; set; }
     }
 }

@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 
 
 
@@ -40,7 +42,7 @@ public class MovieController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var movies = await movieService.GetAll(); // Movies loaded without related entities
+        var movies = await movieService.GetDbSet(); 
 
         var movieRequests = movies.Select(movie => new MovieResponse
         {
@@ -53,88 +55,55 @@ public class MovieController : Controller
             {
                 Id = g.Id,
                 GenreName = g.GenreName
-            }).ToList(), // Genres will be lazy-loaded here
+            }).ToList(), 
             MovieImages = movie.MovieImages.Select(img => new MovieImageResponse
             {
                 Path = img.Path,
                 MovieId = img.MovieId
-            }).ToList() // MovieImages will be lazy-loaded here
+            }).ToList() 
         }).ToList();
 
+        
         return View("Movie-list", movieRequests);
     }
 
 
-    [HttpGet]
-    public async Task<IActionResult> Details(Guid Id)
+    public async Task<IActionResult> Show(Guid Id)
     {
+        var findMovie = await movieService.GetById(Id);
 
-        // Fetch all genres
-        var gService = await movieService.GetAllGenre();
-        // return Json(gService);
-        // Initialize savedId to hold genre IDs for the current movie
-        var savedId = "";
-
-        // Get the movie with its genres and images
-        var movie = await movieService.GetById(Id);
-
-
-        // Return 404 if the movie is not found
-        if (movie == null)
+        if (findMovie == null)
         {
-            return NotFound();
+            return NotFound(); // Handle not found case
         }
 
-        // Populate savedId with the genre IDs linked to the current movie
-        if (movie.Genres != null && movie.Genres.Any())
+        var dto = new MovieResponse
         {
-            savedId = string.Join(",", movie.Genres.Select(g => g.Id.ToString()));
-        }
-
-        // Map the movie entity to the MovieRequest model
-        var data = new MovieResponse
-        {
-            Id = movie.Id,
-            Title = movie.Title,
-            Description = movie.Description,
-            ReleaseDate = movie.ReleaseDate,
-            EndDate = movie.EndDate,
-            Genres = gService?.Select(g => new GenreResponse
+            Id = findMovie.Id,
+            Title = findMovie.Title,
+            Description = findMovie.Description,
+            ReleaseDate = findMovie.ReleaseDate,
+            EndDate = findMovie.EndDate,
+            Genres = findMovie.MovieGenres.Select(mg => new GenreResponse  // ✅ Correct way to fetch genres
             {
-                Id = g.Id,
-                GenreName = g.GenreName
-            }).ToList() ?? new List<GenreResponse>(),
-            MovieImages = movie.MovieImages?.Select(img => new MovieImageResponse
+                Id = mg.Genres.Id,
+                GenreName = mg.Genres.GenreName
+            }).ToList(),
+            MovieImages = findMovie.MovieImages.Select(img => new MovieImageResponse
             {
-                Id = img.Id,
                 Name = img.Name,
                 Size = img.Size,
                 Type = img.Type,
                 Path = img.Path,
                 MovieId = img.MovieId
-            }).ToList() ?? new List<MovieImageResponse>()
+            }).ToList()
         };
 
-        // Pass the saved genre IDs to the view using ViewBag
-        ViewBag.SaveId = savedId;
-        // return Json(data);
-        // Return the view with the movieRequest model
-        return View("Movie-Details", data);
+        return Json(dto);
     }
 
 
 
-
-
-
-
-
-    // public async Task<IActionResult> Details(Guid Id)
-    // {
-    //     var data = await movieService.GetByIdAsync(Id);
-    //     return Json(data);
-    //     return View("Movie-details", data);
-    // }
 
     public async Task<IActionResult> Create()
     {
@@ -147,93 +116,81 @@ public class MovieController : Controller
             {
                 GenreName = b.GenreName,
                 Id = b.Id,
-                // Movies = m.Select(mo => new MovieRequest{
-                //     Title = mo.Title
-                // }).ToList()
             }).ToList()
         };
 
-        // return Json(data);
 
         return View("Movie-Details", data);
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> PostMovie([FromBody] MovieRequest movieRequest)
+    public async Task<IActionResult> PostMovie([FromForm] MovieRequest movieRequest)
     {
-        // return Json(movieRequest);
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            try
-            {
-                var newMovie = new Movie
-                {
-                    Id = Guid.NewGuid(),
-                    Title = movieRequest.Title,
-                    Description = movieRequest.Description,
-                    ReleaseDate = movieRequest.ReleaseDate,
-                    EndDate = movieRequest.EndDate,
-                    Genres = new List<Genre>(),
-                    MovieImages = new List<MovieImage>()
-                };
-                // return Json(newMovie);
-                foreach (var gen in movieRequest.Genres)
-                {
-                    var newGenre = new Genre
-                    {
-                        Id = gen.Id,
-                        GenreName = gen.GenreName
-                    };
-                    newMovie.Genres.Add(newGenre);
-                }
-
-                string pathFolder = Path.Combine("wwwroot", "app", "images", "movie");
-                string savePathFolder = Path.Combine("app", "images", "movie");
-
-                // return Json(savePathFolder);
-
-                if (!Directory.Exists(pathFolder))
-                {
-                    Directory.CreateDirectory(pathFolder);
-
-                }
-
-                foreach (var mg in movieRequest.MovieImages)
-                {
-                    byte[] imageBytes = Convert.FromBase64String(mg.Base64File);
-
-                    // Generate file name and path
-                    string fileName = newMovie.Id + Path.GetExtension(mg.Name);
-                    string filePath = Path.Combine(pathFolder, fileName);
-                    // Save image to the folder
-                    await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
-
-                    var newImage = new MovieImage
-                    {
-                        Name = mg.Name,
-                        Size = mg.Size,
-                        Type = mg.Type,
-                        Base64File = mg.Base64File,
-                        MovieId = newMovie.Id,
-                        Path = filePath
-                    };
-                    newMovie.MovieImages.Add(newImage);
-                }
-                // return Json(newMovie);
-                await movieService.AddAsync(newMovie);
-
-                return Json(new { success = true, message = "Movie created successfully", result = newMovie });
-            }
-            catch (Exception ex)
-            {
-                var innerException = ex.InnerException?.Message;
-                return Json(new { success = false, message = ex.Message, innerMessage = innerException });
-            }
+            return Json(new { success = false, message = "Invalid data", errors = ModelState, data = movieRequest });
         }
 
-        return Json(new { success = false, message = "Invalid data", errors = ModelState });
+        try
+        {
+            var newMovie = new Movie
+            {
+                Id = Guid.NewGuid(),
+                Title = movieRequest.Title,
+                Description = movieRequest.Description,
+                ReleaseDate = movieRequest.ReleaseDate,
+                EndDate = movieRequest.EndDate,
+                MovieGenres = new List<MovieGenre>(),
+                MovieImages = new List<MovieImage>()
+            };
+
+            if (!string.IsNullOrEmpty(movieRequest.MovieGenresJson))
+            {
+                newMovie.MovieGenres = JsonConvert.DeserializeObject<List<MovieGenre>>(movieRequest.MovieGenresJson);
+            }
+
+            string folderPath = Path.Combine("wwwroot", "images", "movies");
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            foreach (var file in movieRequest.MovieImages)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    string fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                    string filePath = Path.Combine(folderPath, fileName);
+                    string dbPath = Path.Combine("images", "movies", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    newMovie.MovieImages.Add(new MovieImage
+                    {
+                        Name = file.FileName,
+                        Size = (int)file.Length,
+                        Type = file.ContentType,
+                        Path = dbPath,
+                        MovieId = newMovie.Id
+                    });
+                }
+            }
+            // return Json(newMovie);
+            // ✅ Save Movie to Database (Fix placement of `await`)
+            await movieService.AddAsync(newMovie);
+
+            return Json(new { success = true, message = "Movie created successfully", result = newMovie });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
+        }
     }
+
 
     [HttpPut]
     public async Task<IActionResult> PutMovie([FromBody] MovieRequest movieRequest)
@@ -265,7 +222,6 @@ public class MovieController : Controller
                 }
             }
             return Json(existingMovie);
-            // Save changes
             await movieService.Update(existingMovie);
 
             return Json(new { success = true, message = "Movie updated successfully", result = existingMovie });

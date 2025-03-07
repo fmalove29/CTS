@@ -9,7 +9,6 @@ public class MovieImageRequest : BaseRequest
     public string Type {get; set;}
 
     public string Path {get; set;}
-    public string Base64File { get; set; } 
     public Guid? MovieId { get; set; }
     public virtual MovieRequest? Movie { get; set; }
 }

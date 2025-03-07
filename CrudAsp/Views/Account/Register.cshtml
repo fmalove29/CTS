@@ -9,38 +9,38 @@
             <h4 class="card-title"><strong>Register</strong></h4>
         </div>
         <div class="card-body">
-            <form asp-controller="Account"  asp-action="PostRegister" method="post">
-                <div class="row mb-3">
+            <form asp-controller="Account" class="row"  asp-action="PostRegister" method="post">
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="firstName" class="form-label">First Name</label>
                         <input type="text" id="firstName" name="FirstName" class="form-control" placeholder="Enter your first name">
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="lastName" class="form-label">Last Name</label>
                         <input type="text" id="lastName" name="LastName" class="form-control" placeholder="Enter your last name">
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="lastName" class="form-label">Middle Name</label>
                         <input type="text" id="lastName" name="MiddleName" class="form-control" placeholder="Enter your last name">
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="lastName" class="form-label">User Name</label>
                         <input type="text" id="lastName" name="UserName" class="form-control" placeholder="Enter your last name">
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="lastName" class="form-label">Age</label>
-                        <input type="number" id="lastName" name="Age" class="form-control" placeholder="Enter your last name">
+                        <input type="number" id="Age" name="Age" class="form-control" placeholder="Enter your last name">
                     </div>
                 </div>
-                <div class="row mb-3">
+                @* <div class="row mb-3">
                     <div class="col">
                         <label for="gender" class="form-label">Gender</label>
                         <select name="Gender" id="gender" class="form-select">
@@ -48,8 +48,8 @@
                             <option value="2">Female</option>
                         </select>
                     </div>
-                </div>
-                <div class="row mb-3">
+                </div> *@
+                @* <div class="row mb-3">
                     <div class="col">
                         <label for="gender" class="form-label">Role</label>
                         <select name="Role" id="gender" class="form-select">
@@ -57,31 +57,31 @@
                             <option value="2">User</option>
                         </select>
                     </div>
-                </div>
-                <div class="row mb-3">
+                </div> *@
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" id="email" name="Email" class="form-control" placeholder="Enter your email address">
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="col-6 mb-3">
                     <div class="col">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" id="password" name="Password" class="form-control" placeholder="Enter your password">
                     </div>
                 </div>
-                <div class="row mb-5">
+                <div class="col-6 mb-5">
                     <div class="col">
                         <label for="password" class="form-label">Confirm Password</label>
                         <input type="password" id="password" name="ConfirmPassword" class="form-control" placeholder="Enter your password">
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row text-end mb-3">
                     <div class="col">
                         <a asp-controller="Account" asp-action="Login">Already have an Account?</a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row text-end">
                     <div class="col">
                         <button type="submit" class="btn btn-primary">Register</button>
                     </div>

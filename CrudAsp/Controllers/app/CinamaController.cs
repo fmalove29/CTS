@@ -1,10 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Threading.Tasks;
 using CrudAsp.Services.Cinemas;
+using CrudAsp.Services.Movies;
 using CrudAsp.Models.app;
 using CrudAsp.Repository;
 using CrudAsp.resource.response;
 using CrudAsp.resource.request;
+using CrudAsp.Extensions;
 
 
 namespace CrudAsp.Controllers.app;
@@ -13,8 +21,11 @@ namespace CrudAsp.Controllers.app;
 public class CinemaController : Controller
 {
     private readonly CinemaService cinemaService;
+    private readonly MovieService movieService;
 
     private readonly IRepository<Cinema> repository;
+    private readonly IRepository<Movie> _movieRepo;
+    private readonly IRepository<Genre> _genRepo;
     public CinemaController
     (
         IRepository<Cinema> repository
@@ -22,20 +33,18 @@ public class CinemaController : Controller
     {
         this.repository = repository;
         cinemaService = new CinemaService((Repository<Cinema>) repository);
+        // movieService = new MovieService((Repository<Movie>) _movieRepo, (Repository<Genre>) _genRepo);
+
     }
 
-    public async Task<IActionResult> Index(string searchQuery)
+    public async Task<IActionResult> Index()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> IndexData()
     {
         var cinemas = await cinemaService.GetAllAsync();
-
-        // Filter cinemas based on searchQuery
-        if (!string.IsNullOrEmpty(searchQuery))
-        {
-            cinemas = cinemas
-                .Where(c => c.CinemaName.Contains(searchQuery, StringComparison.OrdinalIgnoreCase) 
-                        || c.Location.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-        }
 
         var cineResponse = cinemas.Select(c => new CinemaResponse {
             Id          = c.Id,
@@ -43,12 +52,11 @@ public class CinemaController : Controller
             Location    = c.Location,
             created_at  = c.created_at
         }).ToList();
+        
 
-        // Pass the search query back to the view so it can be displayed in the input
-        ViewBag.SearchQuery = searchQuery;
-
-        return View(cineResponse);
+        return Ok(cineResponse);
     }
+
     [HttpGet]
     public async Task<IActionResult> CinemaSearch(string searchQuery)
     {
@@ -73,23 +81,24 @@ public class CinemaController : Controller
         return Json(cineResponse); // Return JSON response
     }
 
-
-
+    
 
 
     public async Task<IActionResult> Details(Guid Id)
     {
-        var cinema = await cinemaService.GetByIdAsync(Id);
+        var db = await(await cinemaService.GetDbSet())
+                .Include(e => e.Halls)
+                .FirstOrDefaultAsync(e => e.Id == Id);
 
-        var cinemaById  =  new CinemaResponse{
-            Id          = cinema.Id,
-            CinemaName  = cinema.CinemaName,
-            Location    = cinema.Location,
-            created_at  = cinema.created_at
-        };
-
-        return View(cinemaById);
+        // return Json(db);
+        return View(db.ToCinemaResponse());
     }
+
+    // public async Task<IActionResult> CinemaDetails(Guid Id)
+    // {
+    //     var cinema = await cinemaService.
+    // }
+
     [HttpPost]
     public async Task<IActionResult> PostCinema([FromBody] CinemaRequest cinemaRequest)
     {
@@ -98,25 +107,24 @@ public class CinemaController : Controller
             try
             {
                 var cinema = new Cinema
-                {
-                    CinemaName = cinemaRequest.CinemaName,
-                    Location = cinemaRequest.Location
+                {   
+                    CinemaName      = cinemaRequest.CinemaName,
+                    Location        = cinemaRequest.Location
                 };
-
+    
+                
                 if (string.IsNullOrEmpty(cinemaRequest.CinemaName) || string.IsNullOrEmpty(cinemaRequest.Location))
                 {
                     return BadRequest(new
                     {
                         success = false,
-                        message = "Unable to save with empty fields",
+                        message = "Unable to save with empty fields ",
                         result = cinema
                     });
                 }
-                else
-                {
+                    // return Json(cinema);
                     await cinemaService.AddAsync(cinema);
-                    return Json(new { success = true, message = "Cinema created successfully", result = cinema });
-                }
+                    return Json(new { success = true, message = "Cinema created successfully", result = cinema , Id = cinema.Id });
             }
             catch (Exception ex)
             {
@@ -124,14 +132,7 @@ public class CinemaController : Controller
                 return Json(new { success = false, message = ex.Message, innerMessage = innerException });
             }
         }
-
-        // If ModelState is invalid, return a bad request response
-        return BadRequest(new 
-        {
-            success = false,
-            message = "Invalid data",
-            errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
-        });
+        return Json(cinemaRequest);
     }
 
 }

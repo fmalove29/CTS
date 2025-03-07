@@ -24,29 +24,21 @@ public class CinemaService
         return await this.repository.GetAllAsync();
     }
     public async Task<Cinema> GetByIdAsync(Guid Id)
-    {   
-        return await this.repository.GetByIdAsync(Id);
+    {
+        var existCinema = await this.repository.GetDbSet();
+
+        var cinema = await existCinema
+                    .Include(e => e.Halls)
+                        .ThenInclude(h => h.Shows) 
+                    .Where(e => e.Id == Id)
+                    .FirstOrDefaultAsync();
+
+        return cinema;
     }
     public async Task<DbSet<Cinema>> GetDbSet()
         => await this.repository.GetDbSet();
 
     public async Task<Cinema> AddAsync(Cinema cinema)
-    {
-        try
-        {
-            var newCinema = new Cinema
-            {
-                CinemaName = cinema.CinemaName,
-                Location = cinema.Location
-            };
-
-            await this.repository.AddAsync(newCinema);
-
-            return cinema;
-        }
-        catch(Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-    }
+    =>    await this.repository.AddAsync(cinema);
+    
 }

@@ -8,7 +8,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="container mt-2 d-flex justify-content-center">
-        <div class="card" style="width: 50rem;">
+        <div class="netflix-card" style="width: 50rem;">
             <div class="card-body">
                 <h5 class="card-title">Movie Card Form</h5>
                     <div class="mb-3">
@@ -51,7 +51,7 @@
                             @foreach (var genre in Model.Genres)
                             {
                                 <div class="form-check col-3">
-                                    <input class="form-check-input genre" type="checkbox"
+                                    <input class="form-check-input genre border border-danger border-2 rounded" type="checkbox"
                                     id="genre_@genre.Id"
                                     name="genre[]"
                                     data-id="@genre.GenreName"
@@ -65,10 +65,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="ImageFile" class="form-label">Upload Image</label>
-                        <input type="file" id="movieImg" name="ImageFile" class="form-control" required />
+                        <input type="file" id="movieImg" name="ImageFile" class="form-control bg-dagner text-light" required />
                     </div>
                     <a  class="btn btn-secondary" asp-controller="Movie" asp-action="Index">Back</a>
-                    <button type="submit" id="btnSave" class="btn btn-primary"> @(isUpdate ? "Update" : "Create")</button>
+                    <button type="submit" id="btnSave" class="btn btn-netflix-primary"> @(isUpdate ? "Update" : "Create")</button>
             </div>
         </div>
     </div>
@@ -77,4 +77,3 @@
 <script src="@Url.Content("~/js/axios.min.js")"></script>
 <script src="@Url.Content("~/js/sweetalert2.min.js")"></script>
 <script src="@Url.Content("~/js/app/movie-details.js")"></script>
-

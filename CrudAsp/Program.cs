@@ -6,6 +6,7 @@ using CrudAsp.Models;
 using CrudAsp.Models.app;
 using CrudAsp.Services.Movies;
 using CrudAsp.Services.Genres;
+using CrudAsp.Services.Shows;
 using CrudAsp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IRepository<Movie>, Repository<Movie>>();
 builder.Services.AddScoped<IRepository<Genre>, Repository<Genre>>();
 builder.Services.AddScoped<IRepository<Cinema>, Repository<Cinema>>();
+builder.Services.AddScoped<IRepository<Show>, Repository<Show>>();
+builder.Services.AddScoped<IRepository<Booking>, Repository<Booking>>();
+builder.Services.AddScoped<IRepository<Hall>, Repository<Hall>>();
+builder.Services.AddScoped<MovieService>();
+
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

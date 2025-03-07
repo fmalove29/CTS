@@ -1,88 +1,56 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    $('#btnSave').on('click', async () => {
+        let formData = new FormData();
 
-    $('#btnSave').on('click', () => {
-        let genresArr = [];
-        let movieGen = [];
-        $('.genre:checked').each(function() {
-            let genName = $(this).data('id');
-            genresArr.push({
-                genreName : genName,
-                Id : $(this).val()
-            });
+        let movieId = $('#movieId').val();
+        formData.append("Id", movieId);
+        formData.append("Title", $('#movieTitle').val());
+        formData.append("Description", $('#movieDescription').val());
+        formData.append("ReleaseDate", $('#releaseDate').val());
+        formData.append("EndDate", $('#endDate').val());
 
-            movieGen.push({
-                genresId : $(this).val()
-            });
-        });
         
-        var fileInput = $('#movieImg')[0];
-        var file = fileInput.files[0];
+        let movieGenres = [];
+        $('.genre:checked').each(function () {
+            movieGenres.push({ MoviesId: movieId, GenresId: $(this).val() });
+        });
+        formData.append("MovieGenresJson", JSON.stringify(movieGenres));
 
-        if (!file) {
-            alert("Please select a file.");
+
+        formData.append("MovieGenres", JSON.stringify(movieGenres)); // Backend should expect JSON and deserialize it
+
+        
+        let fileInput = $('#movieImg')[0].files[0];
+        if (!fileInput) {
+            alert("Please select an image file.");
             return;
         }
+        formData.append("MovieImages", fileInput);
 
-        var reader = new FileReader();
-        reader.onloadend = async function () {
-            var base64String = reader.result.split(',')[1];
+        try {
+            const response = await axios.post('/Movie/PostMovie', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
 
-            let imageArr = [{
-                name: file.name,
-                type: file.type,
-                size: file.size,
-                path : '',
-                Base64File: base64String
-            }];
-
-            let movieRequest = {
-                Id : $('#movieId').val(),
-                title: $('#movieTitle').val(),
-                description: $('#movieDescription').val(),
-                releaseDate: $('#releaseDate').val(),
-                endDate: $('#endDate').val(),
-                genres: genresArr,
-                MovieImages: imageArr,
-                MovieGenre: movieGen
-            };
-
-            // You can uncomment the following axios code for the POST request
-            /*
-            axios.post('/Movie/PostMovie', movieRequest, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((res) => {
-                console.log(res);
+            console.log(response.data);
+            if(response.data.success == true)
+            {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
-                    text: 'Movie created successfully!'
-                });
-            })
-            .catch((err) => {
-                console.log(err);
+                    text: response.data.message
+                })
+                .then(()=>{
+                    window.location = '/Movie';
+                })
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Something went wrong.'
             });
-            */
-
-    
-
-                let decider = 'PostMovie';
-                let update = await request(decider, movieRequest);
-                console.log(update);
-        };
-        reader.readAsDataURL(file);
-
+        }
     });
-
-    async function request(decider, movie) {
-        try {
-            const data = await axios.post('/Movie/' + decider, movie);
-            console.log(data);
-            return data.response;
-        } catch(error) {
-            console.log(error);
-        }   
-    }
 });

@@ -1,0 +1,83 @@
+@using Microsoft.AspNetCore.Identity
+
+
+@inject SignInManager<Users> signInManager
+
+@using CrudAsp.resource.ViewModels
+
+@{
+    var menuItems = ViewData["MenuItems"] as IEnumerable<MenuItemVM>;
+}
+
+<ul class="navbar-nav">
+    @if (signInManager.IsSignedIn(User))
+    {
+        @* <li class="nav-item">
+            <a asp-controller="Account" asp-action="Logout">Logout</a>
+        </li> *@
+        
+        @* @if (menuItems == null || menuItems.Any())
+        {
+            <p>No menu items available.</p>
+        }
+        else
+        {
+            <ul>
+                @foreach (var menuItem in menuItems)
+                {
+                    <li><a href="@menuItem.Path">@menuItem.Name</a></li>
+                }
+            </ul>
+        } *@
+
+            if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Security
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="UserRole">
+                                User
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Role">
+                                UserClaims
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Role">
+                                Role
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Role">
+                                RoleClaims
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-action="" asp-controller="">
+                                Access
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-action="" asp-controller="Menu">
+                                Modules
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+</ul>

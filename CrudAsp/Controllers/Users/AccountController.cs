@@ -132,12 +132,15 @@ namespace CrudAsp.Controllers.Users
     {
         private readonly SignInManager<CrudAsp.Models.Users> _signInManager;
         private readonly UserManager<CrudAsp.Models.Users> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
 
         // Constructor with dependency injection
-        public AccountController(SignInManager<CrudAsp.Models.Users> signInManager, UserManager<CrudAsp.Models.Users> userManager)
+        public AccountController(SignInManager<CrudAsp.Models.Users> signInManager, UserManager<CrudAsp.Models.Users> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // Display the login page
@@ -206,7 +209,13 @@ namespace CrudAsp.Controllers.Users
         [HttpPost]
         public async Task<IActionResult> PostRegister(RegisterVM model)
         {
-            // return Ok(model);
+
+            var role =  _roleManager.Roles
+                        .FirstOrDefault(r => r.NormalizedName == "USER");
+
+
+            // return Json(model);
+            // // return Ok(model);
             if (ModelState.IsValid)
             {
                 var user = new CrudAsp.Models.Users
@@ -215,16 +224,16 @@ namespace CrudAsp.Controllers.Users
                     MiddleName          = model.MiddleName,
                     LastName            = model.LastName,
                     UserName            = model.UserName,
-                    Email               = model.Email
+                    Email               = model.Email,
+                    Age                 = model.Age
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 // return Ok(result);
                 if (result.Succeeded)
                 {
-                    string roleName = "User";
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _userManager.AddToRoleAsync(user, roleName);
+                    await _userManager.AddToRoleAsync(user, role.Name);
                     return RedirectToAction("Index", "Movie");
                 }
 

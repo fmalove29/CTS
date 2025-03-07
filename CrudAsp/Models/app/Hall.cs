@@ -11,5 +11,5 @@ public class Hall : BaseEntity
 
     public int SeatCapacity {get; set;}
 
-    public virtual ICollection<Show> Shows{get; set;}
+    public virtual ICollection<Show>? Shows{get; set;}
 }

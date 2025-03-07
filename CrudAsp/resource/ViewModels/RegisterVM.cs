@@ -12,6 +12,8 @@ namespace CrudAsp.resource.ViewModels;
         public string? MiddleName {get; set;}
         [Required]
         public string UserName {get; set;}
+        
+        public int Age {get; set;}
         [Required]
         [DataType(DataType.EmailAddress)]
         public string? Email{get; set;}
