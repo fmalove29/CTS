@@ -45,33 +45,31 @@ namespace CrudAsp.Models.app.Enum
     public enum ScreenType
     {
         // Standard Screens
-        TwoD,
-        ThreeD,
+        C2D = 0,
+        C3D = 1,
 
         // Premium & Large Format Screens
-        IMAX,
-        IMAX3D,
-        DolbyCinema,
-        RPX,
-        CinemarkXD,
-        ScreenX,
-        BarcoEscape,
-        UltraPanavision70,
-        FourDX,
+        IMAX = 2,
+        IMAX3D = 3,
+        DolbyCinema = 4,
+        RPX = 5,
+        CinemarkXD = 6,
+        ScreenX = 7,
+        BarcoEscape = 8,
+        UltraPanavision70 = 9,
+        FourDX = 10,
 
         // Luxury & VIP Screens
-        DirectorsClub,
-        GoldClass,
-        PremierScreen,
-        DineInTheater,
+        DirectorsClub = 11,
+        GoldClass = 12,
+        PremierScreen = 13,
+        DineInTheater = 14,
 
         // Special Projection Screens
-        Cinerama,
-        DBox,
-        DriveIn,
-        FloatingCinema
+        Cinerama = 15,
+        DBox = 16,
+        DriveIn = 17, 
+        FloatingCinema = 18
     }
-
-
 
 }

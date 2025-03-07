@@ -67,4 +67,6 @@ $(document).ready(function(){
         $('#hallName').val('');
         $('#seatCapacity').val('');
     })
+
+    
 })

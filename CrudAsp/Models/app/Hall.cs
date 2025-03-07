@@ -11,5 +11,9 @@ public class Hall : BaseEntity
 
     public int SeatCapacity {get; set;}
 
+    [ForeignKey("CinemaFormat")]
+    public Guid CinemaFormatId { get; set; }
+    public virtual CinemaFormat CinemaFormat { get; set; } 
+
     public virtual ICollection<Show>? Shows{get; set;}
 }

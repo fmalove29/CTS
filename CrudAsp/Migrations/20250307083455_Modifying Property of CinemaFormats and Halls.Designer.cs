@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrudAsp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250227020648_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250307083455_Modifying Property of CinemaFormats and Halls")]
+    partial class ModifyingPropertyofCinemaFormatsandHalls
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,6 +182,37 @@ namespace CrudAsp.Migrations
                     b.ToTable("Cinemas");
                 });
 
+            modelBuilder.Entity("CrudAsp.Models.app.CinemaFormat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ScreenType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ScreenTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CinemaFormats");
+                });
+
             modelBuilder.Entity("CrudAsp.Models.app.Genre", b =>
                 {
                     b.Property<Guid>("Id")
@@ -205,38 +236,38 @@ namespace CrudAsp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4244a75f-543f-4be6-ac6a-d096f5e835d6"),
+                            Id = new Guid("e1f2d1df-f2b9-4aa3-8451-f21710198db7"),
                             GenreName = "Action",
-                            created_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6140),
-                            updated_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6180)
+                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3870),
+                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3910)
                         },
                         new
                         {
-                            Id = new Guid("60f0ad07-2f94-4c56-9b91-83bbbb650bc8"),
+                            Id = new Guid("6d0bfda8-574e-4501-b25c-1527b914df7e"),
                             GenreName = "Drama",
-                            created_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6240),
-                            updated_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6240)
+                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3940),
+                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950)
                         },
                         new
                         {
-                            Id = new Guid("92a3da1b-f889-4dcf-ba4e-3172738a86dc"),
+                            Id = new Guid("c8fdc6f3-52a2-43f8-97bb-8e07edd3339e"),
                             GenreName = "Sci-Fi",
-                            created_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6250),
-                            updated_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6250)
+                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950),
+                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950)
                         },
                         new
                         {
-                            Id = new Guid("ae6258a5-285f-457c-9fbf-0feda267147e"),
+                            Id = new Guid("3e412481-33bf-45eb-b7a5-2d4e50aaf219"),
                             GenreName = "Comedy",
-                            created_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6260),
-                            updated_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6260)
+                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3960),
+                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3960)
                         },
                         new
                         {
-                            Id = new Guid("a8058a7f-18ef-4978-a200-12fbf2682bc7"),
+                            Id = new Guid("e3732c5d-a4db-4f27-9bc2-dd69537e0fe5"),
                             GenreName = "Horror",
-                            created_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6270),
-                            updated_at = new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6270)
+                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3970),
+                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3970)
                         });
                 });
 
@@ -244,6 +275,9 @@ namespace CrudAsp.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CinemaFormatId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CinemaId")
@@ -263,6 +297,8 @@ namespace CrudAsp.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CinemaFormatId");
 
                     b.HasIndex("CinemaId");
 
@@ -569,11 +605,19 @@ namespace CrudAsp.Migrations
 
             modelBuilder.Entity("CrudAsp.Models.app.Hall", b =>
                 {
+                    b.HasOne("CrudAsp.Models.app.CinemaFormat", "CinemaFormat")
+                        .WithMany("Halls")
+                        .HasForeignKey("CinemaFormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CrudAsp.Models.app.Cinema", null)
                         .WithMany("Halls")
                         .HasForeignKey("CinemaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CinemaFormat");
                 });
 
             modelBuilder.Entity("CrudAsp.Models.app.MovieGenre", b =>
@@ -680,6 +724,11 @@ namespace CrudAsp.Migrations
                 });
 
             modelBuilder.Entity("CrudAsp.Models.app.Cinema", b =>
+                {
+                    b.Navigation("Halls");
+                });
+
+            modelBuilder.Entity("CrudAsp.Models.app.CinemaFormat", b =>
                 {
                     b.Navigation("Halls");
                 });

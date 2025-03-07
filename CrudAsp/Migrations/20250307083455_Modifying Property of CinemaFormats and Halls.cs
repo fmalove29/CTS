@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CrudAsp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ModifyingPropertyofCinemaFormatsandHalls : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,6 +78,23 @@ namespace CrudAsp.Migrations
             //     {
             //         table.PrimaryKey("PK_Bookings", x => x.Id);
             //     });
+
+            migrationBuilder.CreateTable(
+                name: "CinemaFormats",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ScreenType = table.Column<int>(type: "int", nullable: false),
+                    ScreenTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CinemaFormats", x => x.Id);
+                });
 
             // migrationBuilder.CreateTable(
             //     name: "Cinemas",
@@ -246,27 +263,34 @@ namespace CrudAsp.Migrations
             //             onDelete: ReferentialAction.Cascade);
             //     });
 
-            // migrationBuilder.CreateTable(
-            //     name: "Halls",
-            //     columns: table => new
-            //     {
-            //         Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-            //         CinemaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-            //         HallName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-            //         SeatCapacity = table.Column<int>(type: "int", nullable: false),
-            //         created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-            //         updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
-            //     },
-            //     constraints: table =>
-            //     {
-            //         table.PrimaryKey("PK_Halls", x => x.Id);
-            //         table.ForeignKey(
-            //             name: "FK_Halls_Cinemas_CinemaId",
-            //             column: x => x.CinemaId,
-            //             principalTable: "Cinemas",
-            //             principalColumn: "Id",
-            //             onDelete: ReferentialAction.Cascade);
-            //     });
+            migrationBuilder.CreateTable(
+                name: "Halls",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CinemaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HallName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SeatCapacity = table.Column<int>(type: "int", nullable: false),
+                    CinemaFormatId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Halls", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Halls_CinemaFormats_CinemaFormatId",
+                        column: x => x.CinemaFormatId,
+                        principalTable: "CinemaFormats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Halls_Cinemas_CinemaId",
+                        column: x => x.CinemaId,
+                        principalTable: "Cinemas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             // migrationBuilder.CreateTable(
             //     name: "MovieGenre",
@@ -342,39 +366,39 @@ namespace CrudAsp.Migrations
             //             principalColumn: "Id");
             //     });
 
-            // migrationBuilder.CreateTable(
-            //     name: "Show",
-            //     columns: table => new
-            //     {
-            //         Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-            //         MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-            //         HallId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-            //         ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-            //         TicketPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-            //         created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-            //         updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
-            //     },
-            //     constraints: table =>
-            //     {
-            //         table.PrimaryKey("PK_Show", x => x.Id);
-            //         table.ForeignKey(
-            //             name: "FK_Show_Halls_HallId",
-            //             column: x => x.HallId,
-            //             principalTable: "Halls",
-            //             principalColumn: "Id",
-            //             onDelete: ReferentialAction.Cascade);
-            //     });
+            migrationBuilder.CreateTable(
+                name: "Show",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HallId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TicketPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Show", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Show_Halls_HallId",
+                        column: x => x.HallId,
+                        principalTable: "Halls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             // migrationBuilder.InsertData(
             //     table: "Genres",
             //     columns: new[] { "Id", "GenreName", "created_at", "updated_at" },
             //     values: new object[,]
             //     {
-            //         { new Guid("4244a75f-543f-4be6-ac6a-d096f5e835d6"), "Action", new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6140), new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6180) },
-            //         { new Guid("60f0ad07-2f94-4c56-9b91-83bbbb650bc8"), "Drama", new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6240), new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6240) },
-            //         { new Guid("92a3da1b-f889-4dcf-ba4e-3172738a86dc"), "Sci-Fi", new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6250), new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6250) },
-            //         { new Guid("a8058a7f-18ef-4978-a200-12fbf2682bc7"), "Horror", new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6270), new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6270) },
-            //         { new Guid("ae6258a5-285f-457c-9fbf-0feda267147e"), "Comedy", new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6260), new DateTime(2025, 2, 27, 10, 6, 48, 243, DateTimeKind.Local).AddTicks(6260) }
+            //         { new Guid("3e412481-33bf-45eb-b7a5-2d4e50aaf219"), "Comedy", new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3960), new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3960) },
+            //         { new Guid("6d0bfda8-574e-4501-b25c-1527b914df7e"), "Drama", new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3940), new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950) },
+            //         { new Guid("c8fdc6f3-52a2-43f8-97bb-8e07edd3339e"), "Sci-Fi", new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950), new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950) },
+            //         { new Guid("e1f2d1df-f2b9-4aa3-8451-f21710198db7"), "Action", new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3870), new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3910) },
+            //         { new Guid("e3732c5d-a4db-4f27-9bc2-dd69537e0fe5"), "Horror", new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3970), new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3970) }
             //     });
 
             // migrationBuilder.CreateIndex(
@@ -415,6 +439,11 @@ namespace CrudAsp.Migrations
             //     column: "NormalizedUserName",
             //     unique: true,
             //     filter: "[NormalizedUserName] IS NOT NULL");
+
+            // migrationBuilder.CreateIndex(
+            //     name: "IX_Halls_CinemaFormatId",
+            //     table: "Halls",
+            //     column: "CinemaFormatId");
 
             // migrationBuilder.CreateIndex(
             //     name: "IX_Halls_CinemaId",
@@ -497,6 +526,9 @@ namespace CrudAsp.Migrations
 
             migrationBuilder.DropTable(
                 name: "Halls");
+
+            migrationBuilder.DropTable(
+                name: "CinemaFormats");
 
             migrationBuilder.DropTable(
                 name: "Cinemas");

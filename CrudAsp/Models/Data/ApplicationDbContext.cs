@@ -32,9 +32,15 @@ namespace CrudAsp.Models.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
 
         public DbSet<MovieImage> MovieImages {get; set;}
+        public DbSet<CinemaFormat> CinemaFormats {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Hall>()
+            .HasOne(h => h.CinemaFormat)
+            .WithMany(cf => cf.Halls)
+            .HasForeignKey(h => h.CinemaFormatId)
+            .OnDelete(DeleteBehavior.Cascade);
             // base.OnModelCreating(modelBuilder);
                 modelBuilder.Entity<Movie>()
                     .HasMany(x => x.Genres)
@@ -59,6 +65,7 @@ namespace CrudAsp.Models.Data
                     .IsRequired()   // Makes it NOT NULL
                     .HasMaxLength(255); // Optional: setting max length
             });
+
 
 
             base.OnModelCreating(modelBuilder);
