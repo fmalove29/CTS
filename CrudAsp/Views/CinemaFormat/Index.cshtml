@@ -12,10 +12,10 @@
         <div class="card-body">
             <div class="card-title"><h1 class="text-danger"><strong>Cinema Format Management</strong></h1></div>
             <div class="d-flex justify-content-end mb-2">
-                    <button type="button" class="btn btn-netflix-primary" id="btnAddHall" data-bs-toggle="modal" data-bs-target="#btnHallShow">Add Format</button>
+                    <button type="button" class="btn btn-netflix-primary" id="btnAddFormat" data-bs-toggle="modal" data-bs-target="#btnHallShow">Add Format</button>
                 </div>
             <div class="row">
-                <table class="table table-striped zero-configuration w-100">
+                <table class="table table-striped zero-configuration w-100" id="formatTable">
                     <thead>
                         <tr>
                             <th>Screen Type</th>
@@ -24,6 +24,9 @@
                             <th></th>
                         </tr>
                     </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -47,20 +50,20 @@
                     <div class="mb-3 row">
                         <label for="hallName" class="col-3 col-form-label text-dark">Description</label>
                         <div class="col-9">
-                            <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="" id="formatDescription" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <label for="seatCapacity" class="col-4 col-form-label text-dark">Price:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" id="seatCapacity">
+                            <input type="text" class="form-control" id="formatPrice">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-netflix-primary">Save</button>
+                    <button class="btn btn-netflix-primary" id="cinemaFormatSave">Save</button>
                 </div>
             </div>
         </div>
@@ -74,4 +77,6 @@
     <script src="@Url.Content("~/js/select2.min.js")"></script>
     <script src="@Url.Content("~/js/select2.js")"></script>
     <script src="@Url.Content("~/js/app/cinemaformat/cinemaformat.js")"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }

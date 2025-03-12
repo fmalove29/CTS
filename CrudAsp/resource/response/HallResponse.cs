@@ -7,6 +7,8 @@ public class HallResponse : BaseResponse
     public string HallName {get; set;}
 
     public int SeatCapacity {get; set;}
+    public Guid CinemaFormatId {get; set;}
+    public string ScreenTypeName {get; set;}
 
     public virtual ICollection<ShowResponse>? Shows{get; set;}
 }

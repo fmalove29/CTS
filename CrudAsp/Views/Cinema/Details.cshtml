@@ -15,7 +15,7 @@
             <input type="text" name="" id="cinemaId" class="d-none" value="@Model.Id">
             <div class="card-title"><h1 class="text-danger"><strong>@Model.CinemaName</strong></h1></div>
             <div class="d-flex justify-content-end mb-2">
-                    <button type="button" class="btn btn-netflix-primary" id="btnAddHall" data-bs-toggle="modal" data-bs-target="#btnHallShow">Add Cinema</button>
+                    <button type="button" class="btn btn-netflix-primary" id="btnAddHall" data-bs-toggle="modal" data-bs-target="#hallModal">Add Halls</button>
                 </div>
             <table class="table table-striped zero-configuration w-100" id="hTable">
                 <thead>
@@ -32,7 +32,7 @@
     <a class="btn btn-secondary" asp-controller="Cinema" asp-action="Index">Back</a>
 
 
-    <div class="modal  fade" id="btnHallShow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade" id="hallModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -61,6 +61,10 @@
                             <input type="text" class="form-control" id="seatCapacity">
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-netflix-primary" id="btnHallSave" data-id="@Model.Id">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,4 +78,6 @@
     <script src="@Url.Content("~/js/select2.min.js")"></script>
     <script src="@Url.Content("~/js/select2.js")"></script>
     <script src="@Url.Content("~/js/app/cinema/cinema-details.js")"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }

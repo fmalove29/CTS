@@ -26,4 +26,6 @@ public class HallService
     {
         return await this.repository.GetByIdAsync(Id);
     }
+    public async Task<Hall> AddAsync(Hall hall)
+    => await this.repository.AddAsync(hall);
 }

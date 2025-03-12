@@ -9,3 +9,7 @@
     background-color:#B3B3B3 !important;
     color: #E50914 !important;
 }
+
+#formatTable tbody tr:hover {
+    background-color: #E50914 !important; /* Light gray */
+}

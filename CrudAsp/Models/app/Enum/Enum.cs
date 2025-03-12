@@ -45,7 +45,9 @@ namespace CrudAsp.Models.app.Enum
     public enum ScreenType
     {
         // Standard Screens
+        [Description("2D")]
         C2D = 0,
+        [Description("3D")]
         C3D = 1,
 
         // Premium & Large Format Screens

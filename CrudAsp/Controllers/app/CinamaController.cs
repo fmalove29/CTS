@@ -8,11 +8,13 @@ using System.IO;
 using System.Threading.Tasks;
 using CrudAsp.Services.Cinemas;
 using CrudAsp.Services.Movies;
+using CrudAsp.Services.CinemaFormat;
 using CrudAsp.Models.app;
 using CrudAsp.Repository;
 using CrudAsp.resource.response;
 using CrudAsp.resource.request;
 using CrudAsp.Extensions;
+using CrudAsp.resource.response;
 
 
 namespace CrudAsp.Controllers.app;
@@ -23,17 +25,21 @@ public class CinemaController : Controller
     private readonly CinemaService cinemaService;
     private readonly MovieService movieService;
 
+    private readonly CinemaFormatService _cinemaFormatService;
+
     private readonly IRepository<Cinema> repository;
     private readonly IRepository<Movie> _movieRepo;
     private readonly IRepository<Genre> _genRepo;
+    private readonly IRepository<CrudAsp.Models.app.CinemaFormat> _cinemaFormat;
     public CinemaController
     (
-        IRepository<Cinema> repository
+        IRepository<Cinema> repository,
+        CinemaFormatService cinemaFormatService
     )
     {
         this.repository = repository;
+        _cinemaFormatService = cinemaFormatService;
         cinemaService = new CinemaService((Repository<Cinema>) repository);
-        // movieService = new MovieService((Repository<Movie>) _movieRepo, (Repository<Genre>) _genRepo);
 
     }
 
@@ -133,6 +139,28 @@ public class CinemaController : Controller
             }
         }
         return Json(cinemaRequest);
+    }
+
+    [HttpGet("cinema-format/select")]
+    public async Task<IActionResult> GetCinemaFormat()
+    {
+        var cinemaFormats = await _cinemaFormatService.GetAllAsync();
+
+        // Ensure cinemaFormats is not null before mapping
+        if (cinemaFormats == null || !cinemaFormats.Any())
+        {
+            return NotFound("No cinema formats available.");
+        }
+
+        var response = cinemaFormats.Select(cf => new CinemaFormatSelectResponse
+        {
+            Id = cf.Id,
+            ScreenType = cf.ScreenType,
+            ScreenTypeName = cf.ScreenTypeName,
+            Price = cf.Price
+        }).ToList();
+
+        return Ok(response);
     }
 
 }

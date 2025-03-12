@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using CrudAsp.Services.Halls;
+using CrudAsp.Services.CinemaFormat;
 using CrudAsp.Models.app;
 using CrudAsp.Repository;
 using CrudAsp.resource.response;
@@ -15,29 +16,64 @@ namespace CrudAsp.Controllers.app;
 public class HallController : Controller
 { 
     private readonly IRepository<Hall> repository;
+    private readonly IRepository<CinemaFormat> _cinemaFormat;
     private readonly HallService hallService;
-    public HallController(IRepository<Hall> repository)
+    private readonly CinemaFormatService _cinemaFormatService;
+    public HallController(IRepository<Hall> repository, CinemaFormatService cinemaFormatService)
     {
         this.repository = repository;
         hallService = new HallService((Repository<Hall>) repository);
+        _cinemaFormatService = cinemaFormatService;
     }
 
     [HttpGet("hall/{Id}")]
     public async Task<IActionResult> Hall(Guid Id)
     {
-        var hallDbSet = await hallService.GetDbSet();
+        var halls = await hallService.GetDbSet(); // Await the task first
 
-        // Fetch all halls associated with the given CinemaId
-        var halls = await hallDbSet
-            .Where(c => c.CinemaId == Id)
-            .ToListAsync();
+        var data = halls
+                    .AsQueryable() // Convert to IQueryable to use Include
+                    .Include(e => e.CinemaFormat) // Include related data
+                    .Where(e => e.CinemaId == Id)
+                    .Select(e => new HallResponse
+                    {
+                        Id = e.Id,
+                        CinemaId = e.CinemaId,
+                        HallName = e.HallName,
+                        SeatCapacity = e.SeatCapacity,
+                        CinemaFormatId = e.CinemaFormatId,
+                        ScreenTypeName = e.CinemaFormat.ScreenTypeName // Access from CinemaFormat
+                    })
+                    .ToList(); // Execute query
 
-        // Return the list of halls as a JSON response
-        return Json(halls);
+        return Ok(data);
     }
 
-    public async Task<IActionResult> postHall(HallResponse hallResponse)
+
+
+
+
+
+    [HttpPost("hall")]
+    public async Task<IActionResult> postHall([FromBody] HallResponse hallResponse)
     {
-        return Json(hallResponse);
+        try
+        {
+            var hall = new CrudAsp.Models.app.Hall(){
+                CinemaId = hallResponse.CinemaId,
+                HallName = hallResponse.HallName,
+                SeatCapacity = hallResponse.SeatCapacity,
+                CinemaFormatId = hallResponse.CinemaFormatId
+            };
+
+            var response = await hallService.AddAsync(hall);
+            return Ok(new { success = true, message = "New Hall Added Successfully" , data = response});
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
+        }
+
+        return Ok(hallResponse);
     }
 }
