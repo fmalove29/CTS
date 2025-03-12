@@ -1,5 +1,6 @@
 $(document).ready(function(){
     let hallarr = [];
+    let gHallId;
     populateHall();
     async function getHall()
     {
@@ -18,6 +19,8 @@ $(document).ready(function(){
     {
         let data = await getHall();
         console.log(data);
+
+        hallarr = [];
         data.forEach((e)=>{
             hallarr.push({
                 Id : e.id,
@@ -56,17 +59,18 @@ $(document).ready(function(){
 
     $(document).on('click', '.editbtn', function(e){
         e.preventDefault();
+        $('#btnHallSave').text('Update');
         let Id = $(e.currentTarget).data('id');
-
-        let findData = hallarr.find(e => e.Id == Id);
-        console.log(findData);
         
-        if ($('#cinemaFormat').find(`option[value="${findData.Id}"]`).length === 0) {
-            $('#cinemaFormat').append(new Option(findData.ScreenTypeName, findData.Id, true, true));
-        }
+        
+        let findData = hallarr.find(e => e.Id == Id);
+        gHallId = findData.Id;
+        
+            $('#cinemaFormat').append(new Option(findData.ScreenTypeName, findData.CinemaFormatId, true, true));
+        
     
         // Set the value and trigger Select2 update
-        $('#cinemaFormat').val(findData.Id).trigger('change');
+        $('#cinemaFormat').val(findData.CinemaFormatId).trigger('change');
 
 
         $('#hallName').val(findData.HallName);
@@ -75,6 +79,7 @@ $(document).ready(function(){
     })
 
     $('#btnAddHall').on('click', function(){
+        $('#btnHallSave').text('Save');
         $('#cinemaFormat').val(null).trigger('change'); 
         $('#hallName').val('');
         $('#seatCapacity').val('');
@@ -130,27 +135,56 @@ $(document).ready(function(){
     });
 
     $('#btnHallSave').on('click', function(){
-        let hallResponse = {
-            CinemaId : $(this).data('id'),
-            HallName : $('#hallName').val(),
-            CinemaFormatId : $('#cinemaFormat option:selected').val(),
-            SeatCapacity : parseInt($('#seatCapacity').val())
+        if($('#btnHallSave').text() == 'Update')
+        {
+            let hallResponse = {
+                Id : gHallId,
+                CinemaId : $(this).data('id'),
+                HallName : $('#hallName').val(),
+                CinemaFormatId : $('#cinemaFormat option:selected').val(),
+                SeatCapacity : parseInt($('#seatCapacity').val())
+            }
+            axios.put('/hall',hallResponse)
+            .then((success)=>{
+                Swal.fire({
+                    title : "Success",
+                    text : success.data.message,
+                    icon : "success"
+                })
+                .then(()=>{
+                    $('#hallModal').modal('hide');
+                    populateHall();
+                })
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
         }
-
-        axios.post('/hall', hallResponse)
-        .then((success)=>{
-            Swal.fire({
-                title : "Success",
-                text : success.data.message,
-                icon : "success"
+        else
+        {
+            let hallResponse = {
+                CinemaId : $(this).data('id'),
+                HallName : $('#hallName').val(),
+                CinemaFormatId : $('#cinemaFormat option:selected').val(),
+                SeatCapacity : parseInt($('#seatCapacity').val())
+            }
+            // return console.log(hallResponse);
+            axios.post('/hall', hallResponse)
+            .then((success)=>{
+                Swal.fire({
+                    title : "Success",
+                    text : success.data.message,
+                    icon : "success"
+                })
+                .then(()=>{
+                    populateHall();
+                    $('#hallModal').modal('hide');
+                })
             })
-            .then(()=>{
-                populateHall();
-                $('#hallModal').modal('hide');
+            .catch((err)=>{
+                console.log(err);
             })
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
+        }
+        
     })
 })

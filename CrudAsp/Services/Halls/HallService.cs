@@ -28,4 +28,6 @@ public class HallService
     }
     public async Task<Hall> AddAsync(Hall hall)
     => await this.repository.AddAsync(hall);
+    public async Task<Hall> UpdateAsync(Hall hall)
+    => await this.repository.UpdateAsync(hall);
 }

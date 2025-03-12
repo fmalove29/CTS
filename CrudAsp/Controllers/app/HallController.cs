@@ -76,4 +76,41 @@ public class HallController : Controller
 
         return Ok(hallResponse);
     }
+
+    [HttpPut("hall")]
+    public async Task<IActionResult> PutHall([FromBody] HallResponse hallResponse)
+    {
+        try
+        {
+            var findHall = await hallService.GetHallByCinemaId(hallResponse.Id);
+            if (findHall == null)
+            {
+                return NotFound(new { success = false, message = "Hall not found." });
+            }
+
+            findHall.HallName = hallResponse.HallName;
+            findHall.SeatCapacity = hallResponse.SeatCapacity;
+            findHall.CinemaFormatId = hallResponse.CinemaFormatId;
+
+            var updatedHall = await hallService.UpdateAsync(findHall);
+
+            
+            var response = new HallResponse
+            {
+                Id = updatedHall.Id,
+                CinemaId = updatedHall.CinemaId,
+                HallName = updatedHall.HallName,
+                SeatCapacity = updatedHall.SeatCapacity,
+                CinemaFormatId = updatedHall.CinemaFormatId,
+                ScreenTypeName = updatedHall.CinemaFormat?.ScreenTypeName
+            };
+
+            return Ok(new { success = true, message = $"{hallResponse.Id} has been updated successfully", data = response });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
+        }
+    }
+
 }
