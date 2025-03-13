@@ -43,11 +43,12 @@ $(document).ready(function(){
             columns : [
                 { data : 'HallName', title : 'Name' },
                 { data : 'SeatCapacity', title : 'SeatCapacity' },
+                { data : 'ScreenTypeName', title : 'Screen Type'},
                 { data : 'action'}
             ],
             columnDefs :[
                 {
-                    targets : 2,
+                    targets : 3,
                     render: function(data,type,row)
                     {
                         return `<button class="btn btn-netflix-secondary editbtn" data-id="${row.Id}">Edit</button>`

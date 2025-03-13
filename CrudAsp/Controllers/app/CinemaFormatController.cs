@@ -44,11 +44,29 @@ public class CinemaFormatController : Controller
     [HttpGet("cinema-format/api/list")]
     public async Task<IActionResult> List()
     {
-        var list = await _cinemaFormatService.GetAllAsync();
-        return Json(list);
+        try
+        {
+            var list = await _cinemaFormatService.GetAllAsync();
+
+            var formattedList = list.Select(e => new CinemaFormatDTO
+            {
+                Id         = e.Id,
+                ScreenType = e.ScreenType,
+                ScreenTypeName = e.ScreenType.ToString(), // Convert enum to string
+                Description = e.Description,
+                Price = e.Price
+            }).ToList();
+
+            return Ok(new { success = true, data = formattedList });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
+        }
     }
-    [HttpPost("cinema-format/Add")]
-    public async Task<IActionResult> PostFormat([FromBody] CinemaFormatDTO cinema)
+
+    [HttpPost("cinema-format")]
+    public async Task<IActionResult> PostFormat([FromBody] CinemaFormatDTO cinemaFormat)
     {
         if (!ModelState.IsValid)
         {
@@ -60,17 +78,17 @@ public class CinemaFormatController : Controller
             var dbSet = await _cinemaFormatService.GetDbSet(); // Await the DbSet
 
             
-            bool exists = await dbSet.AnyAsync(e => e.ScreenType == cinema.ScreenType);
+            bool exists = await dbSet.AnyAsync(e => e.ScreenType == cinemaFormat.ScreenType);
             if (exists)
             {
                 return BadRequest(new { success = false, message = "Screen type already exists." });
             }
 
             CinemaFormat cf = new CinemaFormat();
-            cf.ScreenType = cinema.ScreenType;
-            cf.ScreenTypeName = cinema.ScreenTypeName;
-            cf.Description = cinema.Description;
-            cf.Price = cinema.Price;
+            cf.ScreenType = cinemaFormat.ScreenType;
+            cf.ScreenTypeName = cinemaFormat.ScreenTypeName;
+            cf.Description = cinemaFormat.Description;
+            cf.Price = cinemaFormat.Price;
 
             var response = await _cinemaFormatService.AddAsync(cf);
 
@@ -84,6 +102,44 @@ public class CinemaFormatController : Controller
         
 
 
-        return Json(cinema);
+        return Json(cinemaFormat);
     }
+
+    [HttpPut("cinema-format")]
+    public async Task<IActionResult> PutFormat([FromBody] CinemaFormatDTO cinemaFormat)
+    {
+        // return Json(cinemaFormat.ScreenType);
+        try
+        {
+    
+            var findFormat = await _cinemaFormatService.GetByIdAsync(cinemaFormat.Id);
+
+            if (findFormat == null) // Fix: Check if it's null
+            {
+                return NotFound(new { success = false, message = "Format not found." });
+            }
+
+
+            findFormat.Description = cinemaFormat.Description;
+            findFormat.Price = cinemaFormat.Price;
+
+            var updatedCinemaFormat = await _cinemaFormatService.UpdateAsync(findFormat);
+
+            var cf = new CinemaFormatDTO()
+            {
+                Id = updatedCinemaFormat.Id,
+                ScreenType = updatedCinemaFormat.ScreenType,
+                ScreenTypeName = updatedCinemaFormat.ScreenTypeName,
+                Description = updatedCinemaFormat.Description,
+                Price = updatedCinemaFormat.Price
+            };
+
+            return Ok(new { success = true, message = $"{cinemaFormat.Id} format has been updated successfully", data = cf });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
+        }
+    }
+
 }

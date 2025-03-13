@@ -23,5 +23,7 @@ public class CinemaFormatService
     public async Task<DbSet<CrudAsp.Models.app.CinemaFormat>> GetDbSet()
             => await _repository.GetDbSet();
 
+    public async Task<CrudAsp.Models.app.CinemaFormat> UpdateAsync(CrudAsp.Models.app.CinemaFormat cinemaFormat)
+    => await _repository.UpdateAsync(cinemaFormat);
 
 }

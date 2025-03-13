@@ -1,47 +1,84 @@
-class CinemaFormat
-{
-    constructor(screenType, screenTypeName, description, price) {
-        this.screenType = screenType;
-        this.screenTypeName = screenTypeName; 
-        this.description = description;      
-        this.price = price;                  
-    }
-}
 $(document).ready(function(){
     let screenTypeName;
+    let cinemaFormatId;
     let arrayFormats = [];
 
     $('#cinemaFormatSave').on('click', function(){
-        let cinema = new CinemaFormat();
-        cinema.screenType = parseInt($('#cinemaFormat option:selected').val());
-        cinema.screenTypeName = screenTypeName;
-        cinema.description = $('#formatDescription').val();
-        cinema.price = $('#formatPrice').val();
+        // let cinema = new CinemaFormat();
+        // cinema.screenType = parseInt($('#cinemaFormat option:selected').val());
+        // cinema.screenTypeName = screenTypeName;
+        // cinema.description = $('#formatDescription').val();
+        // cinema.price = $('#formatPrice').val();
 
-        axios.post('/cinema-format/Add', cinema)
-        .then((response)=>{
-            console.log(response);
-            Swal.fire({
-                title : "Success",
-                text : response.data.message,
-                icon : "success"
+
+        if($('#cinemaFormatSave').text() == 'Update')
+        {
+            let cinemaFormat = {
+                Id  :  cinemaFormatId,
+                // ScreenType : parseInt($('#cinemaFormat option:selected').val()),
+                // screenTypeName : screenTypeName,
+                Description : $('#formatDescription').val(),
+                Price : $('#formatPrice').val()
+            }
+            // return console.log(cinemaFormat);
+            axios.put('/cinema-format', cinemaFormat)
+            .then((success)=>{
+                Swal.fire({
+                    title : "Success",
+                    text : success.data.message,
+                    icon : "success"
+                })
+                .then(()=>{
+                    renderFormats();
+                    
+                    $('#btnHallShow').modal('hide');
+                    
+                })
             })
-            .then(()=>{
-                renderFormats();
-                
-                $('#btnHallShow').modal('hide');
-                
+            .catch((err)=>{
+                console.log(err);
+                Swal.fire({
+                    title : "Error",
+                    text : err.response.data.message,
+                    icon : "error"
+                });
             })
-        })
-        .catch((err)=>{
-            console.log(err);
-            Swal.fire({
-                title : "Error",
-                text : err.response.data.message,
-                icon : "error"
+        }
+        else
+        {
+
+            let cinemaFormat = {
+                ScreenType : parseInt($('#cinemaFormat option:selected').val()),
+                screenTypeName : screenTypeName,
+                Description : $('#formatDescription').val(),
+                Price : $('#formatPrice').val()
+            }
+            axios.post('/cinema-format', cinemaFormat)
+            .then((response)=>{
+                console.log(response);
+                Swal.fire({
+                    title : "Success",
+                    text : response.data.message,
+                    icon : "success"
+                })
+                .then(()=>{
+                    renderFormats();
+                    
+                    $('#btnHallShow').modal('hide');
+                    
+                })
+            })
+            .catch((err)=>{
+                console.log(err);
+                Swal.fire({
+                    title : "Error",
+                    text : err.response.message,
+                    icon : "error"
+                });
             });
-        });
+        }
     })
+
     $('#cinemaFormat').select2({
         width: '100%', // Optional: Ensures Select2 fits properly
         placeholder: "Select Cinema Format",
@@ -94,9 +131,9 @@ $(document).ready(function(){
     async function renderFormats()
     {
         let response = await getformats();
-        console.log(response);
 
-        response.forEach((e)=>{
+        arrayFormats = [];
+        response.data.forEach((e)=>{
             arrayFormats.push({
                 Id : e.id,
                 ScreenType : e.screenType,
@@ -132,7 +169,6 @@ $(document).ready(function(){
 
     $(document).on('click', '.edtnBtn', function () {
         let Id = $(this).data('id');
-    
         let findFormat = arrayFormats.find(e => e.Id == Id);
     
         if (!findFormat) {
@@ -140,22 +176,37 @@ $(document).ready(function(){
             return;
         }
     
-        // Check if the option exists in Select2
-        if ($('#cinemaFormat').find(`option[value="${findFormat.Id}"]`).length === 0) {
-            $('#cinemaFormat').append(new Option(findFormat.ScreenTypeName, findFormat.Id, true, true));
+        console.log(findFormat);
+    
+        $('#cinemaFormatSave').text('Update');
+        cinemaFormatId = findFormat.Id;
+        screenTypeName = findFormat.ScreenTypeName;
+    
+        let $cinemaFormat = $('#cinemaFormat'); // Cache Select2 element
+    
+        // Check if option already exists in Select2, if not, add it
+        if ($cinemaFormat.find(`option[value="${findFormat.ScreenType}"]`).length === 0) {
+            let newOption = new Option(findFormat.ScreenTypeName, findFormat.ScreenType, false, false);
+            $cinemaFormat.append(newOption).trigger('change');
         }
     
-        // Set the value and trigger Select2 update
-        $('#cinemaFormat').val(findFormat.Id).trigger('change');
-    
-        // Update other fields
+        // Set the selected value and trigger Select2 update
+        $cinemaFormat.val(findFormat.ScreenType).trigger('change');
+        
+        $cinemaFormat.prop('disabled', true);
+        $cinemaFormat.select2({ disabled: true, width : '100%' });
+        // Populate other form fields
         $('#formatDescription').val(findFormat.Description);
         $('#formatPrice').val(findFormat.Price);
     
+        // Show modal
         $('#btnHallShow').modal('show');
     });
+    
 
     $('#btnAddFormat').on('click', function () {
+        $cinemaFormat.prop('disabled', false);
+        $cinemaFormat.select2({ disabled: false, width : '100%' });
         $('#cinemaFormat').val('').trigger('change.select2');
         $('#formatDescription').val('');
         $('#formatPrice').val('');
