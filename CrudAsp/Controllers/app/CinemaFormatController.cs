@@ -15,6 +15,7 @@ using CrudAsp.Repository;
 
 namespace CrudAsp.Controllers.app;
 
+[Authorize(Roles = "Admin")]
 public class CinemaFormatController : Controller
 {
     private readonly IRepository<CrudAsp.Models.app.CinemaFormat> _repository;

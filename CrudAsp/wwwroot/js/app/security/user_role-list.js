@@ -59,7 +59,8 @@ $(document).ready(function(){
         let fullName = objUser.firstName + ' '+ objUser.middleName + ' '+ objUser.lastName;
         let hderTxt = `Add Claims to ${fullName}`;
 
-        $('#uscHeaderText').html(`<strong>${hderTxt}</strong>`);
+        console.log(fullName);
+        $('#uscHeaderText').html(`<strong class="text-dark">${hderTxt}</strong>`);
     }
     
 })

@@ -6,38 +6,35 @@ using System.Linq;
 using CrudAsp.Extensions;
 using CrudAsp.Models;
 using CrudAsp.resource.response;
-using CrudAsp.Extensions;
+using System.Collections.Generic;
 
-namespace CrudAsp.Controllers.Users;
-
-public class ProfileController : Controller
+namespace CrudAsp.Controllers.Users
 {
-    private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly UserManager<CrudAsp.Models.Users> _userManager;
-    public ProfileController(RoleManager<IdentityRole> role, UserManager<CrudAsp.Models.Users> userManager)
+    [Authorize] // Ensures only authenticated users can access this controller
+    public class ProfileController : Controller
     {
-        _roleManager = role;
-        _userManager = userManager;
-    }
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<CrudAsp.Models.Users> _userManager;
 
-    public async Task<IActionResult> UserProfile(string Id)
-    {
-        var user = await _userManager.FindByIdAsync(Id);
-            if (user == null)
+        public ProfileController(RoleManager<IdentityRole> roleManager, UserManager<CrudAsp.Models.Users> userManager)
+        {
+            _roleManager = roleManager;
+            _userManager = userManager;
+        }
+
+        [Authorize]
+        public async Task<IActionResult> UserProfile()
+        {
+            var currentUser = await _userManager.GetUserAsync(User); 
+            if (currentUser == null)
             {
-                return NotFound("User not found");
+                return Unauthorized();
             }
 
-            
-            var userResponse = user.ToUserResponse();
-
-            
+            var userResponse = currentUser.ToUserResponse();
             userResponse.Roles = new List<RoleResponseDTO>();
 
-        
-            var roles = await _userManager.GetRolesAsync(user);
-
-        
+            var roles = await _userManager.GetRolesAsync(currentUser);
             foreach (var roleName in roles)
             {
                 var role = await _roleManager.FindByNameAsync(roleName);
@@ -47,10 +44,12 @@ public class ProfileController : Controller
                     {
                         Id = role.Id,
                         Name = role.Name,
-                        NormalizeName = role.NormalizedName 
+                        NormalizeName = role.NormalizedName
                     });
                 }
             }
             return View(userResponse);
+        }
+
     }
 }

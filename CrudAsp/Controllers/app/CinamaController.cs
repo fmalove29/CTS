@@ -19,7 +19,7 @@ using CrudAsp.resource.response;
 
 namespace CrudAsp.Controllers.app;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class CinemaController : Controller
 {
     private readonly CinemaService cinemaService;

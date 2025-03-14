@@ -13,6 +13,8 @@ using CrudAsp.Extensions;
 
 namespace CrudAsp.Controllers.app;
 
+
+[Authorize(Roles = "Admin")]
 public class HallController : Controller
 { 
     private readonly IRepository<Hall> repository;
@@ -25,7 +27,6 @@ public class HallController : Controller
         hallService = new HallService((Repository<Hall>) repository);
         _cinemaFormatService = cinemaFormatService;
     }
-
     [HttpGet("hall/{Id}")]
     public async Task<IActionResult> Hall(Guid Id)
     {

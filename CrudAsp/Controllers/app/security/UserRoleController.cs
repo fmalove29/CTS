@@ -10,6 +10,7 @@ using CrudAsp.Extensions;
 
 namespace CrudAsp.Controllers
 {
+    [Authorize]
     public class UserRoleController : Controller
     {
         private readonly UserManager<CrudAsp.Models.Users> _userManager;
@@ -30,6 +31,7 @@ namespace CrudAsp.Controllers
             return View("User/Index"); 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("user-role")]
         public async Task<IActionResult> GetAllUser()
         {
@@ -105,7 +107,7 @@ namespace CrudAsp.Controllers
 
         //     return Json(roles);
         // }
-        
+        [Authorize(Roles = "Admin")]
         [HttpGet("user/details/{id}")]
         public async Task<IActionResult> GetUserRole(string id)
         {
