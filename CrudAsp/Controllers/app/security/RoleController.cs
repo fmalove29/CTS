@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Security.Claims;
+using CrudAsp.Models.app.Enum;
+using CrudAsp.Models.app;
 
 namespace CrudAsp.Controllers.app.security;
 
@@ -85,6 +88,81 @@ public class RoleController : Controller
         // Handle errors
         return BadRequest(result.Errors);
     }
-
     
+    [Authorize(Roles = "Admin")]
+    [HttpGet("management-level")]
+    public async Task<IActionResult> GetManagementRole()
+    {
+        var managementLevel = Enum.GetValues(typeof(ManagementLevel))
+            .Cast<ManagementLevel>()
+            .Select(e => new { Id = (int)e, Name = e.ToString() })
+            .ToList();
+
+        return Json(managementLevel);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("role-claims")]
+    public async Task<IActionResult> PostRoleClaims([FromBody] RoleClaim roleClaim)
+    {
+        var findRole = await _roleManager.FindByIdAsync(roleClaim.RoleId.ToString());
+        
+        if(findRole == null || roleClaim.ClaimValue == null)
+        {
+            return NotFound(new { code = 404, message = "No Role Found or No Management Level Selected"});
+        }
+
+        var claim = new Claim(roleClaim.ClaimType, roleClaim.ClaimValue);
+
+        var existingClaims = await _roleManager.GetClaimsAsync(findRole);
+        bool claimExists = existingClaims.Any(c => c.Type == roleClaim.ClaimType && c.Value == roleClaim.ClaimValue);
+
+        if(!claimExists)
+        {
+            var result = await _roleManager.AddClaimAsync(findRole, claim);
+            return result.Succeeded
+            ? Ok(new { success = true, message = $"Claim { roleClaim.ClaimValue } Added successfully" })
+            : BadRequest("Error adding claim");
+        }
+        return BadRequest(new { success = false, message = $"Claim {roleClaim.ClaimValue} Already exist"});
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("role-claims/{roleId}")]
+    public async Task<IActionResult> GetClaimById(string roleId)
+    {
+        var role = await _roleManager.FindByIdAsync(roleId);
+        if (role == null)
+        {
+            return NotFound(new { statusCode = 404, message = "Role not found" });
+        }
+        var claims = await _roleManager.GetClaimsAsync(role);
+
+        return Ok(claims.Select(c => new {c.Type, c.Value }));
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("delete-roleClaim/{roleId}")]
+    public async Task<IActionResult> RemoveClaim(string roleId, [FromBody] RoleClaim roleClaim)
+    {
+        if (roleClaim == null)
+        {
+            return BadRequest(new { statusCode = 400, message = "Invalid role claim data" });
+        }
+
+        var role = await _roleManager.FindByIdAsync(roleId); // Use roleId from URL
+        if (role == null)
+        {
+            return NotFound(new { statusCode = 404, message = "Role not found" });
+        }
+
+        var claim = new Claim(roleClaim.ClaimType, roleClaim.ClaimValue);
+        var result = await _roleManager.RemoveClaimAsync(role, claim);
+
+        return result.Succeeded 
+            ? Ok(new { success = true, statusCode = 200, message = $"Claim {roleClaim.ClaimValue} removed successfully" }) 
+            : BadRequest(new { statusCode = 400, message = "Error removing claim" });
+    }
+
+
 }

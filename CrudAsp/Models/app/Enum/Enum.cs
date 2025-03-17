@@ -2,13 +2,6 @@ using System.ComponentModel;
 
 namespace CrudAsp.Models.app.Enum
 {
-    public enum Role
-    {
-        [Description("Admin")]
-        Admin = 1,
-        [Description("User")]
-        User = 2
-    }
     public enum Gender
     {
         [Description("Male")]
@@ -72,6 +65,15 @@ namespace CrudAsp.Models.app.Enum
         DBox = 16,
         DriveIn = 17, 
         FloatingCinema = 18
+    }
+    public enum ManagementLevel
+    {
+        [Description("Executive")]
+        Executive = 1,
+        [Description("Manager")]
+        Manager = 2,
+        [Description("Supervisor")]
+        Supervisor = 3
     }
 
 }
