@@ -81,4 +81,11 @@ public static class MovieExntension
         Location = cinema.Location
     };
 
+    public static MovieSelectResponse ToMovieSelectResponse(this Movie movie)
+    => new MovieSelectResponse
+    {
+        Id = movie.Id,
+        Title = movie.Title
+    };
+
 }

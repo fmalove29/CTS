@@ -23,4 +23,25 @@ public class ShowService
         var response = await this.repository.GetByIdAsync(Id);
         return response;
     }
+    
+    public async Task<DbSet<Show>> GetDbSet()
+    => await this.repository.GetDbSet();
+    public async Task<Show> AddAsync(Show show)
+    => await this.repository.AddAsync(show);
+
+    public async Task<Show> UpdateAsync(Show show)
+    => await this.repository.UpdateAsync(show);
+
+    public async Task<Show?> RemoveAsync(Show show)
+    {
+        try
+        {
+            return await this.repository.DeleteAsync(show);
+        }
+        catch (Exception ex)
+        {
+            return null; // Return null if the deletion fails
+        }
+    }
+
 }

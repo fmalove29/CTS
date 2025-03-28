@@ -16,4 +16,6 @@ public class Hall : BaseEntity
     public virtual CinemaFormat CinemaFormat { get; set; } 
 
     public virtual ICollection<Show>? Shows{get; set;}
+
+    public virtual ICollection<MovieHall> MovieHalls {get; set;} = new List<MovieHall>();
 }

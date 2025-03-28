@@ -10,5 +10,6 @@ public class HallResponse : BaseResponse
     public Guid CinemaFormatId {get; set;}
     public string ScreenTypeName {get; set;}
 
+    public decimal TicketPrice {get; set;}
     public virtual ICollection<ShowResponse>? Shows{get; set;}
 }

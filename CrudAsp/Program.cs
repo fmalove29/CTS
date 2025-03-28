@@ -7,6 +7,7 @@ using CrudAsp.Models.app;
 using CrudAsp.Services.Movies;
 using CrudAsp.Services.Genres;
 using CrudAsp.Services.Shows;
+using CrudAsp.Services.Halls;
 using CrudAsp.Services.CinemaFormat;
 using CrudAsp.Repository;
 
@@ -26,6 +27,8 @@ builder.Services.AddScoped<IRepository<Booking>, Repository<Booking>>();
 builder.Services.AddScoped<IRepository<Hall>, Repository<Hall>>();
 builder.Services.AddScoped<IRepository<CinemaFormat>, Repository<CinemaFormat>>();
 builder.Services.AddScoped<CinemaFormatService>();
+builder.Services.AddScoped<HallService>();
+builder.Services.AddScoped<ShowService>();
 builder.Services.AddScoped<MovieService>();
 
 

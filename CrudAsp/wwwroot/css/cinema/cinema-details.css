@@ -2,3 +2,53 @@
     z-index: 9999 !important;
 }
 
+table.dataTable td.dt-control {
+    text-align: center;
+    cursor: pointer;
+  }
+  table.dataTable td.dt-control:before {
+    display: inline-block;
+    box-sizing: border-box;
+    content: "";
+    border-top: 5px solid transparent;
+    border-left: 10px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid transparent;
+    border-right: 0px solid transparent;
+  }
+  table.dataTable tr.dt-hasChild td.dt-control:before {
+    border-top: 10px solid rgba(0, 0, 0, 0.5);
+    border-left: 5px solid transparent;
+    border-bottom: 0px solid transparent;
+    border-right: 5px solid transparent;
+  }
+  table.dataTable tfoot:empty {
+    display: none;
+  }
+  
+  html.dark table.dataTable td.dt-control:before,
+  :root[data-bs-theme=dark] table.dataTable td.dt-control:before,
+  :root[data-theme=dark] table.dataTable td.dt-control:before {
+    border-left-color: rgba(255, 255, 255, 0.5);
+  }
+  html.dark table.dataTable tr.dt-hasChild td.dt-control:before,
+  :root[data-bs-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before,
+  :root[data-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before {
+    border-top-color: rgba(255, 255, 255, 0.5);
+    border-left-color: transparent;
+  }
+
+  .select2-container {
+    z-index: 9999 !important;
+}
+
+.select2-results__option {
+    color: #000;
+}
+.select2-results__option:hover {
+    background-color:#B3B3B3 !important;
+    color: #E50914 !important;
+}
+
+#formatTable tbody tr:hover {
+    background-color: #E50914 !important; /* Light gray */
+}

@@ -12,8 +12,6 @@ $(document).ready(function(){
                     params: { searchTerm: params.data.term }
                 })
                 .then(response => {
-                    
-
                     success({
                         results: response.data.map(cinema => ({
                             id: cinema.id,  // Make sure this matches backend

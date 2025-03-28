@@ -32,10 +32,26 @@ namespace CrudAsp.Models.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
 
         public DbSet<MovieImage> MovieImages {get; set;}
+        public DbSet<MovieHall> MovieHalls {get; set;}
         public DbSet<CinemaFormat> CinemaFormats {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MovieHall>().HasKey(mh => new {mh.MovieId, mh.HallId});
+
+
+            modelBuilder.Entity<MovieHall>()
+            .HasOne(mh => mh.Movie)
+            .WithMany(m => m.MovieHalls)
+            .HasForeignKey(mh => mh.MovieId)
+            .OnDelete(DeleteBehavior.Cascade);  
+
+            modelBuilder.Entity<MovieHall>()
+                .HasOne(mh => mh.Hall)
+                .WithMany(h => h.MovieHalls)
+                .HasForeignKey(mh => mh.HallId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Hall>()
             .HasOne(h => h.CinemaFormat)
             .WithMany(cf => cf.Halls)

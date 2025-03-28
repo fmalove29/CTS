@@ -209,10 +209,8 @@ namespace CrudAsp.Controllers.Users
         [HttpPost]
         public async Task<IActionResult> PostRegister(RegisterVM model)
         {
-
             var role =  _roleManager.Roles
-                        .FirstOrDefault(r => r.NormalizedName == "USER");
-
+                        .FirstOrDefault(r => r.NormalizedName == "ADMIN");
 
             // return Json(model);
             // // return Ok(model);

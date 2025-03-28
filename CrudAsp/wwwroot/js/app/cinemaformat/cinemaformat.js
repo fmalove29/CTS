@@ -80,37 +80,32 @@ $(document).ready(function(){
     })
 
     $('#cinemaFormat').select2({
-        width: '100%', // Optional: Ensures Select2 fits properly
+        width: '100%',
         placeholder: "Select Cinema Format",
-        allowClear: true ,
+        allowClear: true,
         ajax: {
-            transport: function (params, success, failure) {
-                axios.get("/CinemaFormat/GetScreenTypes", {
-                    params: { searchTerm: params.data.term }
-                })
-                .then(response => {
-                    
-
-                    success({
-                        results: response.data.map(screentype => ({
-                            id: screentype.id,  // Make sure this matches backend
-                            text: screentype.name
-                        }))
-                    });
-                })
-                .catch(error => {
-                    failure(error);
-                });
+            url: "/CinemaFormat/GetScreenTypes",
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+                console.log("Search term:", params.term);
+                return { searchTerm: params.term || "" };
             },
             processResults: function (data) {
-                return { results: data.results }; // Ensure proper result structure
-            },
-            delay: 250
+                // Map the API response to the format expected by Select2
+                return {
+                    results: data.map(function(screentype) {
+                        return {
+                            id: screentype.id,   // must match your backend
+                            text: screentype.name // display text
+                        };
+                    })
+                };
+            }
         }
     }).on('select2:select', function (e) {
-        let selectedFormat = e.params.data; // Get selected cinema object
+        let selectedFormat = e.params.data;
         console.log("🎯 Selected Cinema:", selectedFormat);
-
         screenTypeName = selectedFormat.text;
     });
 
@@ -170,46 +165,91 @@ $(document).ready(function(){
     $(document).on('click', '.edtnBtn', function () {
         let Id = $(this).data('id');
         let findFormat = arrayFormats.find(e => e.Id == Id);
-    
+        
         if (!findFormat) {
             console.error("Format not found for ID:", Id);
             return;
         }
-    
+        
         console.log(findFormat);
-    
         $('#cinemaFormatSave').text('Update');
+        
+        // Save format values globally if needed
         cinemaFormatId = findFormat.Id;
         screenTypeName = findFormat.ScreenTypeName;
-    
-        let $cinemaFormat = $('#cinemaFormat'); // Cache Select2 element
-    
-        // Check if option already exists in Select2, if not, add it
+        
+        var $cinemaFormat = $('#cinemaFormat'); // Cache the select element
+        
+        // Check if the option already exists; if not, add it
         if ($cinemaFormat.find(`option[value="${findFormat.ScreenType}"]`).length === 0) {
             let newOption = new Option(findFormat.ScreenTypeName, findFormat.ScreenType, false, false);
             $cinemaFormat.append(newOption).trigger('change');
         }
-    
-        // Set the selected value and trigger Select2 update
+        
+        // Set the selected value and update Select2
         $cinemaFormat.val(findFormat.ScreenType).trigger('change');
         
+        // Disable the select input so the user cannot change it during edit
         $cinemaFormat.prop('disabled', true);
-        $cinemaFormat.select2({ disabled: true, width : '100%' });
-        // Populate other form fields
+        // Reinitialize Select2 to reflect the disabled state (if necessary)
+        $cinemaFormat.select2({
+            width: '100%',
+            placeholder: "Select Cinema Format",
+            allowClear: true
+        });
+        
+        // Populate other form fields with the format's details
         $('#formatDescription').val(findFormat.Description);
         $('#formatPrice').val(findFormat.Price);
-    
-        // Show modal
+        
+        // Show the Edit modal (adjust modal id as needed)
         $('#btnHallShow').modal('show');
     });
     
 
-    $('#btnAddFormat').on('click', function () {
+    $(document).on('click', '#btnAddFormat', function () {
+        var $cinemaFormat = $('#cinemaFormat');
+        $('#cinemaFormatSave').text('Save');
+        // Enable the select input
         $cinemaFormat.prop('disabled', false);
-        $cinemaFormat.select2({ disabled: false, width : '100%' });
-        $('#cinemaFormat').val('').trigger('change.select2');
+        
+        // If the select is already initialized with Select2, destroy it before reinitializing.
+        if ($cinemaFormat.data('select2')) {
+            $cinemaFormat.select2('destroy');
+        }
+        
+        // Reinitialize Select2 (if necessary) to ensure it reflects the enabled state
+        $cinemaFormat.select2({
+            width: '100%',
+            placeholder: "Select Cinema Format",
+            allowClear: true,
+            ajax: {
+                url: "/CinemaFormat/GetScreenTypes",
+                dataType: "json",
+                delay: 250,
+                data: function (params) {
+                    return { searchTerm: params.term || "" };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.map(function(screentype) {
+                            return {
+                                id: screentype.id,
+                                text: screentype.name
+                            };
+                        })
+                    };
+                }
+            }
+        });
+        
+        // Clear any previous selection and other fields
+        $cinemaFormat.val(null).trigger('change');
         $('#formatDescription').val('');
         $('#formatPrice').val('');
+        
+        // Show the Add modal (adjust modal id as needed)
+        $('#addFormatModal').modal('show');
     });
     
 })

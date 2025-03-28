@@ -45,17 +45,13 @@ namespace CrudAsp.Repository
             return entity;
         }
 
-        public async Task<T> DeleteAsync(Guid Id)
+        public async Task<T> DeleteAsync(T entity)
         {
-            var entity = await _dbset.FindAsync(Id);
-            if (entity != null)
-            {
-                _dbset.Remove(entity);
-                await _context.SaveChangesAsync();
-            }
-
+            _dbset.Remove(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
+
 
         public async Task<DbSet<T>> GetDbSet()
             => _context.Set<T>();

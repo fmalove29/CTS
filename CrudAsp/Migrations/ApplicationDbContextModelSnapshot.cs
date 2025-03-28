@@ -233,38 +233,38 @@ namespace CrudAsp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e1f2d1df-f2b9-4aa3-8451-f21710198db7"),
+                            Id = new Guid("b0f2337a-cadb-4849-a98a-87660c371d25"),
                             GenreName = "Action",
-                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3870),
-                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3910)
+                            created_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(3960),
+                            updated_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(3980)
                         },
                         new
                         {
-                            Id = new Guid("6d0bfda8-574e-4501-b25c-1527b914df7e"),
+                            Id = new Guid("d9530102-224b-41a2-bd87-1cbe7b636acc"),
                             GenreName = "Drama",
-                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3940),
-                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950)
+                            created_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4010),
+                            updated_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4010)
                         },
                         new
                         {
-                            Id = new Guid("c8fdc6f3-52a2-43f8-97bb-8e07edd3339e"),
+                            Id = new Guid("77fc3686-06de-46f3-b101-a99bc100bc3e"),
                             GenreName = "Sci-Fi",
-                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950),
-                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3950)
+                            created_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4020),
+                            updated_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4020)
                         },
                         new
                         {
-                            Id = new Guid("3e412481-33bf-45eb-b7a5-2d4e50aaf219"),
+                            Id = new Guid("28b04af0-4c76-4b3b-a228-ab74145274c7"),
                             GenreName = "Comedy",
-                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3960),
-                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3960)
+                            created_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4020),
+                            updated_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4030)
                         },
                         new
                         {
-                            Id = new Guid("e3732c5d-a4db-4f27-9bc2-dd69537e0fe5"),
+                            Id = new Guid("96ce5b07-a7e1-4809-b533-825072893f0a"),
                             GenreName = "Horror",
-                            created_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3970),
-                            updated_at = new DateTime(2025, 3, 7, 16, 34, 55, 458, DateTimeKind.Local).AddTicks(3970)
+                            created_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4030),
+                            updated_at = new DateTime(2025, 3, 25, 16, 12, 10, 13, DateTimeKind.Local).AddTicks(4030)
                         });
                 });
 
@@ -360,6 +360,21 @@ namespace CrudAsp.Migrations
                     b.ToTable("MovieGenres");
                 });
 
+            modelBuilder.Entity("CrudAsp.Models.app.MovieHall", b =>
+                {
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("HallId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MovieId", "HallId");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("MovieHalls");
+                });
+
             modelBuilder.Entity("CrudAsp.Models.app.MovieImage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -448,6 +463,8 @@ namespace CrudAsp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("HallId");
+
+                    b.HasIndex("MovieId");
 
                     b.ToTable("Show");
                 });
@@ -636,6 +653,25 @@ namespace CrudAsp.Migrations
                     b.Navigation("Movies");
                 });
 
+            modelBuilder.Entity("CrudAsp.Models.app.MovieHall", b =>
+                {
+                    b.HasOne("CrudAsp.Models.app.Hall", "Hall")
+                        .WithMany("MovieHalls")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CrudAsp.Models.app.Movie", "Movie")
+                        .WithMany("MovieHalls")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("CrudAsp.Models.app.MovieImage", b =>
                 {
                     b.HasOne("CrudAsp.Models.app.Movie", "Movie")
@@ -647,11 +683,21 @@ namespace CrudAsp.Migrations
 
             modelBuilder.Entity("CrudAsp.Models.app.Show", b =>
                 {
-                    b.HasOne("CrudAsp.Models.app.Hall", null)
+                    b.HasOne("CrudAsp.Models.app.Hall", "Hall")
                         .WithMany("Shows")
                         .HasForeignKey("HallId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CrudAsp.Models.app.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("GenreMovie", b =>
@@ -732,12 +778,16 @@ namespace CrudAsp.Migrations
 
             modelBuilder.Entity("CrudAsp.Models.app.Hall", b =>
                 {
+                    b.Navigation("MovieHalls");
+
                     b.Navigation("Shows");
                 });
 
             modelBuilder.Entity("CrudAsp.Models.app.Movie", b =>
                 {
                     b.Navigation("MovieGenres");
+
+                    b.Navigation("MovieHalls");
 
                     b.Navigation("MovieImages");
                 });

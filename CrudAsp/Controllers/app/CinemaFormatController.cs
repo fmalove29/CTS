@@ -11,6 +11,8 @@ using CrudAsp.Models.app.Enum;
 using CrudAsp.Models.app;
 using CrudAsp.resource.response;
 using CrudAsp.Services.CinemaFormat;
+using CrudAsp.Services.Shows;
+using CrudAsp.Services.Halls;
 using CrudAsp.Repository;
 
 namespace CrudAsp.Controllers.app;
@@ -20,9 +22,14 @@ public class CinemaFormatController : Controller
 {
     private readonly IRepository<CrudAsp.Models.app.CinemaFormat> _repository;
     private readonly CinemaFormatService _cinemaFormatService;
-    public CinemaFormatController(IRepository<CrudAsp.Models.app.CinemaFormat> repository)
+    private readonly HallService _hallService;
+    private readonly ShowService _showService;
+    
+    public CinemaFormatController(IRepository<CrudAsp.Models.app.CinemaFormat> repository, HallService hallService, ShowService showService)
     {
         _repository = repository;
+        _hallService = hallService;
+        _showService = showService;
         _cinemaFormatService = new CinemaFormatService((Repository<CinemaFormat>) repository);
     }
 
@@ -109,15 +116,14 @@ public class CinemaFormatController : Controller
     [HttpPut("cinema-format")]
     public async Task<IActionResult> PutFormat([FromBody] CinemaFormatDTO cinemaFormat)
     {
-        // return Json(cinemaFormat.ScreenType);
         try
         {
-    
             var findFormat = await _cinemaFormatService.GetByIdAsync(cinemaFormat.Id);
 
-            if (findFormat == null) // Fix: Check if it's null
+
+            if (findFormat == null)
             {
-                return NotFound(new { success = false, message = "Format not found." });
+                return NotFound(new { success = false, message = "Format or shows not found." });
             }
 
 
@@ -142,5 +148,4 @@ public class CinemaFormatController : Controller
             return Json(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
         }
     }
-
 }

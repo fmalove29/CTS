@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using CrudAsp.Services.Halls;
 using CrudAsp.Services.CinemaFormat;
+using CrudAsp.Services.Shows;
 using CrudAsp.Models.app;
 using CrudAsp.Repository;
 using CrudAsp.resource.response;
@@ -21,9 +22,11 @@ public class HallController : Controller
     private readonly IRepository<CinemaFormat> _cinemaFormat;
     private readonly HallService hallService;
     private readonly CinemaFormatService _cinemaFormatService;
-    public HallController(IRepository<Hall> repository, CinemaFormatService cinemaFormatService)
+    private readonly ShowService _showService;
+    public HallController(IRepository<Hall> repository, CinemaFormatService cinemaFormatService, ShowService showService)
     {
         this.repository = repository;
+        _showService = showService;
         hallService = new HallService((Repository<Hall>) repository);
         _cinemaFormatService = cinemaFormatService;
     }
@@ -43,7 +46,8 @@ public class HallController : Controller
                         HallName = e.HallName,
                         SeatCapacity = e.SeatCapacity,
                         CinemaFormatId = e.CinemaFormatId,
-                        ScreenTypeName = e.CinemaFormat.ScreenTypeName // Access from CinemaFormat
+                        ScreenTypeName = e.CinemaFormat.ScreenTypeName, // Access from CinemaFormat
+                        TicketPrice = e.CinemaFormat.Price
                     })
                     .ToList(); // Execute query
 
@@ -84,11 +88,23 @@ public class HallController : Controller
         try
         {
             var findHall = await hallService.GetHallByCinemaId(hallResponse.Id);
+            var findShows = await (await hallService.GetDbSet())
+                .Include(e => e.Shows)
+                .Where(h => h.Id == hallResponse.Id)
+                .SelectMany(h => h.Shows) 
+                .ToListAsync(); 
+
             if (findHall == null)
             {
                 return NotFound(new { success = false, message = "Hall not found." });
             }
 
+
+            foreach (var show in findShows)
+            {
+                show.TicketPrice = hallResponse.TicketPrice;
+                await _showService.UpdateAsync(show);
+            }
             findHall.HallName = hallResponse.HallName;
             findHall.SeatCapacity = hallResponse.SeatCapacity;
             findHall.CinemaFormatId = hallResponse.CinemaFormatId;

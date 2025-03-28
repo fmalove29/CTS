@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using CrudAsp.Extensions;
 
 
 
@@ -233,6 +234,19 @@ public class MovieController : Controller
         }
     }
 
+    [HttpGet("movie-select")]
+    public async Task<IActionResult> MovieToSelect(string searchTerm)
+    {
+        var movie = await movieService.GetAll();
+        
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            movie = movie.Where(m => m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
 
+        var movieResponseList = movie.Select(m => m.ToMovieSelectResponse()).ToList();
+
+        return Ok(movieResponseList);
+    }
 
 }

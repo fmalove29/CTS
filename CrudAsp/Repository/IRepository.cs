@@ -13,7 +13,7 @@ namespace CrudAsp.Repository
         public  Task<T> GetByIdAsync(Guid Id);
         public  Task<T> AddAsync(T entity);
         public  Task<T> UpdateAsync(T entity);
-        public Task<T> DeleteAsync(Guid Id);
+        public Task<T> DeleteAsync(T entity);
         public Task<DbSet<T>> GetDbSet();
 
     }
