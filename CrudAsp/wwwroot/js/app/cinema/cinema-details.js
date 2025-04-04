@@ -5,8 +5,14 @@ $(document).ready(function(){
     let showIdx;
     let hallPrice;
     let ticketPrice;
-    let currentItemOpen = null; 
+    let currentItemOpen = null;
+
+    const now = new Date();
+    const formattedNow = now.toISOString().slice(0, 16);
+    $('#showDate').attr('min',formattedNow );
+
     populateHall();
+    
     async function getHall()
     {
         try
@@ -129,6 +135,7 @@ $(document).ready(function(){
                                         <img src="${fullImagePath}" class="img-fluid rounded border" alt="${s.movie.title}" style="max-width: 120px; height: auto;">
                                     </div>
                                     <div class="col-md-4">
+                                        <h6>Show Id : <span class="badge bg-danger">${s.id}</span></h6>
                                         <h6 class="card-title">Movie: ${s.movie.title}</h6>
                                         <p class="card-text">
                                             <strong>Date:</strong> ${formatDateTime(s.showDate)} <br>
@@ -136,8 +143,8 @@ $(document).ready(function(){
                                         </p>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn btn-netflix-secondary btnShowDetails" data-id="${s.id}">Reschedule</button>
-                                        <button class="btn btn-netflix-secondary btnDeleteShow" data-id="${s.id}">Remove</button>
+                                        <button class="btn btn-sm btn-netflix-secondary btnShowDetails" data-id="${s.id}">Reschedule</button>
+                                        <button class="btn btn-sm btn-netflix-secondary btnDeleteShow" data-id="${s.id}">Remove</button>
                                     </div>
                                 </div>
                             </div>
@@ -210,78 +217,91 @@ $(document).ready(function(){
     
     
     
-    $('#btnShowSave').on('click',async function(){
-
-        if($('#btnShowSave').text() == 'Update')
-        {
-            let show = {
-                Id : showIdx,
-                MovieId : $('#movieSelect option:selected').val(),
-                HallId : showHallId,
-                ShowDate : $('#showDate').val(),
-                TicketPrice : hallPrice
-            }
-
+    $('#btnShowSave').on('click', async function () {
+        let show = {
+            Id: showIdx,
+            MovieId: $('#movieSelect option:selected').val(),
+            HallId: showHallId,
+            ShowDate: $('#showDate').val(),
+            TicketPrice: hallPrice
+        };
+    
+        if ($('#btnShowSave').text() == 'Update') {
             let updateShow = await putShow(show);
-            
-            if(updateShow.data.success)
-            {
+    
+            if (updateShow?.data?.success) {
                 Swal.fire({
-                    title : "Success",
-                    text : updateShow.data.message,
-                    icon : "success"
-                })
-                .then(async ()=>{
+                    title: "Success",
+                    text: updateShow.data.message,
+                    icon: "success"
+                }).then(async () => {
                     let dataShow = await getShowByHallId(updateShow.data.hallId);
                     if (currentItemOpen) {
                         let table = $('#hTable').DataTable();
                         let row = table.row(currentItemOpen);
-                        
+    
                         if (row.child.isShown()) {
                             row.child(format(dataShow)).show();
                         }
                     }
-                
+    
                     $('#addShowModal').modal('hide');
-                })
-            }
-            return updateShow;
-        }
-        else{
-            let show = {
-                MovieId : $('#movieSelect option:selected').val(),
-                HallId : showHallId,
-                ShowDate : $('#showDate').val(),
-                TicketPrice : hallPrice
-            }
-            
-
-            let s = await postShow(show);
-            if(s.data.success)
-            {
+                });
+            } else {
                 Swal.fire({
-                    title : "Success",
-                    text : s.data.message,
-                    icon : "success"
-                })
-                .then(async ()=>{
-                    let dataShow = await getShowByHallId(s.data.hallId);
-                    console.log(dataShow);
-                    if (currentItemOpen) {
-                        let table = $('#hTable').DataTable();
-                        let row = table.row(currentItemOpen);
-                        
-                        if (row.child.isShown()) {
-                            row.child(format(dataShow)).show();
-                        }
-                    }
-                
-                    $('#addShowModal').modal('hide');
-                })
+                    title: "Error",
+                    text: updateShow?.response?.data?.message || updateShow?.data?.message || "Failed to update show",
+                    icon: "error"
+                });
             }
-            return s;
+        } else {
+            let newShow = {
+                MovieId: $('#movieSelect option:selected').val(),
+                HallId: showHallId,
+                ShowDate: $('#showDate').val(),
+                TicketPrice: hallPrice
+            };
+    
+            try {
+                let s = await postShow(newShow);
+                console.log(s);
+    
+                if (s.data.success) {
+                    Swal.fire({
+                        title: "Success",
+                        text: s.data.message,
+                        icon: "success"
+                    }).then(async () => {
+                        let dataShow = await getShowByHallId(s.data.hallId);
+                        console.log(dataShow);
+                        if (currentItemOpen) {
+                            let table = $('#hTable').DataTable();
+                            let row = table.row(currentItemOpen);
+    
+                            if (row.child.isShown()) {
+                                row.child(format(dataShow)).show();
+                            }
+                        }
+    
+                        $('#addShowModal').modal('hide');
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: s.data.message || "Failed to add show",
+                        icon: "error"
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: "Error",
+                    text: error?.response?.data?.message || "Something went wrong!",
+                    icon: "error"
+                });
+            }
         }
-    })
+    });
+    
     async function putShow(showData)
     {
         try
@@ -291,7 +311,7 @@ $(document).ready(function(){
         }
         catch(err)
         {
-            console.log(err);
+            return err;
         }
     }
 
@@ -304,7 +324,7 @@ $(document).ready(function(){
         }
         catch(err)
         {
-            console.log(err);
+            return err;
         }
     }
 

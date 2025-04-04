@@ -129,29 +129,54 @@ public class ShowController : Controller
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] ShowResponse show)
     {
-        if (show == null) 
+        try
         {
-            return BadRequest(new { success = false, message = "Unable to Save with empty fields" });
+            if (show == null) 
+            {
+                return BadRequest(new { success = false, message = "Unable to Save with empty fields" });
+            }
+
+            DateTime newShowDate = show.ShowDate;
+
+            
+            var existingShows = await(await showService.GetDbSet())
+                                                .Where(e => e.HallId == show.HallId)
+                                                .ToListAsync();
+
+            
+            foreach (var existingShow in existingShows)
+            {
+                TimeSpan timeDifference = (newShowDate - existingShow.ShowDate).Duration(); 
+                // return Ok(timeDifference);
+                if (timeDifference.TotalHours < 2)
+                {
+                    return BadRequest(new { success = false, HallId = show.HallId, message = "Show should have 2 hours interval" });
+                }
+            }
+
+            // If no conflicts, proceed with adding the new show
+            var newShow = new Show
+            {
+                MovieId = show.MovieId,
+                HallId = show.HallId,
+                ShowDate = show.ShowDate,
+                TicketPrice = show.TicketPrice
+            };
+
+            var response = await showService.AddAsync(newShow);
+
+            if (response != null)
+            {
+                return Ok(new { success = true, HallId = newShow.HallId, message = $"New show added to Hall {show.HallId}" });
+            }
         }
-
-        var newShow = new Show
+        catch (Exception ex)
         {
-            MovieId = show.MovieId,
-            HallId = show.HallId,
-            ShowDate = show.ShowDate,
-            TicketPrice = show.TicketPrice
-        };
-
-        var response = await showService.AddAsync(newShow);
-
-        if (response != null)
-        {
-            return Ok(new { success = true, HallId = newShow.HallId, message = $"New show added to Hall {show.HallId}" });
+            return Json(new { success = false, message = ex.Message, innerMessage = ex.InnerException?.Message });
         }
-
-        return BadRequest(new { success = false, message = "Failed to add show" });
-
+        return BadRequest(new {success= false, message = "Something went wrong"});
     }
+
 
     [HttpPut]
     public async Task<IActionResult> Put([FromBody] ShowResponse show)
@@ -159,12 +184,28 @@ public class ShowController : Controller
         try
         {
             var findShow = await showService.GetById(show.Id);
-
             if (findShow == null)
             {
                 return NotFound(new { success = false, message = $"Show {show.Id} not found" });
             }
 
+            var findShowList = await(await showService.GetDbSet())
+                            .Where(e => e.HallId == show.HallId)
+                            .ToListAsync();
+
+
+            DateTime newDate = show.ShowDate;
+            
+            foreach(var findshow in findShowList)
+            {
+                TimeSpan timeDifference = (newDate - findshow.ShowDate).Duration();
+                if(timeDifference.TotalHours < 2)
+                {
+                    return BadRequest(new { success = false, HallId = show.HallId, message = "Show should have 2 hours interval" });
+                }
+            }
+            
+        
             findShow.ShowDate = show.ShowDate;
 
             var updatedShow = await showService.UpdateAsync(findShow);
