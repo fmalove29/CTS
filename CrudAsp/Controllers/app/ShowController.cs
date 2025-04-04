@@ -187,7 +187,7 @@ public class ShowController : Controller
             {
                 return Ok(new { success = false, message = $"Show {showId} not found" });
             }
-
+    
             var response = await showService.RemoveAsync(findShow);
             
             if (response == null)

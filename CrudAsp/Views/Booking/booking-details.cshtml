@@ -3,6 +3,8 @@
 @section Style{
     <link rel="stylesheet" href="@Url.Content("~/css/select2.min.css")">
     <link rel="stylesheet" href="@Url.Content("~/css/booking/booking-details.css")">
+    <link href="@Url.Content("~/plugins/jquery-steps/css/jquery.steps.css")" rel="stylesheet">
+
 }
 
 
@@ -24,53 +26,122 @@
     </div>
 </div>
 
-
+<input type="text" id="showingMovie" hidden value="@Model.Id">
 
 <div class="container mt-5">
-    <h2 class="text-center">Book Now</h2>
-
-    <!-- Stepper Indicators -->
-    <div class="progress mb-4">
-        <div id="progress-bar" class="progress-bar bg-netflix-danger" style="width: 33%;">Step 1 of 3</div>
+    <div class="row d-flex justify-content-start mb-3">
+        <div class="col-4">
+            <input type="text" name="" id="searchCinemaId" class="form-control" placeholder="Search Cinema">
+        </div>
     </div>
+    <div id="cinemaShowsContainer">
 
-    <form id="multiStepForm" class="card p-4 shadow bg-dark text-light">
-        <!-- Step 1 -->
-        <div class="step active">
-            <h4>Step 1</h4>
-            <div class="mb-3">
-                <label for="name" class="form-label">Cinema</label>
-                <select class="form-control"  name="" id="cinemaSelect">
-                </select>
-            </div>
-            <button type="button" class="btn btn-netflix-primary" id="stepperNext1">Next</button>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="step">
-            <h4>Step 2</h4>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
-            <button type="button" class="btn btn-secondary" id="prev1">Previous</button>
-            <button type="button" class="btn btn-netflix-primary" id="stepperNext2">Next</button>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="step">
-            <h4>Step 3</h4>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <button type="button" class="btn btn-secondary" id="prev2">Previous</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-    </form>
+    </div>
 </div>
 
+ <div class="modal  fade bg-dark" id="bookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex flex-column">
+                        <h1 class="modal-title fs-5 text-danger" id="cinemaName"><strong></strong></h1>
+                        <small class="text-danger" id="cinemaLocation"></small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action="#" id="step-form-horizontal" class="step-form-horizontal w-100">
+                                    <div>
+                                        <h4>Booking Details</h4>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div>
+                                                        <img src="@Url.Content("~/images/movies/" + System.IO.Path.GetFileName(Model.MovieImages.FirstOrDefault()?.Path))" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <p><h2 class="text-dark ml-3">@Model.Title</h2></p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="text-dark">@Model.Description</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="text-dark" id="formatType"></p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="text-dark" id="costId"></p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col counter d-flex">
+                                                            <label for="qtyVal" class="mr-3 text-dark">Quantity: </label>
+                                                            <button id="decrease" class="btn btn-sm btn-netflix-secondary">−</button>
+                                                            <input type="number" class="form-control" name="" id="qtyVal" placeholder="0" required>
+                                                            <button id="increase" class="btn btn-sm btn-netflix-secondary">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col d-flex justify-content-end">
+                                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                        <button type="button" class="btn btn-sm btn-netflix-info">Sub Total :</button>
+                                                        <button type="button" id="subTotal" class="btn btn-sm btn-netflix-primary">0</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <h4>Your Address</h4>
+                                        <section>
+                                            <div class="row">
+                                                
+                                            </div>
+                                        </section>
+                                        <h4>Billing Details</h4>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" name="creditCard" placeholder="Credit Card Number">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" name="date" placeholder="Expiration Date">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" name="owner" placeholder="Credit Card Owner">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <h4>Confirmation</h4>
+                                        <section>
+                                            <div class="row h-100">
+                                                <div class="col-12 h-100 d-flex flex-column justify-content-center align-items-center">
+                                                    <h2>You have submitted form successfully!</h2>
+                                                    <p>Thank you very much for you information. we will procceed accordingly.</p>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @section Scripts{
+
     <script src="@Url.Content("~/plugins/common/common.min.js")"></script>
     <script src="@Url.Content("~/js/custom.min.js")"></script>
     <script src="@Url.Content("~/js/settings.js")"></script>
@@ -83,9 +154,9 @@
     <script src="@Url.Content("~/js/select2.js")"></script>
 
     <script src="@Url.Content("~/js/app/booking/booking-details.js")"></script>
-    @* <script src="@Url.Content("~/plugins/jquery-steps/build/jquery.steps.min.js")"></script>
+    <script src="@Url.Content("~/plugins/jquery-steps/build/jquery.steps.min.js")"></script> 
     <script src="@Url.Content("~/plugins/jquery-validation/jquery.validate.min.js")"></script>
-    <script src="@Url.Content("~/js/plugins-init/jquery-steps-init.js")"></script> *@
+    <script src="@Url.Content("~/js/plugins-init/jquery-steps-init.js")"></script> 
 
 }
     

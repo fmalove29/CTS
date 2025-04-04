@@ -4,8 +4,9 @@ namespace CrudAsp.Models.app;
 
 public class Hall : BaseEntity
 {
-    [ForeignKey("User")]
+    [ForeignKey("Cinema")]
     public Guid CinemaId {get; set;}
+    public virtual Cinema Cinema {get; set;}
 
     public string HallName {get; set;}
 

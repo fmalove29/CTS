@@ -34,10 +34,15 @@ namespace CrudAsp.Models.Data
         public DbSet<MovieImage> MovieImages {get; set;}
         public DbSet<MovieHall> MovieHalls {get; set;}
         public DbSet<CinemaFormat> CinemaFormats {get; set;}
+        public DbSet<CinemaShow> CinemaShows {get; set;}
+        public DbSet<CinemaMovie> CinemaMovies { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MovieHall>().HasKey(mh => new {mh.MovieId, mh.HallId});
+            modelBuilder.Entity<CinemaShow>().HasKey(cs => new {cs.cinemaId, cs.ShowId });
+            modelBuilder.Entity<CinemaMovie>().HasKey(cm => new {cm.cinemaId, cm.MovieId});
 
 
             modelBuilder.Entity<MovieHall>()

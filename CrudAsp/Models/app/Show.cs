@@ -14,4 +14,5 @@ public class Show : BaseEntity
     public DateTime ShowDate {get; set;}
 
     public decimal TicketPrice {get; set;}
+    public virtual ICollection<CinemaShow> CinemaShows {get; set;}
 }

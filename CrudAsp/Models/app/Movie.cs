@@ -24,4 +24,5 @@ public class Movie : BaseEntity
 
     public virtual ICollection<MovieImage> MovieImages {get; set;} = new List<MovieImage>();
     public virtual ICollection<MovieGenre> MovieGenres {get; set;} = new List<MovieGenre>();
+    public virtual ICollection<CinemaMovie> CinemaMovies {get; set;}
 }
