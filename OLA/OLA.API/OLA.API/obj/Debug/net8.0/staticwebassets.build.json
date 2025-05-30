@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "SBj3Fd59V0bBRC4hCF3i2GDv2kZ+aF1bEHoGHJsfeKA=",
+  "Source": "OLA.API",
+  "BasePath": "_content/OLA.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,15 @@
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/bin/Debug/net8.0/OLA.Data.deps.json
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/bin/Debug/net8.0/OLA.Data.runtimeconfig.json
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/bin/Debug/net8.0/OLA.Data.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/bin/Debug/net8.0/OLA.Data.pdb
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.csproj.AssemblyReference.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.AssemblyInfoInputs.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.AssemblyInfo.cs
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.csproj.CoreCompileInputs.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.sourcelink.json
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/refint/OLA.Data.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.pdb
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/OLA.Data.genruntimeconfig.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Data/obj/Debug/net8.0/ref/OLA.Data.dll

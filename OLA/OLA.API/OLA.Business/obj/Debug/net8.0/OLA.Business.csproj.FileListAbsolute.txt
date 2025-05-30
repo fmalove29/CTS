@@ -1,0 +1,16 @@
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/bin/Debug/net8.0/OLA.Business.deps.json
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/bin/Debug/net8.0/OLA.Business.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/bin/Debug/net8.0/OLA.Business.pdb
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/bin/Debug/net8.0/OLA.Data.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/bin/Debug/net8.0/OLA.Data.pdb
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.csproj.AssemblyReference.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.AssemblyInfoInputs.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.AssemblyInfo.cs
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.csproj.CoreCompileInputs.cache
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.sourcelink.json
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Busi.CC03640E.Up2Date
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/refint/OLA.Business.dll
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/OLA.Business.pdb
+/Users/itdev-mac01/OLA/OLA.API/OLA.Business/obj/Debug/net8.0/ref/OLA.Business.dll
